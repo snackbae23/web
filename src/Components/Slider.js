@@ -42,87 +42,84 @@ const Slider = () => {
         {/* Your item components go here */}
         <div className="item" style={{ backgroundImage: `url(${slide1})` }}>
           <div className="content">
-            <button className=" rounded-3xl  px-1   text-nowrap bg-amber-50 text-amber-500">
+            {/* <button className=" rounded-3xl  px-1   text-nowrap bg-amber-50 text-amber-500">
               <p className=" font-roboto  font-semibold text-base ">Coupons</p>
-            </button>
+            </button> */}
 
-            <div className="name">Personalised Discovery</div>
+            <div className="name">
+              Discover Delectable Delights
+            </div>
             <div className="des">
-              Lorem ipsum dolor sit amet consectetur. Tincidunt scelerisque
-              commodo proin faucibus.Lorem ipsum dolor sit amet consectetur.
-              Tincidunt scelerisque commodo proin faucibus.
+              Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
             </div>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${slide2})` }}>
           <div className="content">
-            <button className=" px-1   text-nowrap  rounded-3xl   bg-amber-50 text-amber-500">
+            {/* <button className=" px-1   text-nowrap  rounded-3xl   bg-amber-50 text-amber-500">
               <p className=" font-roboto  font-semibold text-base ">Coupons</p>
-            </button>
+            </button> */}
 
-            <div className="name">Personalised Discovery</div>
+            <div className="name">
+              Discover Delectable Delights
+            </div>
             <div className="des">
-              Lorem ipsum dolor sit amet consectetur. Tincidunt scelerisque
-              commodo proin faucibus.Lorem ipsum dolor sit amet consectetur.
-              Tincidunt scelerisque commodo proin faucibus.
+              Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
             </div>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${slide3})` }}>
           <div className="content">
-            <button className="w-[8vw]  rounded-3xl   bg-amber-50 text-amber-500">
+            {/* <button className="w-[8vw]  rounded-3xl   bg-amber-50 text-amber-500">
               <p className=" font-roboto  font-semibold text-base ">Coupons</p>
-            </button>
+            </button> */}
 
-            <div className="name">Personalised Discovery</div>
+            <div className="name">
+              Discover Delectable Delights
+            </div>
             <div className="des">
-              Lorem ipsum dolor sit amet consectetur. Tincidunt scelerisque
-              commodo proin faucibus.Lorem ipsum dolor sit amet consectetur.
-              Tincidunt scelerisque commodo proin faucibus.
+              Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
             </div>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${slide4})` }}>
           <div className="content">
-            <button className=" px-1   text-nowrap rounded-3xl   bg-amber-50 text-amber-500">
+            {/* <button className=" px-1   text-nowrap rounded-3xl   bg-amber-50 text-amber-500">
               <p className=" font-roboto  font-semibold text-base ">Coupons</p>
-            </button>
+            </button> */}
 
-            <div className="name">Personalised Discovery</div>
+            <div className="name">
+              Discover Delectable Delights
+            </div>
             <div className="des">
-              Lorem ipsum dolor sit amet consectetur. Tincidunt scelerisque
-              commodo proin faucibus.Lorem ipsum dolor sit amet consectetur.
-              Tincidunt scelerisque commodo proin faucibus.
+              Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
             </div>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${slide5})` }}>
           <div className="content">
-            <button className=" px-1   text-nowrap  rounded-3xl   bg-amber-50 text-amber-500">
+            {/* <button className=" px-1   text-nowrap  rounded-3xl   bg-amber-50 text-amber-500">
               <p className=" font-roboto  font-semibold text-base ">Coupons</p>
-            </button>
+            </button> */}
 
-            <div className="text-[42px] leading-[56px] font-semibold">
-              Personalised Discovery
+            <div className="name">
+              Discover Delectable Delights
             </div>
             <div className="des">
-              Lorem ipsum dolor sit amet consectetur. Tincidunt scelerisque
-              commodo proin faucibus.Lorem ipsum dolor sit amet consectetur.
-              Tincidunt scelerisque commodo proin faucibus.
+              Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
             </div>
           </div>
         </div>
         <div className="item" style={{ backgroundImage: `url(${slide6})` }}>
           <div className="content">
-            <button className=" px-1   text-nowrap rounded-3xl bg-amber-50 text-amber-500">
+            {/* <button className=" px-1   text-nowrap rounded-3xl bg-amber-50 text-amber-500">
               <p className=" font-roboto  font-semibold text-base ">Coupons</p>
-            </button>
-
-            <div className="name">Personalised Discovery</div>
+            </button> */}
+            <div className="name">
+              Discover Delectable Delights
+            </div>
             <div className="des">
-              Lorem ipsum dolor sit amet consectetur. Tincidunt scelerisque
-              commodo proin faucibus.Lorem ipsum dolor sit amet consectetur.
-              Tincidunt scelerisque commodo proin faucibus.
+              Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
             </div>
           </div>
         </div>
