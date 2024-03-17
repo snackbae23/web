@@ -18,6 +18,9 @@ function Footer() {
         setEmail("");
     }
 
+    function scrolltoTop(){
+        document.documentElement.scrollTop=0;
+    }
     return (
         <div>
             {/* section */}
@@ -50,34 +53,35 @@ function Footer() {
                         <div className='flex sm:justify-around justify-between w-full lg:w-[70%]'>
                             <div className='flex flex-col gap-[.5rem]'>
                                 <p className='text-[#8b7430]'>Services</p>
-                                <Link to="/"><div className='text-[.9rem]'>Discover Restaurants</div></Link>
-                                <Link to="/"><div className='text-[.9rem]'>Book Tables</div></Link>
-                                <Link to="/"><div className='text-[.9rem]'>Recommand Restaurants</div></Link>
+                                <Link onClick={scrolltoTop} to="/"><div className='text-[.9rem]'>Discover Restaurants</div></Link>
+                                <Link onClick={scrolltoTop}  to="/"><div className='text-[.9rem]'>Book Tables</div></Link>
+                                <Link  onClick={scrolltoTop} to="/"><div className='text-[.9rem]'>Recommand Restaurants</div></Link>
                             </div>
                             <div className='flex flex-col gap-[.5rem]'>
                                 <p className='text-[#8b7430]'>About</p>
-                                <Link to="/"><div className='text-[.9rem]'>Home</div></Link>
-                                <Link to="/blog"><div className='text-[.9rem]'>Blogs</div></Link>
-                                <Link to="/aboutUs" ><div className='text-[.9rem]'>About Us</div></Link>
+                                <Link onClick={scrolltoTop}  to="/"><div className='text-[.9rem]'>Home</div></Link>
+                                <Link onClick={scrolltoTop}  to="/blog"><div className='text-[.9rem]'>Blogs</div></Link>
+                                <Link onClick={scrolltoTop}  to="/aboutUs" ><div className='text-[.9rem]'>About Us</div></Link>
+                                <Link  onClick={scrolltoTop} to="/contact" ><div className='text-[.9rem]'>Contact Us</div></Link>
                             </div>
                             <div className='flex flex-col gap-[.5rem]'>
                                 <p className='text-[#8b7430] text-nowrap'>For Restaurants</p>
-                                <Link to="/joinpartner"><div className='text-[.9rem]'>Join as Partner</div></Link>
-                                <Link to="/login"><div className='text-[.9rem]'>Partner Login</div></Link>
-                                <Link to='/adminlogin' className='text-[.9rem]'><div>Admin Login</div></Link>
+                                <Link onClick={scrolltoTop}  to="/joinpartner"><div className='text-[.9rem]'>Join as Partner</div></Link>
+                                <Link onClick={scrolltoTop}  to="/login"><div className='text-[.9rem]'>Partner Login</div></Link>
+                                <Link onClick={scrolltoTop}  to='/adminlogin' className='text-[.9rem]'><div>Admin Login</div></Link>
                             </div>
                         </div>
                     </div>
 
                     <div className='w-full flex md:flex-row flex-col justify-between items-center '>
                         <div className='flex gap-[1rem] my-[1rem] text-[.9rem]'>
-                            <Link to="/" >Terms & Conditions</Link>
-                            <Link to="/">Privacy Policy</Link>
+                            <Link onClick={scrolltoTop}  to="/termsCondition" >Terms & Conditions</Link>
+                            <Link onClick={scrolltoTop}  to="/privacyPolicy">Privacy Policy</Link>
                         </div>
                         <div className='flex gap-[1rem] my-[1rem]'>
-                            <Link to="/"  ><img src={fb} ></img></Link>
-                            <Link to="/"><img src={twitter}></img></Link>
-                            <Link to="/"><img src={insta}></img></Link>
+                            <Link onClick={scrolltoTop}  to="/"  ><img src={fb} ></img></Link>
+                            <Link onClick={scrolltoTop}  to="/"><img src={twitter}></img></Link>
+                            <Link onClick={scrolltoTop}  to="/"><img src={insta}></img></Link>
                         </div>
                     </div>
 
