@@ -948,7 +948,7 @@ function RestaurantPage({ login, setlogin }) {
 
   const handleCopy = async () => {
     try {
-      await navigator.clipboard.writeText(textToCopy);
+      await navigator.clipboard.writeText(`https://snackbae.in/user/restaurant/${id}`);
       setCopied(true);
       console.log("Text copied to clipboard!");
     } catch (err) {
@@ -2097,7 +2097,7 @@ function RestaurantPage({ login, setlogin }) {
                   </div>
                   <div className="flex flex-row ">
                     <div className="  px-4 pb-4">
-                      <input
+{/*                       <input
                         type="text"
                         id="inputText"
                         placeholder="Enter text to copy"
@@ -2105,7 +2105,16 @@ function RestaurantPage({ login, setlogin }) {
                         onChange={handleChange1}
                         className="bg-[#0000000D]
                         rounded-lg w-[320px] py-2 px-4"
-                      />
+                      /> */}
+                      <div
+                        // type="text"
+                        // id="inputText"
+                        // placeholder={`https://snackbae.in/user/restaurant/${id}`}
+{/*                         value={`https://snackbae.in/user/restaurant/${id}`} */}
+                        // onChange={handleChange1}
+                        className="bg-[#0000000D]
+                        rounded-lg w-[320px] py-2 px-4"
+                      >{`https://snackbae.in/user/restaurant/${id}`}</div>
                     </div>
                     <div className=" pb-4">
                       <button
