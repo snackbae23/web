@@ -1,0 +1,28 @@
+
+  .swiper {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 90%;
+    height: 220px;
+    display: flex;
+    align-items: center;
+    
+}
+.SwiperSlide{
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+  height:180px;
+    /* Center slide text vertically */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .swiper-slide img {
+    height: 150px;
+    display: block;
+    object-fit: contain;
+  }
+  

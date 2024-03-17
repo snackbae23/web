@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.scroll-wheel::-webkit-scrollbar {
+    display: none;
+}
+.clip-path-polygon {
+    clip-path: polygon(69.4% 0%, 100% 100%, 0% 100%);
+  }

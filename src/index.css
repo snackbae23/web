@@ -1,0 +1,218 @@
+*{
+    scroll-behavior: smooth;  
+}
+
+.react-tel-input .form-control {
+    width: 100% !important;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
+  
+  .opt-container {
+    @apply w-full mx-auto items-center;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    
+  }
+  
+  .opt-container input {
+    outline: 1px solid rgb(161, 160, 160);
+    border-radius: 4px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+  }
+
+#slide {
+    width: max-content;
+    margin-top: 50px;
+}
+
+.item {
+    width: 200px;
+    height: 300px;
+    background-position: 50% 50%;
+    display: inline-block;
+transition: 1.2s;
+    background-size: cover;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    transform: translate(0, -50%);
+    border-radius: 20px;
+    box-shadow: 0 30px 50px #505050;
+}
+
+.item:nth-child(1),
+.item:nth-child(2) {
+    left: 0;
+    top: 0;
+    transform: translate(0, 0);
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: none;
+}
+
+.item:nth-child(3) {
+    left: 50%;
+}
+
+.item:nth-child(4) {
+    left: calc(50% + 220px);
+}
+
+.item:nth-child(5) {
+    left: calc(50% + 440px);
+}
+
+.item:nth-child(n+6) {
+    left: calc(50% + 660px);
+    opacity: 0;
+}
+
+.item .content {
+    position: absolute;
+    top: 50%;
+    left: 100px;
+    width: 300px;
+    height: 250px;
+    text-align: left;
+    padding: 0;
+    color: black;
+    transform: translate(0, -50%);
+    display: none;
+    font-family: system-ui;
+}
+
+.item:nth-child(2) .content {
+    display: block;
+    z-index: 11111;
+}
+
+.item .name {
+    font-size: 40px;
+    font-weight: bold;
+    opacity: 0;
+    animation: showcontent 1s ease-in 1 forwards
+}
+
+.item .des {
+    margin: 20px 0;
+    opacity: 0;
+    animation: showcontent 1s ease-in 0.3s 1 forwards
+}
+
+.item button {
+    padding: 10px 20px;
+    border: none;
+    opacity: 0;
+    animation: showcontent 1s ease-in-out 0.6s 1 forwards
+}
+
+@keyframes showcontent {
+    from {
+        opacity: 0;
+        transform: translate(0, 100px);
+        filter: blur(33px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0, 0);
+        filter: blur(0);
+    }
+}
+
+
+
+.buttons button {
+    width: 60px;
+    height: 50px;
+    border-radius: 50%;
+    transition: 0.5s;
+}
+
+
+
+
+.hhappy {
+    display: none;
+}
+
+.happy {
+    display: block;
+
+}
+
+.happye {
+    display: none;
+}
+
+.happyee {
+    display: block;
+}
+
+.padd {
+    margin: 390px;
+}
+
+
+.sidebar{
+    position:fixed;
+    top:0;
+    right:0;
+    height:30%;
+    width:250px;
+    z-index:99;
+    background-color: white;
+    backdrop-filter: blur(10px);
+    box-shadow: -10px 0 10px rgba(0,0,0,0.1);
+    display:none;
+    flex-direction: column;
+    
+    justify-content: flex-start;
+}
+.sidebar li{
+    width: 100%;
+    
+}
+.sidebar li:hover
+{
+    color:white;
+}
+.sidebar link{
+width:100%;
+}
+
+.input_container {
+  border-color: #E2E8F0; /* Set border color */
+  border-width: 1px; /* Set border width */
+  border-style: solid; /* Set border style */
+  border-radius: 0.375rem; /* Set border radius */
+  outline: none; /* Remove outline on focus */
+  width:100%;
+  height:100px;
+}
+
+.input_container:focus {
+  box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.5); /* Add shadow on focus */
+}
+.input_container input[type="file"]{
+    display: none;
+}
+.input_container lable[for="file"]{
+    display: none;
+}
+
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+   /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+  }
