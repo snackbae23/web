@@ -35,6 +35,7 @@ import TermsCondition from "./Pages/TermsCondition";
 import AdminAppControl from "./Pages/AdminAppControl";
 import AdminControl from "./Pages/AdminControl";
 import RestaurantPage from "./Pages/RestaurantPage";
+import ContactUs from "./Pages/ContactUs";
 
   import Navbar1 from "./Components/Navbar1";
 
@@ -103,6 +104,7 @@ let user = JSON.parse(localStorage.getItem("user"));
           <Route path="/home" element={<Home />}></Route>
           <Route path="/joinpartner" element={<Joinpartner />}></Route>
           <Route path="/aboutUs" element={<AboutUs />}></Route>
+          <Route path="/contact" element={<ContactUs />}></Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/dashboard" element={<DashBoard />}></Route>
           <Route path="/blog" element={<Blogs />}></Route>``
