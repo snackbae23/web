@@ -139,7 +139,7 @@ function Joinpartner() {
                         <p className='text-[#020617] text-[2.6rem] leading-[2.6rem] xl:text-7xl font-roboto font-semibold'>Join as Partner</p>
                         <div className='font-opensans font-bold text-[#020617] -tracking-2 xl:text-lg '>Elevate Dining Experience with SnackBae</div>
                         <div className='font-normal text-sm xl:text-lg text-[#020617]  lg:w-[510px] font-opensans -tracking-2 text-center lg:text-start'>
-                            At SnackBae, we believe in the transformative power of exceptional dining experiences. Our mission is to empower restaurants to elevate their offerings, connect with a vibrant community, and enhance customer retention. Join us on this culinary journey and let SnackBae be your partner in success.
+                            Welcome to SnackBae, where we revolutionize the dining experience through our innovative interactive digital menu solutions. Partner with us to unlock a world of benefits tailored to your business
                         </div>
                         <div className='mx-auto lg:mx-0'>
                             <button className='w-[137px] h-[42px] bg-[#EAB308] border rounded-md px-[19px] py-[10px] flex justify-center items-center text-[#ffffff] font-roboto font-semibold tracking-tighter' onClick={openPopup}>
@@ -161,46 +161,46 @@ function Joinpartner() {
                             <div className='w-[111px] h-[37px] bg-[#FFFBEB] border rounded-full'>
                                 <div className='text-[#EAB308] font-roboto leading-9 font-semibold text-sm text-center'>Features</div>
                             </div>
-                            <div className='text-[#020617] lg:w-[515px] text-3xl lg:text-4xl font-roboto font-semibold'>Our Offerings</div>
-                            <div className='lg:w-[515px] lg:h-[75px] text-xs lg:text-sm text-gray-400'>SnackBae is here to elevate your business to new heights with a suite of innovative offerings designed just for you.</div>
+                            <div className='text-[#020617] lg:w-[515px] text-3xl lg:text-4xl font-roboto font-semibold text-[#EAB308]'>Join as a Partner with SnackBae</div>
+                            <div className='lg:w-[515px] lg:h-[75px] text-xs lg:text-sm text-gray-400'>At SnackBae, we prioritize loyalty, marketing, and customer data capture, empowering you to thrive in the competitive food industry. Join us as a partner and take your business to new heights.</div>
                         </div>
                         {/* second part */}
                         <div className='w-[100%] mx-auto flex flex-wrap md:flex-row gap-[1rem] justify-between items-center'>
                             {/* first box */}
                             <div className='flex flex-col  md:w-[30%]'>
                                 <img src={icon1} alt='icons' className='w-[42px] h-[42px]'></img>
-                                <div className='font-bold leading-10'>Marketing Services:</div>
-                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Boost your visibility and attract more customers. SnackBae provides a range of marketing tools, including push notifications, banner ads, social media promotions, and profile boosters, ensuring your business stands out in the crowd.</div>
+                                <div className='font-bold leading-10'>Interactive Digital Menu</div>
+                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Enhance customer engagement with our QR-based menu featuring community recommendations, preordering, self-ordering, and booking management functionalities.</div>
                             </div>
                             {/* second box */}
                             <div className='flex flex-col md:w-[30%]'>
                                 <img src={icon2} alt='icons' className='w-[42px] h-[42px]'></img>
-                                <div className='font-bold leading-10'>Commissionless Payments:</div>
-                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2  text-gray-400'>Keep more of what you earn. SnackBae believes in fair partnerships, offering a commission-free payment solution. Enjoy a seamless transaction experience without unnecessary deductions.</div>
+                                <div className='font-bold leading-10'>Commission-less Payments </div>
+                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2  text-gray-400'>Keep your profits intact with SnackBae's commission-free payment system, allowing you to maximize your earnings.</div>
                             </div>
                             {/* third box */}
                             <div className='flex flex-col md:w-[30%]'>
                                 <img src={icon3} alt='icons' className='w-[42px] h-[42px]'></img>
-                                <div className='font-bold leading-10'>Customer Insights for Better Retention:</div>
+                                <div className='font-bold leading-10'>Customer Data & Insights </div>
                                 <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Unlock the power of data! Gain valuable insights into customer preferences and behaviors, allowing you to tailor your offerings and services for maximum satisfaction.</div>
                             </div>
                             {/* forth box */}
                             <div className='flex flex-col md:w-[30%]'>
                                 <img src={icon3} alt='icons' className='w-[42px] h-[42px]'></img>
-                                <div className='font-bold leading-10'>Customer Insights for Better Retention:</div>
-                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Unlock the power of data! Gain valuable insights into customer preferences and behaviors, allowing you to tailor your offerings and services for maximum satisfaction.</div>
+                                <div className='font-bold leading-10'>Loyalty-Based Offer Tools</div>
+                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Customize offers and rewards to foster customer loyalty and satisfaction, driving repeat business and revenue growth.</div>
                             </div>
                             {/* five box */}
                             <div className='flex flex-col md:w-[30%]'>
                                 <img src={icon3} alt='icons' className='w-[42px] h-[42px]'></img>
-                                <div className='font-bold leading-10'>Customer Insights for Better Retention:</div>
-                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Unlock the power of data! Gain valuable insights into customer preferences and behaviors, allowing you to tailor your offerings and services for maximum satisfaction.</div>
+                                <div className='font-bold leading-10'>Automated Marketing Campaigns </div>
+                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Streamline your marketing efforts with our automated campaign tools, reaching your customers effectively and efficiently.</div>
                             </div>
                             {/* six box */}
                             <div className='flex flex-col md:w-[30%]'>
                                 <img src={icon3} alt='icons' className='w-[42px] h-[42px]'></img>
-                                <div className='font-bold leading-10'>Customer Insights for Better Retention:</div>
-                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Unlock the power of data! Gain valuable insights into customer preferences and behaviors, allowing you to tailor your offerings and services for maximum satisfaction.</div>
+                                <div className='font-bold leading-10'>Influencer Marketing </div>
+                                <div className='lg:w-full text-sm font-opensans font-normal text-[##020617] -tracking-2 text-gray-400'>Leverage our in-house influencer team and collaborate with industry experts to expand your reach on social media and engage with a broader audience.</div>
                             </div>
                         </div>
                     </div>
@@ -229,15 +229,15 @@ function Joinpartner() {
                 <div className='w-[100%] flex md:flex-row flex-col-reverse justify-around items-center'>
                     <div className='md:w-[40%] text-center md:text-start'>
                         <p className='text-[2.6rem] font-roboto font-[600] leading-[60px]'>Vision</p>
-                        <p className=' font-opensans font-[700] leading-[25px]'>Elevate Dining Experience with SnackBae</p>
-                        <p className=' font-opensans font-[400] leading-[25px] w-[80%] mx-auto md:m-0'>At SnackBae, we believe in the transformative power of exceptional dining experiences. Our mission is to empower restaurants to elevate their offerings, connect with a vibrant community, and enhance customer retention. Join us on this culinary journey and let SnackBae be your partner in success.</p>
+                        {/* <p className=' font-opensans font-[700] leading-[25px]'>Elevate Dining Experience with SnackBae</p> */}
+                        <p className=' font-opensans font-[400] leading-[25px] w-[80%] mx-auto md:m-0'>At SnackBae, our vision is to redefine the dining experience by providing innovative tools that enhance customer engagement, foster loyalty, and drive sustainable growth for businesses in the food industry.</p>
                     </div>
                     <img src={joinpartner2} alt='joinpartner2' className='w-[50%] md:w-[30%] aspect-square'></img>
                 </div>
                 <div className='w-[100%] flex md:flex-row-reverse flex-col-reverse justify-around items-center'>
                     <div className='md:w-[40%] text-center md:text-start'>
                         <p className='text-[2.6rem] font-roboto font-[600] leading-[60px]'>Mission</p>
-                        <p className=' font-opensans font-[400] leading-[25px] w-[80%] mx-auto md:m-0 '>At SnackBae, we believe in the transformative power of exceptional dining experiences. Our mission is to empower restaurants to elevate their offerings, connect with a vibrant community, and enhance customer retention. Join us on this culinary journey and let SnackBae be your partner in success.</p>
+                        <p className=' font-opensans font-[400] leading-[25px] w-[80%] mx-auto md:m-0 '>Our mission at SnackBae is to empower restaurants and merchants with cutting-edge technology solutions to elevate the dining experience and increase customer retention. Through our innovative tools for marketing, loyalty-oriented offers, and data-driven insights, we strive to enable businesses to thrive in an ever-evolving landscape while delighting customers with personalized and memorable experiences.</p>
                     </div>
                     <img src={joinpartner3} alt='joinpartner3' className='w-[50%] md:w-[30%] aspect-square'></img>
                 </div>
