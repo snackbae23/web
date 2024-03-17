@@ -8,6 +8,7 @@ import TeamSlider from "../Components/TeamSlider";
 import bg5 from "../assets/bg-5.png";
 import app from "../assets/appstore.png";
 import team from "../Components/Team";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   return (
@@ -29,14 +30,13 @@ const AboutUs = () => {
             <div className="text-[#020617] text-2xl lg:text-5xl  font-roboto font-semibold">
               Vision
             </div>
-            <div className="font-opensans font-bold text-[#020617] -tracking-[2%] xl:text:lg">
+            {/* <div className="font-opensans font-bold text-[#020617] -tracking-[2%] xl:text:lg">
               Empowering Merchants, Enriching Communities
-            </div>
+            </div> */}
             <div className="font-normal text-sm text-[#020617] w-full font-opensans -tracking-[2%] xl:text-lg text-center lg:text-left mx-auto lg:mx-0">
-              SnackBae envisions a future where merchants thrive, empowered by innovative solutions, fostering vibrant and connected communities.
-            </div>
+              At SnackBae, our vision is to redefine the dining experience by providing innovative tools that enhance customer engagement, foster loyalty, and drive sustainable growth for businesses in the food industry.            </div>
             <button className="mx-auto lg:mx-0 w-36 h-11 bg-[#EAB308] border rounded-md px-5 py-3 flex justify-center items-center text-[#ffffff] font-roboto text-base font-semibold tracking-tighter ">
-              Get Started
+              <Link to="/">Get Started</Link>
             </button>
           </div>
 
@@ -86,10 +86,9 @@ const AboutUs = () => {
               <div className="text-[#020617] text-5xl font-roboto font-semibold mt-4 mb-1">
                 Mission
               </div>
-              <div className="font-roboto text-sm mb-1 font-semibold">Empowering Dining Experiences</div>
+              {/* <div className="font-roboto text-sm mb-1 font-semibold">Empowering Dining Experiences</div> */}
               <div className="font-normal text-sm text-[#020617] w-[31.875rem] font-opensans -tracking-[2%]">
-                SnackBae fosters seamless connections between diners and merchants, redefining the way people experience and enjoy their favorite eateries.
-              </div>
+                Our mission at SnackBae is to empower restaurants and merchants with cutting-edge technology solutions to elevate the dining experience and increase customer retention. Through our innovative tools for marketing, loyalty-oriented offers, and data-driven insights, we strive to enable businesses to thrive in an ever-evolving landscape while delighting customers with personalized and memorable experiences.              </div>
             </div>
           </div>
         </div>
@@ -130,7 +129,7 @@ const AboutUs = () => {
             </div>
           </div>
           <div className="lg:mx-24 mt-8 mx-5">
-            <TeamSlider team={team} size={295}/>
+            <TeamSlider team={team} size={295} />
           </div>
         </div>
 
