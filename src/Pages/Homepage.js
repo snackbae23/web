@@ -280,21 +280,21 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
       .then((response) => {
         console.log(JSON.stringify(response.data));
         localStorage.setItem(
-                "user",
-                JSON.stringify({
-                  id: response.data?._id,
-                  name: response.data?.additionalDetails?.fullName,
-                  image: response.data?.additionalDetails?.image,
-                  phone: response.data?.contactNumber
-                })
-              );
+          "user",
+          JSON.stringify({
+            id: response.data?._id,
+            name: response.data?.additionalDetails?.fullName,
+            image: response.data?.additionalDetails?.image,
+            phone: response.data?.contactNumber
+          })
+        );
 
-              console.log(JSON.stringify({
-                id: response.data?._id,
-                name: response.data?.additionalDetails?.fullName,
-                image: response.data?.additionalDetails?.image,
-                phone: response.data?.contactNumber
-              }));
+        console.log(JSON.stringify({
+          id: response.data?._id,
+          name: response.data?.additionalDetails?.fullName,
+          image: response.data?.additionalDetails?.image,
+          phone: response.data?.contactNumber
+        }));
 
         //navigate to home 
         navigate("/home");
@@ -571,30 +571,37 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
             </div>
             <div className="w-[23rem] mx-auto lg:mx-0 md:w-[40rem] md:h-[14rem]  flex flex-col lg:text-left z-40">
               <div className="w-[60%] mx-auto lg:m-0 font-roboto font-semibold text-[28px] md:text-[36px] md:leading-[60px] lg:text-left text-center  text-slate-950 lg:-tracking-[2%]">
-                Tap the Table !!
+                Tap Into the Ultimate Dining Experience
               </div>
               <div className=" w-[362px] h-[75px] text-center lg:text-left md:w-[35rem] lg:h-[4rem] font-opensans font-normal text-[12px] lg:text-base leading-6 -tracking-[2%] text-slate-950 mt-5 mb-4">
-                Instantly book a personalized reservation in a restaurant of your choice for a stress-free dining experience.
+                Our QR-based food menu makes ordering a breeze, ensuring you spend less time waiting and more time indulging in delicious dishes.
               </div>
-              <div className=" flex flex-row mx-auto lg:mx-0 w-[22rem] h-[3.5rem] space-x-6  items-center mb-3">
-                <button className=" flex py-3 px-3 w-[10rem] relative  h-[2.8rem] border rounded-lg space-x-2 items-start justify-start bg-[#EAB308]">
-                  <img
+              <div className=" flex flex-row justify-center lg:justify-start mx-auto lg:mx-0 w-[22rem] h-[3.5rem] space-x-6  items-center mb-3">
+                <button
+                  onClick={() => {
+                    document.documentElement.scrollTop = 0;
+                    setlogin(true);
+                    setMobile(true);
+                  }}
+                  className=" flex py-3 px-3 w-[10rem] relative  h-[2.8rem] border rounded-lg space-x-2 items-start justify-start bg-[#EAB308]"
+                >
+                  {/* <img
                     className="absolute w-[1.2rem] h-[1.2rem]"
                     src={arrow}
                     alt="Logo"
                     loading="lazy"
-                  ></img>
+                  ></img> */}
                   <p className="font-Roboto font-medium w-[9rem] h-[0.75rem] text-white text-base leading-4 ">
-                    Download App
+                    Login
                   </p>
                 </button>
-                <button className="w-[158px] h-[42px] border rounded-lg gap-1 text-slate-950">
+                {/* <button className="w-[158px] h-[42px] border rounded-lg gap-1 text-slate-950">
                   <p className="font-Roboto font-medium text-base leading-5 items-center -tracking-tight justify-center">
                     More Details
                   </p>
-                </button>
+                </button> */}
               </div>
-              <div className="flex flex-row mx-auto lg:mx-0 font-opensans w-[379px] md:w-[21rem] gap-3 items-center justify-center ">
+              {/* <div className="flex flex-row mx-auto lg:mx-0 font-opensans w-[379px] md:w-[21rem] gap-3 items-center justify-center ">
                 <div className="flex relative w-[112px] md:w-[10rem]">
                   <div className="flex my-auto w-[79%]">
                     <div className="flex my-auto w-[74%]">
@@ -628,7 +635,7 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           {/* right part */}
@@ -656,34 +663,46 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
       {/* // ------------------------------------------------FIRST PART ENDED----------------------------------------------------------------
       // ------------------------------------------------SECOND PART STARTED----------------------------------------------------------------- */}
       <div className="w-[100vw] flex-col lg:flex-row items-center justify-center py-12 bg-[#1E2833]">
-        <button className="lg:hidden w-[100px] mx-auto mb-7 flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
+        {/* <button className="lg:hidden w-[100px] mx-auto mb-7 flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
           <p className=" font-roboto  font-semibold text-base leading-10">Discover</p>
-        </button>
+        </button> */}
         <div class="w-[85vw] flex justify-center items-center relative mx-auto">
           <div class="flex flex-col-reverse lg:flex-row justify-between w-11/12 mx-auto">
             {/* .---left part---- */}
             <div className="w-[90%] lg:w-[40%] my-auto">
-              <button className="hidden w-[100px] lg:flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
+              {/* <button className="hidden w-[100px] lg:flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
                 <p className=" font-roboto  font-semibold text-base leading-10">
                   Discover
                 </p>
-              </button>
+              </button> */}
               <div className="w-[90vw] md:w-[80vw] lg:w-[33vw] flex flex-col gap-2 lg:gap-5 mt-7 lg:mt-0 justify-center items-center pr-6 lg:pr-0">
                 <div className="w-full text-center text-white lg:text-left font-semibold text-xl lg:text-[42px] lg:leading-[56px] ">
-                  Scratch Your Itch to Save
+                  Pay, Save, and Earn Delicious Rewards
                 </div>
 
                 <p className="w-full text-center text-white lg:text-left font-opensans font-normal text-sm lg:leading-6 mb-3">
-                  Earn Scratch Cards and Coupons availing attractive discounts and rewards by making payments and inviting friends through the app.
+                  With SnackPay, enjoy exclusive discounts and unlock exciting food coupons with every payment. It's not just about satisfying your cravings; it's about rewarding yourself every time you dine out!
                 </p>
               </div>
-              <button className="py-1 px-1 w-[10rem] h-[2.8rem] border rounded-lg bg-[#EAB308] hidden lg:flex justify-center items-center">
+              <button
+                onClick={() => {
+                  document.documentElement.scrollTop = 0;
+                  setlogin(true);
+                  setMobile(true);
+                }}
+                className="py-1 px-1 w-[10rem] h-[2.8rem] border rounded-lg bg-[#EAB308] hidden lg:flex justify-center items-center">
                 <p className="font-Roboto font-medium w-[9rem] text-white text-base leading-4">
                   Get Started
                 </p>
               </button>
               <div className="w-full mx-auto flex justify-center lg:hidden">
-                <button className="py-1 px-1 w-[10rem] h-[2.8rem] border rounded-lg bg-[#EAB308] mx-auto">
+                <button
+                  onClick={() => {
+                    document.documentElement.scrollTop = 0;
+                    setlogin(true);
+                    setMobile(true);
+                  }}
+                  className="py-1 px-1 w-[10rem] h-[2.8rem] border rounded-lg bg-[#EAB308] mx-auto">
                   <p className="font-Roboto font-medium w-[9rem]  text-white text-base leading-4">
                     Get Started
                   </p>
@@ -757,11 +776,11 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
       {/* --------------------------------------------SECOND PART ENDED--------------------------------------------------
         ------------------------------------------THIRD PART STARTED------------------------------------------------------------- */}
       <div className="w-[100vw] flex-col lg:flex-row items-center justify-center mx-auto py-12 bg-[#1E2833]">
-        <button className="lg:hidden w-[100px] mx-auto mb-7 flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
+        {/* <button className="lg:hidden w-[100px] mx-auto mb-7 flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
           <p className=" font-roboto  font-semibold text-base leading-10">
             Coupons
           </p>
-        </button>
+        </button> */}
         <div className="">
           <div class="flex flex-col lg:flex-row justify-between items-center w-11/12 mx-auto">
             {/* ---left part-----*/}
@@ -797,32 +816,46 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
 
             {/* ----right part----- */}
             <div className="w-[90%] lg:w-[40%] my-auto ">
-              <button className="w-[110px] rounded-3xl py-1 px-6  bg-amber-50 text-amber-500 hidden lg:flex justify-center items-center">
+              {/* <button className="w-[110px] rounded-3xl py-1 px-6  bg-amber-50 text-amber-500 hidden lg:flex justify-center items-center">
                 <p className="  font-roboto  font-semibold text-base leading-10">
                   Coupons
                 </p>
-              </button>
+              </button> */}
               <div className="w-[90vw] md:w-[80vw] lg:w-[33vw] flex flex-col gap-2 lg:gap-5 mt-7 lg:mt-0 pr-9 lg:pr-0">
                 <div className="w-full text-center text-white lg:text-left font-semibold text-xl lg:text-[42px] lg:leading-[56px] ">
-                  You Pay, You Earn
+                  Become the Ultimate Food Critic
                 </div>
 
                 <p className="w-full text-center text-white lg:text-left font-opensans font-normal text-sm lg:leading-6 mb-3">
-                  Make secure and convenient payments through the app and earn rewards everytime you pay. Make your dining experience a saving opportunity for yourself.
+                  Join our community of foodies and unleash your inner food critic! Recommend dishes, and eateries, and help others discover the best sellers and hidden gems of Kolkata's vibrant food scene.
                 </p>
               </div>
-              <button className="  py-1 px-1 w-[10rem] lg:flex items-center justify-center h-[2.8rem] border rounded-lg bg-[#EAB308] hidden">
-                <p className="font-Roboto font-medium w-[9rem] text-white text-base leading-4 ">
-                  Explore Coupons
+              <button
+                onClick={() => {
+                  document.documentElement.scrollTop = 0;
+                  setlogin(true);
+                  setMobile(true);
+                }}
+                className="  py-1 px-1 w-[12rem] lg:flex items-center justify-center h-[2.8rem] border rounded-lg bg-[#EAB308] hidden ">
+                <p className="font-Roboto font-medium text-white text-base leading-4 ">
+                  Start Recommending
                 </p>
               </button>
-              <div className="w-full mx-auto flex justify-center items-center lg:hidden">
-                <button className="  py-1 px-1 w-[10rem] h-[2.8rem] border rounded-lg bg-[#EAB308] mx-auto">
-                  <p className="font-Roboto font-medium w-[9rem] text-white text-base leading-4 ">
-                    Explore Coupons
+              <div className="w-full mx-auto flex justify-center items-center text-center lg:hidden">
+                <button
+                  onClick={() => {
+                    document.documentElement.scrollTop = 0;
+                    setlogin(true);
+                    setMobile(true);
+                  }}
+                  className="flex justify-center items-center py-1 px-1 w-[12rem] h-[2.8rem] border rounded-lg bg-[#EAB308] mx-auto mb-10"
+                >
+                  <p className="font-Roboto font-medium text-white text-base leading-4 whitespace-nowrap">
+                    Start Recommending
                   </p>
                 </button>
               </div>
+
             </div>
           </div>
         </div>
@@ -835,13 +868,13 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
       </div>
 
       <div className="my-12 p-3 block md:hidden w-[90vw] mx-auto border border-gray-400 rounded-md">
-        <div>
+        {/* <div>
           <button className="lg:hidden w-[100px] mx-auto mb-7 flex justify-center items-center rounded-3xl py-1 px-6  bg-amber-50 text-amber-500">
             <p className=" font-roboto  font-semibold text-base leading-10">
               Coupons
             </p>
           </button>
-        </div>
+        </div> */}
         <div className="overflow-x-auto whitespace-nowrap scroll-wheel">
           <div className="flex" style={{ width: team.length * 275 }}>
             {team.map((image, index) => (
@@ -856,9 +889,9 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
           </div>
         </div>
         <div className="w-full mx-auto flex flex-col gap-1">
-          <div className="text-center font-bold text-xl">Community-Driven Recommendations </div>
+          <div className="text-center font-bold text-xl">Discover Delectable Delights </div>
           <div className="text-md text-center">
-            Discover hidden gems and must-try delicacies suggested by a diverse community of food lovers.
+            Explore culinary wonders with our interactive QR menu for personalized recommendations and unforgettable dining experiences.
           </div>
         </div>
       </div>
@@ -896,7 +929,7 @@ const Homepage = ({ login, setlogin, onScrollChange }) => {
       <div>
         <Footer />
       </div>
-    </div>
+    </div >
   );
 };
 export default Homepage;
