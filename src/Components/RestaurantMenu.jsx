@@ -73,7 +73,7 @@ function RestaurantMenu({ restaurantData }) {
                                 className="w-26 h-24 absolute -top-20  "
                             /> */}
                 <div className="p-2 md:p-4 rounded-xl shadow-lg overflow-hidden w-fit">
-                  <p className="text-lg font-medium pt-3 text-center">
+                  <p className="text-lg font-medium pt-3 max-w-[110px] text-center">
                     {item.menuItem}
                   </p>
                   <div className=" px-2 py-2 cursor-pointer font-bold justify-center flex">
