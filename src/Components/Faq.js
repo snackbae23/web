@@ -209,8 +209,7 @@ const Faq = () => {
           Frequently asked questions
         </div>
         <p className="w-[360px] lg:w-[590px] font-normal text-[12px] lg:text[14px] leading-[25px] font-sans text-center text-black ">
-          Powerful, self-serve product and growth analytics to help you convert,
-          engage, and retain more users. Trusted by over 4,000 startups.
+          FAQs provide clarity and address common concerns or queries users may have about SnackBae, ensuring a better understanding of our platform and services.
         </p>
       </div>
       <div className="flex flex-col mt-14 space-y-9 items-center justify-center">
@@ -242,8 +241,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  Check the app for the latest list of available locations. We're expanding rapidly, so stay tuned for updates on new cities joining the SnackBAE network.
-                </div>
+                  Check the app for the latest list of available locations. We're expanding rapidly, so stay tuned for updates on new cities joining the SnackBAE network.                </div>
               </div>
             </div>
           </div>
@@ -277,8 +275,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  Engage in various activities, such as inviting friends and making payments through the app, to unlock exciting coupons cards. The more you interact, the more chances you have to earn valuable rewards.
-                </div>
+                  Making payments through the app, to unlock exciting coupon cards. The more you interact, the more chances you have to earn valuable rewards.                </div>
                 {/* <div className=" w-[770px] h-[1px] bg-slate-200"></div> */}
               </div>
             </div>
@@ -292,8 +289,7 @@ const Faq = () => {
           >
             <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
-                Is Snackview available for all restaurants?
-              </div>
+                Are the discounts applicable at all partner restaurants?              </div>
               {/* <div className="max-w-[18rem]">
                       <p>Languages that I have picked up over the years</p>
                     </div> */}
@@ -316,8 +312,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  We aim to cover as many restaurants as possible with Snackview. Keep an eye out for the Snackview icon in the app to access our unique verification videos, offering you an insider's view of the restaurant's ambience, kitchen, food, and exclusive offers.
-                </div>
+                  The availability of discounts may vary by restaurant. Check the website for specific details and offers for each restaurant, ensuring you get the best deals every time.                </div>
               </div>
             </div>
           </div>
@@ -330,8 +325,7 @@ const Faq = () => {
           >
             <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
-                Are the discounts applicable at all partner restaurants?
-
+                Is SnackBAE safe for payments?
               </div>
             </div>
             <div className=" md:absolute md:-right-7 md:top-4">
@@ -352,8 +346,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  The availability of discounts may vary by restaurant. Check the app for specific details and offers for each restaurant, ensuring you get the best deals every time.
-
+                  Absolutely! SnackBAE prioritizes your security. We ensure all transactions are secure through encrypted payment gateways, providing you with a safe and convenient payment experience.
                 </div>
               </div>
             </div>
@@ -367,8 +360,7 @@ const Faq = () => {
           >
             <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
-                Is SnackBAE safe for payments?
-              </div>
+                How do recommendations work?              </div>
             </div>
             <div className=" md:absolute md:-right-7 md:top-4">
               {fifth ? (
@@ -388,8 +380,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  Absolutely! SnackBAE prioritizes your security. We ensure all transactions are secure through encrypted payment gateways, providing you with a safe and convenient payment experience.
-                </div>
+                  After dining at a restaurant and paying through SnackBAE, users can give dish recommendations. Share your favorite dishes to help other users discover delightful culinary experiences.                </div>
               </div>
             </div>
           </div>
@@ -402,8 +393,7 @@ const Faq = () => {
           >
             <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
-                How do recommendations work?
-              </div>
+                What happens if I recommend a restaurant?              </div>
             </div>
             <div className=" md:absolute md:-right-7 md:top-4">
               {sixth ? (
@@ -423,8 +413,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  After dining at a restaurant and paying through SnackBAE, users have the opportunity to give dish recommendations. Share your favorite dishes to help other users discover delightful culinary experiences.
-
+                  When you recommend a restaurant after paying through SnackBAE, you contribute to our community's shared dining experiences. Your recommendations help others discover hidden gems and great places to dine.
                 </div>
               </div>
             </div>
@@ -438,8 +427,7 @@ const Faq = () => {
           >
             <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
-                Can I customize my dining preferences on SnackBAE?
-              </div>
+                Is my data safe with SnackBae?              </div>
             </div>
             <div className=" md:absolute md:-right-7 md:top-4">
               {seventh ? (
@@ -459,8 +447,7 @@ const Faq = () => {
             <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
-                  Yes, SnackBAE allows you to customize your dining preferences. Explore restaurants based on categories such as nightlife, premium dining, quick-service restaurants (QSR), fast food, and more, tailoring your experience to your specific tastes.
-                </div>
+                  Absolutely. At SnackBae, we prioritize the security and privacy of your data. We adhere to stringent data protection measures and employ the latest encryption technologies to safeguard your information. Rest assured, your data is in safe hands.                </div>
                 {/* <div className=" w-[770px] h-[1px] bg-slate-200"></div> */}
               </div>
             </div>
@@ -472,7 +459,7 @@ const Faq = () => {
             className="flex flex-row relative cursor-pointer  "
             onClick={handlereighth}
           >
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
                 What happens if I recommend a restaurant?
               </div>
@@ -489,25 +476,25 @@ const Faq = () => {
                   <FiPlusCircle size={28} className="text-yellow-500" />{" "}
                 </span>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="eighth ">
-            <div className="  space flex flex-col   ">
+            {/* <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
                   When you recommend a restaurant after paying through SnackBAE, you contribute to our community's shared dining experiences. Your recommendations help others discover hidden gems and great places to dine.
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
-        <div className=" w-[360px] lg:w-[770px] h-[1px] bg-slate-200"></div>
+        {/* <div className=" w-[360px] lg:w-[770px] h-[1px] bg-slate-200"></div> */}
         <div className="w-[360px] lg:w-[770px] flex flex-col space-y-3 ">
           <div
             className="flex flex-row relative cursor-pointer  "
             onClick={handlerninth}
           >
-            <div className="flex flex-col">
+            {/* <div className="flex flex-col">
               <div className=" w-[312px] lg:w-[720px] text-[20px] leading-[30px] font-medium">
                 Can I add my favorite restaurants on SnackBAE?
               </div>
@@ -524,17 +511,26 @@ const Faq = () => {
                   <FiPlusCircle size={28} className="text-yellow-500" />{" "}
                 </span>
               )}
-            </div>
+            </div> */}
           </div>
           <div className="ninth">
-            <div className="  space flex flex-col   ">
+            {/* <div className="  space flex flex-col   ">
               <div className="w-[18.5rem] relative">
                 <div className=" w-[312px] lg:w-[720px] text-[12px] font-sans font-normal lg:text-[14px] leading-[25px]">
                   Absolutely! Add your favorite restaurants to your list on SnackBAE for quick and easy access. Keep track of the places you love and frequently visit.
                 </div>
               </div>
+            </div> */}
+          </div>
+          <div className="  space flex flex-col   ">
+            <div className="w-[18.5rem] relative">
+              <div className=" w-[312px] lg:w-[720px] text-[15px] font-sans font-normal lg:text-[18px] leading-[30px] -translate-y-10">
+                Feel free to reach out to us if you have any further questions or concerns regarding data security. Your trust and privacy are of utmost importance to us.              </div>
             </div>
           </div>
+        </div>
+        <div>
+
         </div>
       </div>
     </div>
