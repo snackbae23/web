@@ -1,6 +1,6 @@
 import React from "react";
-import burger from "../assets/burger.png";
-import rec from "../assets/recommend.png";
+// import burger from "../assets/burger.png";
+import rec from "../assets/allstudent.png";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -43,71 +43,48 @@ function RestaurantMenu({ restaurantData }) {
         Explore Menu
       </div>
       {/* types */}
-      <div className="menu-div flex flex-row py-8 sm:-ml-7 sm:px-2">
+      <div className="menu-div flex flex-wrap justify-center py-8 gap-[1rem]">
         {texts.map((text, index) => (
           <div
             key={index}
-            className="my-div border-2 mr-4 rounded-xl px-2 py-2 cursor-pointer"
+            className="my-div border-2  rounded-xl px-6 py-2 cursor-pointer"
           >
             {text}
           </div>
         ))}
       </div>
       {/* menu ite */}
-      <div className="menu-img">
-        <div className="flex gap-1 sm:gap-3 md:gap-6 flex-wrap">
+      <div className="menu-img w-full">
+        <div className=" w-full mx-auto flex gap-[50px] justify-center flex-wrap">
           {allMenuItem &&
             allMenuItem.map((item, index) => (
               <div
                 key={index}
-                className="relative mt-24 flex justify-center items-center"
+                className="relative w-[280px] mt-24  flex justify-center"
               >
                 <img
                   src={item.pic}
                   alt="Image description"
-                  className="w-26 h-24 absolute -top-20 "
+                  className="w-[150px] object-contain aspect-square absolute -top-[100px]"
                 />
-                {/* <img
-                                src={burger}
-                                alt="Image description"
-                                className="w-26 h-24 absolute -top-20  "
-                            /> */}
-                <div className="p-2 md:p-4 rounded-xl shadow-lg overflow-hidden w-fit">
-                  <p className="text-lg font-medium pt-3 max-w-[110px] text-center">
+
+                <div className="w-full p-2 py-[2rem] rounded-xl shadow-lg">
+                  <p className="w-full text-lg font-medium my-3 text-center overflow-ellipsis">
                     {item.menuItem}
                   </p>
-                  <div className=" px-2 py-2 cursor-pointer font-bold justify-center flex">
+                  <div className="font-bold text-center my-3">
                     ₹ {item.price}
                   </div>
 
                   <div className="div-rec">
-                    <div className="">
-                      {/* {item.users.map((item, index) => (
-                                            <div
-                                                key={index}
-                                                className="flex flex-row justify-center mx-4"
-                                            >
-                                                <img
-                                                    src={rec}
-                                                    alt="Image description"
-                                                    className="w-12 h-6 "
-                                                />
-                                                <div className="">
-                                                    <p className="text-lg font-medium text-slate-500 justify-center ">
-                                                        {item.text}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        ))} */}
-                      <div className="flex flex-row justify-center mx-4">
-                        <img src={rec} alt="" className="w-12 h-6 " />
-                        <div className="">
-                          <p className="text-lg font-medium text-slate-500 justify-center ">
+                      <div className="flex flex-wrap justify-center  mx-4">
+                        <div className="w-20 h-9">
+                        <img src={rec} alt="" className="w-full h-full object-contain " />
+                          </div>
+                          <p className="text-lg font-medium text-slate-500 ">
                             {item.users.length}+
                           </p>
-                        </div>
                       </div>
-                    </div>
                   </div>
                   <div key={index} className="text-slate-500 text-center">
                     Recommendations
