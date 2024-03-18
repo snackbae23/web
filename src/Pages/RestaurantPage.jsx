@@ -2109,8 +2109,8 @@ function RestaurantPage({ login, setlogin }) {
                       <div
                         // type="text"
                         // id="inputText"
-                        // placeholder={`https://snackbae.in/user/restaurant/${id}`}
-{/*                         value={`https://snackbae.in/user/restaurant/${id}`} */}
+                        // placeholder={`https://snackbae.in/user/restaurant/${id}                     
+                        // value={`https://snackbae.in/user/restaurant/${id}`} 
                         // onChange={handleChange1}
                         className="bg-[#0000000D]
                         rounded-lg w-[320px] py-2 px-4"
