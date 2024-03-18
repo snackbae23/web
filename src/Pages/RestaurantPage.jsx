@@ -2061,7 +2061,7 @@ function RestaurantPage({ login, setlogin }) {
         {isOpen7 && (
           <div>
             <div className="absolute lg:h-fit top-28 lg:left-[38%] md:left-[22%] sm:left-0 bg-white z-[100] md:h-fit rounded-lg sm:h-[100vw]">
-              <div className="pop-up lg:h-fit lg:w-[30vw] md:h-fit md:w-[58vw] sm:h-fit sm:w-[95%]">
+              <div className="pop-up lg:h-fit lg:w-[30vw] md:h-fit md:w-[58vw] sm:h-fit sm:w-[100%]">
                 <div className="text-2xl font-bold py-6 text-[#363636] px-8">
                   Share
                 </div>
@@ -2095,7 +2095,7 @@ function RestaurantPage({ login, setlogin }) {
                   <div className="font-bold text-xl px-8 py-4 text-[#363636] ">
                     Or copy link
                   </div>
-                  <div className="flex flex-row ">
+                  <div className="flex md:flex-row flex-col items-center justify-between   ">
                     <div className="  px-4 pb-4">
 {/*                       <input
                         type="text"
@@ -2120,7 +2120,7 @@ function RestaurantPage({ login, setlogin }) {
                       <button
                         id="copyButton"
                         onClick={handleCopy}
-                        className="bg-[#F3D74C] font-bold text-sm px-6 rounded-xl py-2"
+                        className="bg-[#F3D74C] font-bold text-sm px-6 ml-3 mr-3 rounded-xl py-2"
                       >
                         {copied ? "COPIED!" : "COPY"}
                       </button>
