@@ -73,10 +73,10 @@ const Navbar = ({ login, setlogin }) => {
             {
               isOpen &&
               <div className="flex lg:flex-row flex-col  py-4 px-10 absolute right-[10px] top-[65px] lg:relative lg:top-0 lg:right-0  bg-white ">
-                <Link onClick={toggleMenu} to='/' className="text-center py-1 text-nowrap px-4">Home</Link>
-                <Link onClick={toggleMenu} to='/joinpartner' className="text-center py-1 text-nowrap px-4">Join as partner</Link>
-                <Link onClick={toggleMenu} to='/blog' className="text-center py-1 text-nowrap px-4">Blogs</Link>
-                <Link onClick={toggleMenu} to='aboutUs' className="text-center py-1 text-nowrap px-4">About Us</Link>
+                <Link onClick={() => window.innerWidth < 1024 && toggleMenu()}  to='/' className="text-center py-1 text-nowrap px-4">Home</Link>
+                <Link onClick={() => window.innerWidth < 1024 && toggleMenu()}  to='/joinpartner' className="text-center py-1 text-nowrap px-4">Join as partner</Link>
+                <Link onClick={() => window.innerWidth < 1024 && toggleMenu()} to='/blog' className="text-center py-1 text-nowrap px-4">Blogs</Link>
+                <Link onClick={() => window.innerWidth < 1024 && toggleMenu()}  to='aboutUs' className="text-center py-1 text-nowrap px-4">About Us</Link>
                 <button
                   onClick={() => {
                     navigate('/')
