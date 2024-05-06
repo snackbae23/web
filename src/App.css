@@ -1,0 +1,31 @@
+.active{
+    color: #004AAD;
+}
+
+.hideScroller::-webkit-scrollbar {
+    display: none;
+  }
+
+  .comment {
+    transition: transform 0.5s, opacity 0.5s;
+    z-index: 200;
+    background-color: white;
+  }
+
+  .scroller-container {
+    width: 100%;
+    overflow-x: auto;
+    white-space: nowrap; /* Prevents content from wrapping */
+}
+
+.scroller {
+    display: inline-flex; /* Make sure children are laid out in a row */
+}
+
+
+.smoothOpen {
+  transition: height 0.3s ease-out; 
+}
+
+
+  
