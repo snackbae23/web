@@ -54,7 +54,7 @@ const LandingPage = () => {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'http://13.202.8.14:4000/api/becomepartner',
+      url: 'https://seashell-app-lgwmg.ondigitalocean.app/api/becomepartner',
       headers: {},
       data: demoData
     };
