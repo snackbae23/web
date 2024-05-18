@@ -70,7 +70,7 @@ function Footer() {
                             <div className='flex flex-col gap-[.5rem]'>
                                 <p className='text-[#8b7430] text-nowrap'>For Restaurants</p>
                                 <Link onClick={scrollSmooth} to="/joinAsPartner"><div className='text-[.7rem] sm:text-[.9rem]'>Join as Partner</div></Link>
-                                <Link onClick={scrollSmooth} to="/login"><div className='text-[.7rem] sm:text-[.9rem]'>Partner Login</div></Link>
+                                <Link onClick={scrollSmooth} to="https://snackbaeuser-snackbaes-projects.vercel.app/"><div className='text-[.7rem] sm:text-[.9rem]'>Partner Login</div></Link>
                             </div>
                         </div>
                     </div>

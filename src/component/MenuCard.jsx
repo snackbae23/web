@@ -14,6 +14,10 @@ import { CiStar } from "react-icons/ci";
 
 const MenuCard = ({ items }) => {
   const { commentVisible, setCommentVisible, setMenuId, setLogin, User} = useSnackBae();
+  const totalVotes = items.notLikedCount + items.likedCount + items.mustTryCount;
+  const weightedSum = items.notLikedCount * 0 + items.likedCount * 2 + items.mustTryCount * 4;
+  const averageRating = totalVotes > 0 ? (weightedSum / totalVotes) : 0;
+  const roundedRating = parseFloat(averageRating.toFixed(1));
 
   return (
     <div
@@ -32,7 +36,7 @@ const MenuCard = ({ items }) => {
       <div className="w-full relative">
         <img
           src={items?.image}
-          alt="image-menu"
+          alt={items?.name}
           className=" sm:h-[150px]  h-[100px] aspect-auto object-contain mx-auto"
         />
         <div className="p-[.5rem] rounded-md flex items-center justify-start w-fit h-fit absolute top-[.3rem] sm:top-[1rem] left-[.3rem] sm:left-[1rem]  bg-white border-2">
@@ -80,7 +84,7 @@ const MenuCard = ({ items }) => {
         </div> */}
 
         <div className='relative mt-[.5rem]'>
-          <p className='flex gap-[.1rem] items-center bg-[#004AAD] w-fit rounded-3xl text-white px-[.7rem] py-[.2rem] relative left-[75%] '>{items.rated}<CiStar className='text-[1.2rem]' /></p>
+          <p className='flex gap-[.1rem] items-center bg-[#004AAD] w-fit rounded-3xl text-white px-[.7rem] py-[.2rem] relative left-[75%] '>{roundedRating}<CiStar className='text-[1.2rem]' /></p>
 
           <div className='flex gap-[.5rem] mt-[1rem] items-center'>
             <img src={recommandicons} alt="recommandicons" className='w-[30%] aspect-auto' />

@@ -16,7 +16,7 @@ const MerchantNavbar = () => {
         editprofile, } = useSnackBae();
     const [visible, setVisible] = useState();
 
-    const [profileData, setProfileData] = useState();
+    const [profileData, setProfileData] = useState('');
     useEffect(() => {
         // Fetch user profile data from localhost server
         setProfileData(User);
@@ -32,7 +32,7 @@ const MerchantNavbar = () => {
 
 
     return (
-        <div className='relative bg-white  z-[1000] w-full h-[70px] flex justify-between items-center px-[1rem]'>
+        <div className='relative bg-white  z-[1000] w-full h-[60px] sm:h-[70px] flex justify-between items-center px-[1rem]'>
             {/* logo */}
             <img
                 onClick={
@@ -52,11 +52,11 @@ const MerchantNavbar = () => {
                         className='relative cursor-pointer mr-[2rem]'>
                         <img src={User.gender != "female" ? (userimgMale) : (userimggirl)}
                             alt="userImage"
-                            className={`w-[50px] aspect-square object-contain rounded-full absolute left-[5px] top-[5px] z-[-1]`} />
+                            className={`w-[50px] aspect-square object-contain rounded-full absolute sm:left-[5px] sm:top-[5px] z-[-1]`} />
                         <CircularProgressbar
                             value={calculateCompletionPercentage()}
                             // text={`${calculateCompletionPercentage()}%`}
-                            className='size-[60px] '
+                            className='sm:size-[60px] size-[40px] '
                             strokeWidth={6}
                             styles={buildStyles({
 

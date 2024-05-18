@@ -14,7 +14,6 @@ import BlogSingle from './pages/BlogSingle'
 import TermsCondtion from './pages/Terms&Condtion';
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ContactUs from './pages/ContactUs';
-import RestaurantConsole from './pages/RestaurantConsole';
 import MerchantProfile from './pages/MerchantProfile';
 
 function App() {
@@ -38,8 +37,6 @@ function App() {
           <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
           <Route path="/contact" element={<ContactUs />} />
 
-          {/* First Target Restaurant console */}
-          <Route path="/restaurant" element={<RestaurantConsole />} />
 
         </Route>
       </Routes>

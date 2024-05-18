@@ -13,7 +13,6 @@ import MerchantOffers from "../component/MerchantOffers";
 import Menucomment from "../component/Menucomment";
 import MerchantEvents from "../component/MerchantEvents";
 import MerchantShare from "../component/MerchantShare";
-import Loader from '../component/Loader'
 
 //icons
 import { MdOutlineShare } from "react-icons/md";
@@ -22,9 +21,10 @@ import { CiSearch } from "react-icons/ci";
 import { FaAngleDown, FaAngleUp } from "react-icons/fa6";
 import { IoIosCloseCircleOutline } from "react-icons/io";
 import { IoClose } from "react-icons/io5";
-import { FaEdit } from "react-icons/fa";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
+import { IoLocationOutline } from "react-icons/io5";
+import { FaPhoneAlt } from "react-icons/fa";
 
 //image
 import Instagram from "../assets/Instagram.png";
@@ -40,6 +40,8 @@ import defaultuser from '../assets/default.jpg';
 import notliked from '../assets/notliked.png'
 import good from '../assets/good.png'
 import musttry from '../assets/musttry.png';
+import fssai from '../assets/fssai.png';
+import logo from '../assets/logo.png';
 // import userimg from '../assets/userimg.jpg';
 
 // otp
@@ -71,15 +73,12 @@ const MerchantProfile = () => {
     shareVisible,
     restaurentdata,
     setRestaurentData,
-    menuId,
     User,
     openprofile,
     setOpenProfile,
-    loader,
     setLoader,
     editprofile,
     setEditProfile,
-    setFavoriteMenu,
     favoriteMenu,
 
   } = useSnackBae();
@@ -119,14 +118,18 @@ const MerchantProfile = () => {
   const [recommend, setRecommend] = useState(true);
   const navigate = useNavigate();
 
-  const [newone, setNewone] = useState(false);
-  const [notlikedone, setNotliked] = useState(false);
-  const [goodone, setGood] = useState(false);
-  const [musttryone, setMustTry] = useState(false);
-  const [filterone, setFilterone] = useState();
+  // const [newone, setNewone] = useState(false);
+  // const [notlikedone, setNotliked] = useState(false);
+  // const [goodone, setGood] = useState(false);
+  // const [musttryone, setMustTry] = useState(false);
+  const [filterone, setFilterone] = useState('new');
+
+
 
   useEffect(() => {
+
     forRecommendation();
+    setLoader(true); // add loader true
     let config = {
       method: "get",
       maxBodyLength: Infinity,
@@ -162,6 +165,10 @@ const MerchantProfile = () => {
       .catch((error) => {
         console.log(error);
       });
+
+    //remove loader
+    setLoader(false);
+
   }, [recommend]);
 
 
@@ -203,14 +210,21 @@ const MerchantProfile = () => {
 
   const scrollToElement = (id) => {
     const element = document.getElementById(id);
+    const headerOffset = 180; // Adjust this value to match the height of your fixed header
 
     if (element) {
-      element.scrollIntoView({
-        block: 'start',
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
         behavior: 'smooth',
       });
+    } else {
+      console.warn(`Element with ID "${id}" not found.`);
     }
   };
+
 
   //login and signup
   const [openphno, setOpenPhno] = useState(true);
@@ -465,7 +479,6 @@ const MerchantProfile = () => {
   //get all menu items for recommendation
   const [mostRecomended, setMostRecomended] = useState();
   const forRecommendation = async (req, res) => {
-
     let config = {
       method: "get",
       maxBodyLength: Infinity,
@@ -792,7 +805,7 @@ const MerchantProfile = () => {
                 </p>
               </div>
             </div>
-            <div className="w-full flex flex-wrap gap-[.2rem] md:gap-[1rem] items-center justify-center sm:justify-start">
+            <div className="w-full flex flex-wrap gap-[.2rem] md:gap-[1rem] items-center sm:justify-start">
               <button
                 onClick={handleRecommand}
                 id="recommand"
@@ -1431,6 +1444,30 @@ const MerchantProfile = () => {
               </div>
             </div>
           ))}
+
+          <div className="w-[90%] h-fit px-[2rem] py-[1rem] border-2 mx-auto border-black rounded-md mb-[6rem]">
+            <p className="text-[20px] font-inter font-[700] leading-[40px]">Foodoos</p>
+            <div className="flex sm:flex-row flex-col justify-between gap-[1rem]">
+              <div>
+                <div className="flex gap-[.5rem] items-center my-[.5rem]">
+                  <IoLocationOutline className="text-[1.4rem]" />
+                  <p className="text-[16px] font-inter font-[400] leading-[24px]">AG Block, Salt Lake Sector 2</p>
+                </div>
+                <div className="flex gap-[.5rem] items-center my-[.5rem]">
+                  <FaPhoneAlt className="text-[1.2rem]" />
+                  <p className="text-[16px] font-inter font-[400] leading-[24px]">+ 91 {restaurentdata?.contact}</p>
+                </div>
+                <div className="flex gap-[.5rem] items-center my-[.5rem]">
+                  <img src={fssai} alt="fssai" />
+                  <p className="text-[16px] font-inter font-[400] leading-[24px]">1987654321987654321</p>
+                </div>
+              </div>
+              <div className="">
+                <p className="inline text-[18px] font-inter font-[600] leading-[24px] text-[#106CF6] border-b-2 border-[#106CF6]">Powered By</p>
+                <img src={logo} alt="logo"  className="h-[4rem] aspect-auto mt-[1rem] relative left-[-.5rem]"/>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
@@ -1559,119 +1596,45 @@ const MerchantProfile = () => {
             <div className="sm:w-[90%] mx-auto h-fit flex flex-wrap justify-center my-[1rem]">
               <div className='w-full sticky top-0 bg-white z-[100] pt-[1rem] border-b-2'>
                 <p className='font-inter font-[700] leading-[24px] text-[#262627] text-[1.6rem] px-[1rem]'>Recomendations by customers</p>
-                <div className='flex sm:w-fit px-[1rem] w-full gap-[1rem] justify-evenly items-center my-[1rem] overflow-x-scroll hideScroller'>
-                  <button
-                    onClick={() => {
-                      setGood(false);
-                      setNewone(!newone);
-                      setNotliked(false);
-                      setMustTry(false);
-                      setFilterone('new');
-                    }}
-                    className={`${newone && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>New</button>
-                  <button
-                    onClick={() => {
-                      setGood(false);
-                      setNewone(false);
-                      setNotliked(!notlikedone);
-                      setMustTry(false);
-                      setFilterone('notLiked');
-                    }}
-                    className={` ${notlikedone && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Not Liked</button>
-                  <button
-                    onClick={() => {
-                      setGood(!goodone);
-                      setNewone(false);
-                      setNotliked(false);
-                      setMustTry(false);
-                      setFilterone('liked');
-                    }}
-                    className={` ${goodone && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Liked</button>
-                  <button
-                    onClick={() => {
-                      setGood(false);
-                      setNewone(false);
-                      setNotliked(false);
-                      setMustTry(!musttryone);
-                      setFilterone('mustTry');
-                    }}
-                    className={` ${musttryone && ('bg-[#FFD628]')}  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Must try</button>
-                </div>
+                <div className='w-full flex gap-[1rem] items-center my-[1rem] overflow-scroll hideScroller px-[1rem]'>
+                        <button
+                            onClick={() => {
+                                // setGood(false);
+                                // setNewone(!newone);
+                                // setNotliked(false);
+                                // setMustTry(false);
+                                setFilterone('new');
+                            }}
+                            className={`${filterone  === "new"  && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>New</button>
+                        <button
+                            onClick={() => {
+                                // setGood(false);
+                                // setNewone(false);
+                                // setNotliked(!notlikedone);
+                                // setMustTry(false);
+                                setFilterone('notLiked');
+                            }}
+                            className={` ${filterone === "notLiked"  && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Not Liked</button>
+                        <button
+                            onClick={() => {
+                                // setGood(!goodone);
+                                // setNewone(false);
+                                // setNotliked(false);
+                                // setMustTry(false);
+                                setFilterone('liked');
+                            }}
+                            className={` ${filterone === "liked"  && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Liked</button>
+                        <button
+                            onClick={() => {
+                                // setGood(false);
+                                // setNewone(false);
+                                // setNotliked(false);
+                                // setMustTry(!musttryone);
+                                setFilterone('mustTry');
+                            }}
+                            className={` ${filterone === "mustTry" && ('bg-[#FFD628]')}  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Must try</button>
+                    </div>
               </div>
-
-              {/* <div>
-                {filterone === "new" ?
-                  restaurentdata?.menu?.comments
-                    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                    .slice(0, 5) // Adjust the number of recent comments to be displayed
-                    .map((comment, index) => (
-                      // Render recent comments here
-                      <div key={index} className=' relative w-[80%] mx-auto h-fit border-2 p-[1rem] my-[1rem] rounded-3xl shadow-xl'>
-                        <div className='w-full flex justify-evenly items-center'>
-                          <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full ' />
-                          <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
-                          <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
-                        </div>
-                        <p className='font-inter font-[400] text-[#67727E] p-[1rem] pb-[3rem]'>{comment?.description}</p>
-                        <div >
-                          {comment?.rated == "mustTry" &&
-                            <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]'>
-                              <img src={musttry} alt="musttry" className='w-[20px] aspect-square' />
-                              <p className='font-inter font-[400] mt-[3px]'>must try</p>
-                            </div>
-                          }
-                          {comment?.rated == "liked" &&
-                            <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]'>
-                              <img src={good} alt="musttry" className='w-[20px] aspect-square' />
-                              <p className='font-inter font-[400] mt-[3px]'>Liked</p>
-                            </div>
-                          }
-                          {comment?.rated == "notLiked" &&
-                            <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]'>
-                              <img src={notliked} alt="musttry" className='w-[20px] aspect-square' />
-                              <p className='font-inter font-[400] mt-[3px]'>Not liked</p>
-                            </div>
-                          }
-                        </div>
-                      </div>
-                    ))
-                  :
-                  restaurentdata?.menu?.comments
-                    .filter(comment => filterone ? comment.rated === filterone : true)
-                    .map((comment, index) => (
-                      // Render comments based on other filters here
-                      <div key={index} className=' relative w-[80%] mx-auto h-fit border-2 p-[1rem] my-[1rem] rounded-3xl shadow-xl'>
-                        <div className='w-full flex justify-evenly items-center'>
-                          <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
-                          <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
-                          <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
-                        </div>
-                        <p className='font-inter font-[400] text-[#67727E] p-[1rem] pb-[3rem]'>{comment?.description}</p>
-                        <div >
-                          {comment?.rated == "mustTry" &&
-                            <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]'>
-                              <img src={musttry} alt="musttry" className='w-[20px] aspect-square' />
-                              <p className='font-inter font-[400] mt-[3px]'>must try</p>
-                            </div>
-                          }
-                          {comment?.rated == "liked" &&
-                            <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]'>
-                              <img src={good} alt="musttry" className='w-[20px] aspect-square' />
-                              <p className='font-inter font-[400] mt-[3px]'>Liked</p>
-                            </div>
-                          }
-                          {comment?.rated == "notLiked" &&
-                            <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]'>
-                              <img src={notliked} alt="musttry" className='w-[20px] aspect-square' />
-                              <p className='font-inter font-[400] mt-[3px]'>Not liked</p>
-                            </div>
-                          }
-                        </div>
-                      </div>
-                    ))
-                }
-
-              </div> */}
 
               <div className="w-[100%] h-fit flex flex-wrap gap-[.5rem]">
                 {
@@ -1684,13 +1647,13 @@ const MerchantProfile = () => {
                           .slice(0, 5) // Adjust the number of recent comments to be displayed
                           .map((comment, index) => (
                             // Render recent comments here
-                            <div key={index} className=' relative min-w-[360px] w-[360px] h-fit  mx-auto border-2 p-[1rem] my-[1rem] rounded-3xl shadow-xl'>
-                              <div className='w-full  flex justify-evenly items-center'>
+                            <div key={index} className=' relative min-w-[360px] w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
+                              <div className='w-full  flex justify-between items-center'>
                                 <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
                                 <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
                                 <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
                               </div>
-                              <p className=' font-inter font-[400] text-[#67727E] p-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
+                              <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
 
                               <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
                                 <p>{menu.name}</p>
@@ -1721,13 +1684,13 @@ const MerchantProfile = () => {
                           .filter(comment => filterone ? comment.rated === filterone : true)
                           .map((comment, index) => (
                             // Render comments based on other filters here
-                            <div key={index} className=' relative min-w-[360px] w-[360px] h-fit  mx-auto border-2 p-[1rem] my-[1rem] rounded-3xl shadow-xl'>
-                              <div className='w-full  flex justify-evenly items-center'>
+                            <div key={index} className=' relative min-w-[360px] w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
+                              <div className='w-full  flex justify-between items-center'>
                                 <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
                                 <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
                                 <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
                               </div>
-                              <p className=' font-inter font-[400] text-[#67727E] p-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
+                              <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
 
                               <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
                                 <p>{menu.name}</p>
