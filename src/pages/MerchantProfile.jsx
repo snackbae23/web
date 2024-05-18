@@ -13,6 +13,7 @@ import MerchantOffers from "../component/MerchantOffers";
 import Menucomment from "../component/Menucomment";
 import MerchantEvents from "../component/MerchantEvents";
 import MerchantShare from "../component/MerchantShare";
+import SuccessPayment from "../component/SuccessPayment";
 
 //icons
 import { MdOutlineShare } from "react-icons/md";
@@ -47,6 +48,8 @@ import logo from '../assets/logo.png';
 // otp
 import { auth } from "../firebase.config";
 import { RecaptchaVerifier, signInWithPhoneNumber } from "firebase/auth";
+import FailurePayment from "../component/FailurePayment";
+
 
 
 
@@ -80,7 +83,12 @@ const MerchantProfile = () => {
     editprofile,
     setEditProfile,
     favoriteMenu,
-
+    paymentamount,
+    setPaymentAmount,
+    successPayment,
+    setsuccesspayment,
+    failurePayment,
+    setfailurepayment,
   } = useSnackBae();
 
   const calculateTimeDifference = (fateDate) => {
@@ -435,7 +443,6 @@ const MerchantProfile = () => {
   };
 
   //payment
-  const [paymentamount, setPaymentAmount] = useState("");
   const [paymentVisible, setPaymentVisible] = useState(false);
   const [ishidden, setIsHidden] = useState(false);
 
@@ -565,26 +572,10 @@ const MerchantProfile = () => {
       });
 
   }
-  // useEffect(()=>{
-  //   let paymentmode;
-  //   let config = {
-  //     method: "get",
-  //     maxBodyLength: Infinity,
-  //     url: "https://api.razorpay.com/v1/payments/pay_OC5tEecuwdkukq",
-  //     headers: {},
-  //   };
 
-  //   axios
-  //     .request(config)
-  //     .then((response) => {
-  //       console.log(JSON.stringify(response.data));
-  //       paymentmode = JSON.stringify(response.data);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // })
   //payment for bill
+  const [amountToPay, setamountToPay] = useState('');
+
   function loadScript(src) {
     return new Promise((resolve) => {
       console.log("hello");
@@ -599,12 +590,15 @@ const MerchantProfile = () => {
       document.body.appendChild(script);
     });
   }
-  const userId= User._id;
+  const userId = User._id;
   const handlePayment = async (event) => {
     // console.log(amount);
     event.preventDefault();
-
     try {
+      setTimeout(() => {
+        setPaymentAmount('');
+        setPaymentVisible(false);
+      }, 3000);
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
       );
@@ -617,9 +611,9 @@ const MerchantProfile = () => {
       // setAmount("");
       // Opening the Razorpay SDK
       const options = {
-        key:"rzp_test_j0bIhMBoV0HF8k",
+        key: "rzp_test_j0bIhMBoV0HF8k",
         currency: orderResponse.data.data.currency,
-        amount:`${orderResponse.data.data.amount}`,
+        amount: `${orderResponse.data.data.amount}`,
         order_id: orderResponse.data.data.id,
         name: "SnackBae",
         description: "Thank you for the payment",
@@ -632,10 +626,10 @@ const MerchantProfile = () => {
           "name": User.name,
           "email": User.email,
           "contact": User.contact
-      },
-      "theme": {
+        },
+        "theme": {
           "color": "#3399cc"
-      }
+        }
       };
       console.log("hello");
       const paymentObject = new window.Razorpay(options);
@@ -646,7 +640,9 @@ const MerchantProfile = () => {
         console.log(response.error);
       });
       //setAmount("");
-    } catch (error) {}
+    } catch (error) { }
+
+
   };
 
   async function verifypayment(bodydata) {
@@ -661,10 +657,12 @@ const MerchantProfile = () => {
       console.log(data);
       // pay now wala popup band krna aur succesful payment wala popup kholna hai
       // setIsOpen5(true);
+      setsuccesspayment(true);
     } catch (error) {
       console.log(error);
       //payment failed ka popup
       // setIsOpen6(true);
+      setfailurepayment(true);
     }
   }
 
@@ -953,7 +951,13 @@ const MerchantProfile = () => {
             </div>
             <button
               onClick={() => {
-                setPaymentVisible(!paymentVisible);
+                if (User._id) {
+                  setPaymentVisible(!paymentVisible);
+                }
+                else {
+                  setLogin(true);
+                  setOpenPhno(true);
+                }
               }}
               className="bg-[#004AAD] rounded-lg flex gap-[1rem] items-center justify-center sm:px-[1rem] text-white sm:py-[.5rem] px-[.5rem] py-[.3rem]"
             >
@@ -1021,7 +1025,7 @@ const MerchantProfile = () => {
               </button>
             }
             {/* events */}
-            <button
+            {/* <button
               onClick={() => {
                 setMenus(false);
                 setEvents(!events);
@@ -1035,7 +1039,7 @@ const MerchantProfile = () => {
                 }`}
             >
               Events
-            </button>
+            </button> */}
             {/* offers */}
             <button
               onClick={() => {
@@ -1267,6 +1271,19 @@ const MerchantProfile = () => {
       {/* MerchantShare */}
       <MerchantShare />
 
+
+      {/* successpayment popup */}
+      {
+        successPayment &&
+        <SuccessPayment amountToPay={amountToPay} />
+      }
+
+      {/* failurepayment popup */}
+      {
+        failurePayment &&
+        <FailurePayment />
+      }
+
       {/* paybill */}
       <div className="w-full h-0 relative">
         <div
@@ -1308,6 +1325,7 @@ const MerchantProfile = () => {
                 value={paymentamount}
                 onChange={(e) => {
                   setPaymentAmount(e.target.value);
+                  setamountToPay(e.target.value)
                   console.log(paymentamount);
                 }}
               />
@@ -1546,8 +1564,8 @@ const MerchantProfile = () => {
               </div>
             </div>
           ))}
-
-          <div className="w-[90%] h-fit px-[2rem] py-[1rem] border-2 mx-auto border-black rounded-md mb-[6rem]">
+          {/* footer */}
+          <div className="w-[90%] h-fit px-[2rem] py-[1rem] border-2 mx-auto border-black rounded-md mb-[6rem] mt-[1rem]">
             <p className="text-[20px] font-inter font-[700] leading-[40px]">Foodoos</p>
             <div className="flex sm:flex-row flex-col justify-between gap-[1rem]">
               <div>
@@ -1566,7 +1584,7 @@ const MerchantProfile = () => {
               </div>
               <div className="">
                 <p className="inline text-[18px] font-inter font-[600] leading-[24px] text-[#106CF6] border-b-2 border-[#106CF6]">Powered By</p>
-                <img src={logo} alt="logo"  className="h-[4rem] aspect-auto mt-[1rem] relative left-[-.5rem]"/>
+                <img src={logo} alt="logo" className="h-[4rem] aspect-auto mt-[1rem] relative left-[-.5rem]" />
               </div>
             </div>
           </div>
@@ -1601,7 +1619,7 @@ const MerchantProfile = () => {
       )}
 
       {/* events  */}
-      {events && (
+      {/* {events && (
         <div>
           {restaurantEvents?.length === 0 ? (
             <div className="w-full flex flex-col items-center p-[2rem] pb-[6rem]">
@@ -1625,7 +1643,7 @@ const MerchantProfile = () => {
             </div>
           )}
         </div>
-      )}
+      )} */}
 
       {/* Favourite */}
       {
@@ -1699,43 +1717,43 @@ const MerchantProfile = () => {
               <div className='w-full sticky top-0 bg-white z-[100] pt-[1rem] border-b-2'>
                 <p className='font-inter font-[700] leading-[24px] text-[#262627] text-[1.6rem] px-[1rem]'>Recomendations by customers</p>
                 <div className='w-full flex gap-[1rem] items-center my-[1rem] overflow-scroll hideScroller px-[1rem]'>
-                        <button
-                            onClick={() => {
-                                // setGood(false);
-                                // setNewone(!newone);
-                                // setNotliked(false);
-                                // setMustTry(false);
-                                setFilterone('new');
-                            }}
-                            className={`${filterone  === "new"  && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>New</button>
-                        <button
-                            onClick={() => {
-                                // setGood(false);
-                                // setNewone(false);
-                                // setNotliked(!notlikedone);
-                                // setMustTry(false);
-                                setFilterone('notLiked');
-                            }}
-                            className={` ${filterone === "notLiked"  && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Not Liked</button>
-                        <button
-                            onClick={() => {
-                                // setGood(!goodone);
-                                // setNewone(false);
-                                // setNotliked(false);
-                                // setMustTry(false);
-                                setFilterone('liked');
-                            }}
-                            className={` ${filterone === "liked"  && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Liked</button>
-                        <button
-                            onClick={() => {
-                                // setGood(false);
-                                // setNewone(false);
-                                // setNotliked(false);
-                                // setMustTry(!musttryone);
-                                setFilterone('mustTry');
-                            }}
-                            className={` ${filterone === "mustTry" && ('bg-[#FFD628]')}  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Must try</button>
-                    </div>
+                  <button
+                    onClick={() => {
+                      // setGood(false);
+                      // setNewone(!newone);
+                      // setNotliked(false);
+                      // setMustTry(false);
+                      setFilterone('new');
+                    }}
+                    className={`${filterone === "new" && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>New</button>
+                  <button
+                    onClick={() => {
+                      // setGood(false);
+                      // setNewone(false);
+                      // setNotliked(!notlikedone);
+                      // setMustTry(false);
+                      setFilterone('notLiked');
+                    }}
+                    className={` ${filterone === "notLiked" && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Not Liked</button>
+                  <button
+                    onClick={() => {
+                      // setGood(!goodone);
+                      // setNewone(false);
+                      // setNotliked(false);
+                      // setMustTry(false);
+                      setFilterone('liked');
+                    }}
+                    className={` ${filterone === "liked" && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Liked</button>
+                  <button
+                    onClick={() => {
+                      // setGood(false);
+                      // setNewone(false);
+                      // setNotliked(false);
+                      // setMustTry(!musttryone);
+                      setFilterone('mustTry');
+                    }}
+                    className={` ${filterone === "mustTry" && ('bg-[#FFD628]')}  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Must try</button>
+                </div>
               </div>
 
               <div className="w-[100%] h-fit flex flex-wrap gap-[.5rem]">

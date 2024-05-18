@@ -26,6 +26,11 @@ export const SnackBaeProvider = (props) => {
   const [openprofile, setOpenProfile] = useState(false); // open user profile for signup
   const [editprofile, setEditProfile] = useState(false); //edit and open user profile
 
+  //payment
+  const [paymentamount, setPaymentAmount] = useState("");//payamount for bill pay
+  const [ successPayment, setsuccesspayment ] = useState(false);
+  const [ failurePayment, setfailurepayment ] = useState(false);
+
   useEffect(() => {
     setLoader(true);
     const storedUser = localStorage.getItem('user');
@@ -92,6 +97,12 @@ export const SnackBaeProvider = (props) => {
         isFavorite,
         setFavoriteMenu,
         favoriteMenu,
+        paymentamount,
+        setPaymentAmount,
+        successPayment, 
+        setsuccesspayment,
+        failurePayment, 
+        setfailurepayment,
       }}
     >
       {props.children}
