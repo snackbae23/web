@@ -565,25 +565,25 @@ const MerchantProfile = () => {
       });
 
   }
-  useEffect(()=>{
-    let paymentmode;
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: "https://api.razorpay.com/v1/payments/pay_OC5tEecuwdkukq",
-      headers: {},
-    };
+  // useEffect(()=>{
+  //   let paymentmode;
+  //   let config = {
+  //     method: "get",
+  //     maxBodyLength: Infinity,
+  //     url: "https://api.razorpay.com/v1/payments/pay_OC5tEecuwdkukq",
+  //     headers: {},
+  //   };
 
-    axios
-      .request(config)
-      .then((response) => {
-        console.log(JSON.stringify(response.data));
-        paymentmode = JSON.stringify(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  })
+  //   axios
+  //     .request(config)
+  //     .then((response) => {
+  //       console.log(JSON.stringify(response.data));
+  //       paymentmode = JSON.stringify(response.data);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // })
   //payment for bill
   function loadScript(src) {
     return new Promise((resolve) => {
