@@ -565,6 +565,108 @@ const MerchantProfile = () => {
       });
 
   }
+  useEffect(()=>{
+    let paymentmode;
+    let config = {
+      method: "get",
+      maxBodyLength: Infinity,
+      url: "https://api.razorpay.com/v1/payments/pay_OC5tEecuwdkukq",
+      headers: {},
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+        paymentmode = JSON.stringify(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  })
+  //payment for bill
+  function loadScript(src) {
+    return new Promise((resolve) => {
+      console.log("hello");
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  }
+  const userId= User._id;
+  const handlePayment = async (event) => {
+    // console.log(amount);
+    event.preventDefault();
+
+    try {
+      const res = await loadScript(
+        "https://checkout.razorpay.com/v1/checkout.js"
+      );
+      console.log("jjjjjjjjjj");
+      const orderResponse = await axios.post(
+        "https://seashell-app-lgwmg.ondigitalocean.app/api/payment/capturepayment",
+        { amount: paymentamount }
+      );
+      console.log(orderResponse);
+      // setAmount("");
+      // Opening the Razorpay SDK
+      const options = {
+        key:"rzp_test_j0bIhMBoV0HF8k",
+        currency: orderResponse.data.data.currency,
+        amount:`${orderResponse.data.data.amount}`,
+        order_id: orderResponse.data.data.id,
+        name: "SnackBae",
+        description: "Thank you for the payment",
+        image: logo,
+        handler: function (response) {
+          console.log(response);
+          verifypayment({ ...response, id, userId, amount: paymentamount });
+        },
+        "prefill": {
+          "name": User.name,
+          "email": User.email,
+          "contact": User.contact
+      },
+      "theme": {
+          "color": "#3399cc"
+      }
+      };
+      console.log("hello");
+      const paymentObject = new window.Razorpay(options);
+
+      paymentObject.open();
+      paymentObject.on("payment.failed", function (response) {
+        // toast.error("Oops! Payment Failed.");
+        console.log(response.error);
+      });
+      //setAmount("");
+    } catch (error) {}
+  };
+
+  async function verifypayment(bodydata) {
+    console.log("hellohjjjjjjj");
+    try {
+      const verifyUrl =
+        "https://seashell-app-lgwmg.ondigitalocean.app/api/payment/verifypayment";
+      const { data } = await axios.post(verifyUrl, {
+        bodydata,
+      });
+      console.log("hello");
+      console.log(data);
+      // pay now wala popup band krna aur succesful payment wala popup kholna hai
+      // setIsOpen5(true);
+    } catch (error) {
+      console.log(error);
+      //payment failed ka popup
+      // setIsOpen6(true);
+    }
+  }
 
   return (
     <div className="w-full h-fit">
@@ -1339,7 +1441,7 @@ const MerchantProfile = () => {
           </div>
 
           <div className="sticky bottom-0 w-full bg-white border-2 p-[1rem] rounded-t-3xl">
-            <button className="  bg-[#004AAD] text-[#ffffff] font-[700] font-Roboto w-[300px]  h-[3.6rem] mx-auto  rounded-md block">
+            <button onClick={handlePayment} className="  bg-[#004AAD] text-[#ffffff] font-[700] font-Roboto w-[300px]  h-[3.6rem] mx-auto  rounded-md block">
               Pay Now
             </button>
           </div>
