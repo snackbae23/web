@@ -348,7 +348,7 @@ const MerchantProfile = () => {
   //profile
   const [profileData, setProfileData] = useState({
     // profileImage: userimg,
-    fullName: "",
+    name: "",
     gender: "",
     dob: "male",
     contact: "",
@@ -759,15 +759,15 @@ const MerchantProfile = () => {
                 <div className="relative w-full flex flex-col">
                   <label
                     className="bg-white inline px-[1rem] w-fit h-fit relative top-[10px] left-[15px]"
-                    htmlFor="fullName"
+                    htmlFor="name"
                   >
                     Full Name:
                   </label>
                   <input
                     className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
                     type="text"
-                    id="fullName"
-                    name="fullName"
+                    id="name"
+                    name="name"
                     required
                     onChange={handleChangeProfile}
                   />
@@ -1325,7 +1325,8 @@ const MerchantProfile = () => {
                 </p>
                 <input
                   className="w-[7rem] h-[3rem] focus:outline-none bg-transparent text-[1.5rem] text-[#262627C7] font-[700] font-inter  px-[.5rem]"
-                  type="text"
+                  type="number"
+                  min="1"
                   placeholder="400"
                   value={paymentamount}
                   onChange={(e) => {
