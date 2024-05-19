@@ -602,6 +602,7 @@ const MerchantProfile = () => {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
       );
+      //Math.round(paymentamount);
       console.log("jjjjjjjjjj");
       const orderResponse = await axios.post(
         "https://seashell-app-lgwmg.ondigitalocean.app/api/payment/capturepayment",
@@ -611,7 +612,7 @@ const MerchantProfile = () => {
       // setAmount("");
       // Opening the Razorpay SDK
       const options = {
-        key: "rzp_test_j0bIhMBoV0HF8k",
+        key: "rzp_live_gmPEn9SzKAciFs",
         currency: orderResponse.data.data.currency,
         amount: `${orderResponse.data.data.amount}`,
         order_id: orderResponse.data.data.id,
