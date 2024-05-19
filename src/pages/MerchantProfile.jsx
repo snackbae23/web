@@ -251,14 +251,20 @@ const MerchantProfile = () => {
     // setLoader(true);
     console.log("inside onsignup");
     try {
-      const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {});
+    const recaptcha = new RecaptchaVerifier(auth, 'sign-in-button', {
+  'size': 'invisible',
+  'callback': (response) => {
+    // reCAPTCHA solved, allow signInWithPhoneNumber.
+    onSignInSubmit();
+  }
+});
       const formatPh = "+91" + phoneNumber;
       console.log(formatPh);
       // const confirmation = await signInWithPhoneNumber(auth, formatPh);
       const confirmation = await signInWithPhoneNumber(
         auth,
         formatPh,
-        recaptcha
+        //recaptcha
       );
       console.log(confirmation);
       setUser(confirmation);
