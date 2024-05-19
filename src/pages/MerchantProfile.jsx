@@ -1389,14 +1389,14 @@ const MerchantProfile = () => {
                   <p className="font-[400] font-Roboto leading-[19.36px] text-[#004AAD]">
                     offers
                   </p>
-                  <p className="text-[#004AAD]">-₹ {paymentamount}</p>
+                  <p className="text-[#004AAD]">-₹ 0</p>
                 </div>
 
                 <div className="flex justify-between items-center my-[.25rem] ">
                   <p className="font-[400] font-Roboto leading-[19.36px]">
                     Convenience fee
                   </p>
-                  <p className="text-[#262627C7]">₹ {paymentamount}</p>
+                  <p className="text-[#262627C7]">₹ 0</p>
                 </div>
 
                 <div className="w-full h-[1px] bg-[#00000057] my-[1rem]"></div>
