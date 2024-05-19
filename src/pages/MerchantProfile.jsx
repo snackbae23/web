@@ -247,29 +247,72 @@ const MerchantProfile = () => {
     }
   };
 
-  const handleSubmit = async () => {
+  // const handleSubmit = async () => {
+  //   console.log("inside onsignup");
+  //   try {
+  //     const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {});
+  //     const formatPh = "+91" + phoneNumber;
+  //     console.log(formatPh);
+  //     // const confirmation = await signInWithPhoneNumber(auth, formatPh);
+  //     const confirmation = await signInWithPhoneNumber(
+  //       auth,
+  //       formatPh,
+  //       recaptcha
+  //     );
+  //     console.log(confirmation);
+  //     setUser(confirmation);
+  //     setOpenPhno(false);
+  //     setOpenOtp(true);
+  //     toast.success('Successfully Read!');
+  //   } catch (err) {
+  //     console.log(err);
+  //     toast.error(err);
+  //   }
+  // };
+ const handleSubmit = async () => {
     console.log("inside onsignup");
-    try {
-      const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {});
-      const formatPh = "+91" + phoneNumber;
-      console.log(formatPh);
-      // const confirmation = await signInWithPhoneNumber(auth, formatPh);
-      const confirmation = await signInWithPhoneNumber(
-        auth,
-        formatPh,
-        recaptcha
-      );
-      console.log(confirmation);
-      setUser(confirmation);
-      setOpenPhno(false);
-      setOpenOtp(true);
-      toast.success('Successfully Read!');
-    } catch (err) {
-      console.log(err);
-      toast.error(err);
-    }
-  };
+  try {
+    // Initialize invisible reCAPTCHA verifier
+    
+       if (!window.recaptchaVerifier) {
+         window.recaptchaVerifier = new RecaptchaVerifier(
+           auth ,"recaptcha-container",
+           {
+             size: "invisible",
+             callback: (response) => {
+               onSignup();
+             },
+             "expired-callback": () => {},
+           },
+           
+         );
+       }
+    
+ const appVerifier = window.recaptchaVerifier;
 
+    // Verify the phone number format
+    const formatPh = "+91" + phoneNumber;
+    console.log(formatPh);
+
+    // Ask user to solve reCAPTCHA before continuing
+    // const appVerifier = window.recaptchaVerifier;
+
+    // Sign in with phone number
+    const confirmation = await signInWithPhoneNumber(
+      auth,
+      formatPh,
+      appVerifier
+    );
+    console.log(confirmation);
+    setUser(confirmation);
+    setOpenPhno(false);
+    setOpenOtp(true);
+    toast.success("Successfully sent verification code!");
+  } catch (err) {
+    console.log(err);
+    toast.error(err.message || "An error occurred. Please try again.");
+  }
+  };
 
   //otp
   const [otp, setOtp] = useState("");
