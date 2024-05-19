@@ -1281,187 +1281,192 @@ const MerchantProfile = () => {
       {/* failurepayment popup */}
       {
         failurePayment &&
-        <FailurePayment />
+        <FailurePayment
+          paymentVisible={paymentVisible} setPaymentVisible={setPaymentVisible} />
       }
 
       {/* paybill */}
       <div className="w-full h-0 relative">
         <div
-          className={`fixed bottom-0 left-[50%] translate-x-[-50%] max-w-[400px] w-full hideScroller h-[80vh] z-[3000] bg-white border-2 overflow-scroll comment ${paymentVisible
+          className={`fixed bottom-0 left-[50%] translate-x-[-50%] max-w-[400px] w-full hideScroller  z-[3000] bg-transparent h-fit border-2 overflow-scroll comment ${paymentVisible
             ? "translate-y-0 opacity-100"
             : "translate-y-full opacity-0"
             }`}
         >
-          <IoClose
-            onClick={() => {
-              setPaymentVisible(!paymentVisible);
-            }}
-            className="absolute right-[1rem] top-[1rem] text-[#426CFF] text-[1.5rem] cursor-pointer"
-          />
+          <div className='w-full h-[30vh] bg-black opacity-45'></div>
+          <div className='bg-white border-2 overflow-scroll h-[70vh]'>
 
-          <div className="w-full h-fit mt-[2rem]">
-            {/* logo-image */}
-            <img
-              src={restaurentdata?.image || foodos}
-              alt="merchant-logo"
-              className="w-[100px] aspect-square rounded-full mx-auto"
+            <IoClose
+              onClick={() => {
+                setPaymentVisible(!paymentVisible);
+              }}
+              className="absolute right-[1rem] top-[32vh] text-[#426CFF] text-[1.5rem] cursor-pointer"
             />
-            <p className="font-inter font-[600] text-[1.1rem] leading-[32px] text-center">
-              Paying to FOODOOS
-            </p>
-            <p className="font-inter font-[400] leading-[32px] text-center">
-              AMP Baisakhi Mall,Salt Lake
-            </p>
 
-            {/* pay-amount */}
-            <div className="w-fit flex bg-[#D9D9D938] justify-center items-center  px-[1rem] py-[.5rem] mx-auto rounded-md my-[.5rem]">
-              <p className="font-inter font-[400] leading-[24px] text-[35px] text-[#262627]">
-                ₹
-              </p>
-              <input
-                className="w-[7rem] h-[3rem] focus:outline-none bg-transparent text-[1.5rem] text-[#262627C7] font-[700] font-inter  px-[.5rem]"
-                type="text"
-                placeholder="400"
-                value={paymentamount}
-                onChange={(e) => {
-                  setPaymentAmount(e.target.value);
-                  setamountToPay(e.target.value)
-                  console.log(paymentamount);
-                }}
+            <div className="w-full h-fit mt-[2rem]">
+              {/* logo-image */}
+              <img
+                src={restaurentdata?.image || foodos}
+                alt="merchant-logo"
+                className="w-[100px] aspect-square rounded-full mx-auto"
               />
-            </div>
-
-            <div className="flex justify-center items-center gap-[.5rem] py-[1rem]">
-              <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
-              <p className="font-[500] font-inter leading-[19.36px] uppercase">
-                Redeem Offers
+              <p className="font-inter font-[600] text-[1.1rem] leading-[32px] text-center">
+                Paying to FOODOOS
               </p>
-              <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
-            </div>
+              <p className="font-inter font-[400] leading-[32px] text-center">
+                AMP Baisakhi Mall,Salt Lake
+              </p>
 
-            {/* offers */}
-
-            {restaurantOffers?.length == 0 ? (
-              <div className="w-full flex flex-col items-center p-[1rem] ">
-                <img
-                  src={eventnofound}
-                  alt="eventnofound"
-                  className="w-[40%] aspect-auto"
+              {/* pay-amount */}
+              <div className="w-fit flex bg-[#D9D9D938] justify-center items-center  px-[1rem] py-[.5rem] mx-auto rounded-md my-[.5rem]">
+                <p className="font-inter font-[400] leading-[24px] text-[35px] text-[#262627]">
+                  ₹
+                </p>
+                <input
+                  className="w-[7rem] h-[3rem] focus:outline-none bg-transparent text-[1.5rem] text-[#262627C7] font-[700] font-inter  px-[.5rem]"
+                  type="text"
+                  placeholder="400"
+                  value={paymentamount}
+                  onChange={(e) => {
+                    setPaymentAmount(e.target.value);
+                    setamountToPay(e.target.value)
+                    console.log(paymentamount);
+                  }}
                 />
-                <p className=" font-Sen font-[700] text-[1.4rem]  leading-[3rem] text-center">
-                  Opps ! no offers found
-                </p>
-                <p className=" font-Sen font-[400]  leading-[1rem] text-[#525C67] text-center">
-                  Restaurant dont have any active offers
-                </p>
-              </div>
-            ) : (
-              <div className={` flex gap-[1rem] overflow-x-scroll hideScroller`}>
-                {restaurantOffers.map((offer, index) => (
-                  <MerchantOffers key={index} offer={offer} />
-                ))}
-              </div>
-            )}
-
-            {/* payment */}
-
-            <div className="flex justify-center items-center gap-[.5rem] py-[1rem]">
-              <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
-              <p className="font-[500] font-inter leading-[19.36px] uppercase">
-                Bill Summary
-              </p>
-              <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
-            </div>
-
-            <div className="w-[90%] mx-auto border-2 rounded-xl p-[1rem]">
-              <div className="flex justify-between items-center my-[.25rem]">
-                <p className="font-[400] font-inter leading-[19.36px] uppercase">
-                  Bill Amount{" "}
-                </p>
-                <p className="text-[#262627C7]">₹ {paymentamount}</p>
               </div>
 
-              <div className="flex justify-between items-center my-[.25rem] ">
-                <p className="font-[400] font-Roboto leading-[19.36px] text-[#004AAD]">
-                  offers
+              <div className="flex justify-center items-center gap-[.5rem] py-[1rem]">
+                <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
+                <p className="font-[500] font-inter leading-[19.36px] uppercase">
+                  Redeem Offers
                 </p>
-                <p className="text-[#004AAD]">-₹ {paymentamount}</p>
+                <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
               </div>
 
-              <div className="flex justify-between items-center my-[.25rem] ">
-                <p className="font-[400] font-Roboto leading-[19.36px]">
-                  Convenience fee
-                </p>
-                <p className="text-[#262627C7]">₹ {paymentamount}</p>
-              </div>
+              {/* offers */}
 
-              <div className="w-full h-[1px] bg-[#00000057] my-[1rem]"></div>
-
-              <div className="flex justify-between items-center my-[.25rem] ">
-                <p className="font-[600] font-inter leading-[19.36px]">
-                  To be paid
-                </p>
-                <p className="text-[#262627C7]">₹ {paymentamount}</p>
-              </div>
-            </div>
-
-            <div className="w-[90%] mx-auto h-fit my-[2rem] py-[1rem] border-2 rounded-3xl">
-              <div className="flex justify-around items-center">
-                <div className="flex gap-[1rem] items-center">
+              {restaurantOffers?.length == 0 ? (
+                <div className="w-full flex flex-col items-center p-[1rem] ">
                   <img
-                    src={termsImage}
-                    alt="termsImage"
-                    className="h-[20px] aspect-auto"
+                    src={eventnofound}
+                    alt="eventnofound"
+                    className="w-[40%] aspect-auto"
                   />
-                  <p className="text-[#262627] font-inter font-[700] leading-[24px]">
-                    Terms & Conditions
+                  <p className=" font-Sen font-[700] text-[1.4rem]  leading-[3rem] text-center">
+                    Opps ! no offers found
+                  </p>
+                  <p className=" font-Sen font-[400]  leading-[1rem] text-[#525C67] text-center">
+                    Restaurant dont have any active offers
                   </p>
                 </div>
+              ) : (
+                <div className={` flex gap-[1rem] overflow-x-scroll hideScroller`}>
+                  {restaurantOffers.map((offer, index) => (
+                    <MerchantOffers key={index} offer={offer} />
+                  ))}
+                </div>
+              )}
 
-                {!ishidden ? (
-                  <FaChevronUp
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      setIsHidden(!ishidden);
-                    }}
-                  />
-                ) : (
-                  <FaChevronDown
-                    className=" cursor-pointer"
-                    onClick={() => {
-                      setIsHidden(!ishidden);
-                    }}
-                  />
-                )}
+              {/* payment */}
+
+              <div className="flex justify-center items-center gap-[.5rem] py-[1rem]">
+                <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
+                <p className="font-[500] font-inter leading-[19.36px] uppercase">
+                  Bill Summary
+                </p>
+                <div className="w-[110px] h-[.7px] bg-[#00000057]"></div>
               </div>
-              <div
-                className={`border-dotted border-2 w-[90%] mx-auto   ${ishidden
-                  ? "opacity-0 h-0 duration-200 transition-opacity transition-height"
-                  : "opacity-100 h-auto duration-200 transition-opacity transition-height my-[1rem] p-[1rem]"
-                  }`}
-              >
-                <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
-                  No refund on any purchase are possible{" "}
-                </p>
-                <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
-                  Refunds are only processed by the merchants
-                </p>
-                <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
-                  By paying, you consent to receive communications via email,
-                  whatsapp from the associated entities.
-                </p>
+
+              <div className="w-[90%] mx-auto border-2 rounded-xl p-[1rem]">
+                <div className="flex justify-between items-center my-[.25rem]">
+                  <p className="font-[400] font-inter leading-[19.36px] uppercase">
+                    Bill Amount{" "}
+                  </p>
+                  <p className="text-[#262627C7]">₹ {paymentamount}</p>
+                </div>
+
+                <div className="flex justify-between items-center my-[.25rem] ">
+                  <p className="font-[400] font-Roboto leading-[19.36px] text-[#004AAD]">
+                    offers
+                  </p>
+                  <p className="text-[#004AAD]">-₹ {paymentamount}</p>
+                </div>
+
+                <div className="flex justify-between items-center my-[.25rem] ">
+                  <p className="font-[400] font-Roboto leading-[19.36px]">
+                    Convenience fee
+                  </p>
+                  <p className="text-[#262627C7]">₹ {paymentamount}</p>
+                </div>
+
+                <div className="w-full h-[1px] bg-[#00000057] my-[1rem]"></div>
+
+                <div className="flex justify-between items-center my-[.25rem] ">
+                  <p className="font-[600] font-inter leading-[19.36px]">
+                    To be paid
+                  </p>
+                  <p className="text-[#262627C7]">₹ {paymentamount}</p>
+                </div>
               </div>
+
+              <div className="w-[90%] mx-auto h-fit my-[2rem] py-[1rem] border-2 rounded-3xl">
+                <div className="flex justify-around items-center">
+                  <div className="flex gap-[1rem] items-center">
+                    <img
+                      src={termsImage}
+                      alt="termsImage"
+                      className="h-[20px] aspect-auto"
+                    />
+                    <p className="text-[#262627] font-inter font-[700] leading-[24px]">
+                      Terms & Conditions
+                    </p>
+                  </div>
+
+                  {!ishidden ? (
+                    <FaChevronUp
+                      className=" cursor-pointer"
+                      onClick={() => {
+                        setIsHidden(!ishidden);
+                      }}
+                    />
+                  ) : (
+                    <FaChevronDown
+                      className=" cursor-pointer"
+                      onClick={() => {
+                        setIsHidden(!ishidden);
+                      }}
+                    />
+                  )}
+                </div>
+                <div
+                  className={`border-dotted border-2 w-[90%] mx-auto   ${ishidden
+                    ? "opacity-0 h-0 duration-200 transition-opacity transition-height"
+                    : "opacity-100 h-auto duration-200 transition-opacity transition-height my-[1rem] p-[1rem]"
+                    }`}
+                >
+                  <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
+                    No refund on any purchase are possible{" "}
+                  </p>
+                  <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
+                    Refunds are only processed by the merchants
+                  </p>
+                  <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
+                    By paying, you consent to receive communications via email,
+                    whatsapp from the associated entities.
+                  </p>
+                </div>
+              </div>
+
+              <button className="  bg-[#4BCA59] text-[#ffffff] font-[700] font-Roboto max-w-[300px] w-full h-[3.6rem] mx-auto mb-[1rem] rounded-md flex justify-center items-center gap-[1rem]">
+                <FaWhatsapp className="text-[2rem]" /> WhatsApp
+              </button>
             </div>
 
-            <button className="  bg-[#4BCA59] text-[#ffffff] font-[700] font-Roboto max-w-[300px] w-full h-[3.6rem] mx-auto mb-[1rem] rounded-md flex justify-center items-center gap-[1rem]">
-              <FaWhatsapp className="text-[2rem]" /> WhatsApp
-            </button>
-          </div>
-
-          <div className="sticky bottom-0 w-full bg-white border-2 p-[1rem] rounded-t-3xl">
-            <button onClick={handlePayment} className="  bg-[#004AAD] text-[#ffffff] font-[700] font-Roboto w-[300px]  h-[3.6rem] mx-auto  rounded-md block">
-              Pay Now
-            </button>
+            <div className="sticky bottom-0 w-full bg-white border-2 p-[1rem] rounded-t-3xl">
+              <button onClick={handlePayment} className="  bg-[#004AAD] text-[#ffffff] font-[700] font-Roboto w-[300px]  h-[3.6rem] mx-auto  rounded-md block">
+                Pay Now
+              </button>
+            </div>
           </div>
         </div>
       </div>

@@ -29,7 +29,7 @@ export const SnackBaeProvider = (props) => {
   //payment
   const [paymentamount, setPaymentAmount] = useState("");//payamount for bill pay
   const [ successPayment, setsuccesspayment ] = useState(false);
-  const [ failurePayment, setfailurepayment ] = useState(false);
+  const [ failurePayment, setfailurepayment ] = useState(true);
 
   useEffect(() => {
     setLoader(true);
