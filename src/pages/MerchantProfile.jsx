@@ -248,23 +248,16 @@ const MerchantProfile = () => {
   };
 
   const handleSubmit = async () => {
-    // setLoader(true);
     console.log("inside onsignup");
     try {
-    const recaptcha = new RecaptchaVerifier(auth, 'sign-in-button', {
-  'size': 'invisible',
-  'callback': (response) => {
-    // reCAPTCHA solved, allow signInWithPhoneNumber.
-    onSignInSubmit();
-  }
-});
+      const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {});
       const formatPh = "+91" + phoneNumber;
       console.log(formatPh);
       // const confirmation = await signInWithPhoneNumber(auth, formatPh);
       const confirmation = await signInWithPhoneNumber(
         auth,
         formatPh,
-        //recaptcha
+        recaptcha
       );
       console.log(confirmation);
       setUser(confirmation);
@@ -275,8 +268,8 @@ const MerchantProfile = () => {
       console.log(err);
       toast.error(err);
     }
-    // setLoader(false);
   };
+
 
   //otp
   const [otp, setOtp] = useState("");
