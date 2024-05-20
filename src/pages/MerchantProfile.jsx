@@ -1160,7 +1160,7 @@ const MerchantProfile = () => {
 
       {/* menucomment */}
       <div>
-        {User && <Menucomment />
+        {User && <Menucomment resId={id}/>
         }
       </div>
 

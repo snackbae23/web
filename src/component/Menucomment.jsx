@@ -14,7 +14,7 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaHeart } from "react-icons/fa6";
 import toast from 'react-hot-toast';
 
-const Menucomment = () => {
+const Menucomment = ({resId}) => {
 
     const {
         commentVisible,
@@ -122,7 +122,7 @@ const Menucomment = () => {
 
     const submitHandler = () => {
         console.log(comment);
-        let com = { "description": "", rated: "" };
+        let com = { "description": "", rated: "",resId: "" };
         com.description = comment;
 
         const a = menuData.menu.mustTry;
@@ -152,6 +152,7 @@ const Menucomment = () => {
                 }
             }
         }
+        com.resId = resId;
         let data = JSON.stringify(com);
 
         let config = {
@@ -198,14 +199,15 @@ const Menucomment = () => {
     };
 
     useEffect(() => {
-        const rating = { "rated": "" };
+        const rating = { "rated": "", "resId" : ""};
         if (value <= 2)
             rating.rated = "notLiked";
         else if (value > 2 && value <= 4)
             rating.rated = "liked";
         else
             rating.rated = "mustTry";
-
+        
+        rating.resId = resId;
         let data = JSON.stringify(rating);
         const userId = JSON.parse(localStorage.getItem("user"))._id;
         let config = {
