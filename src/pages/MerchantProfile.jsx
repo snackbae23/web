@@ -89,6 +89,9 @@ const MerchantProfile = () => {
     setsuccesspayment,
     failurePayment,
     setfailurepayment,
+    commentVisible,
+    setCommentVisible,
+    setMenuId,
   } = useSnackBae();
 
   const calculateTimeDifference = (fateDate) => {
@@ -132,8 +135,6 @@ const MerchantProfile = () => {
   // const [musttryone, setMustTry] = useState(false);
   const [filterone, setFilterone] = useState('new');
 
-
-
   useEffect(() => {
 
     forRecommendation();
@@ -151,7 +152,7 @@ const MerchantProfile = () => {
         console.log(response.data.restaurant);
         setRestaurentData(response.data.restaurant);
         console.log(restaurentdata);
-        const userId = JSON.parse(localStorage.getItem("user"))._id;
+        const userId = JSON.parse(localStorage.getItem("user"))?._id;
         const a = response.data.restaurant?.recommendedBy;
         // console.log(a);
 
@@ -362,7 +363,15 @@ const MerchantProfile = () => {
             setLogin(false);
             toast.success('loggedIn successfully!');
             // navigate(`/profile/merchant/${id}`);
-            window.location.reload();
+            // window.location.reload();
+            setUser(JSON.parse(localStorage.getItem("user")));
+            const temp = JSON.parse(localStorage.getItem("temp"));
+            if(temp)
+            {
+              setCommentVisible(temp?.commentVisible);
+              setMenuId(temp?.menuId);
+            }
+            localStorage.removeItem("temp");
           } else {
             setOpenPhno(false);
             setOpenOtp(false);
@@ -476,7 +485,15 @@ const MerchantProfile = () => {
         setOpenProfile(false);
         toast.success('SignUp Successfully!');
         // navigate(`/profile/merchant/${id}`);
-        window.location.reload();
+        // window.location.reload();
+        setUser(JSON.parse(localStorage.getItem("user")));
+        const temp = JSON.parse(localStorage.getItem("temp"));
+            if(temp)
+            {
+              setCommentVisible(temp?.commentVisible);
+              setMenuId(temp?.menuId);
+            }
+            localStorage.removeItem("temp");
       })
       .catch((error) => {
         console.log(error);
@@ -487,7 +504,6 @@ const MerchantProfile = () => {
   //payment
   const [paymentVisible, setPaymentVisible] = useState(false);
   const [ishidden, setIsHidden] = useState(false);
-
 
   //search bar
   const [search, setSearch] = useState("");
@@ -714,7 +730,7 @@ const MerchantProfile = () => {
       <MerchantNavbar />
       {login && (
         <div
-          className=" absolute top-[70px] w-full h-fit py-[1rem]  min-h-[calc(100vh-70px)] bg-white opacity-95 z-[1000] border-2
+          className=" absolute top-[70px] w-full h-fit py-[1rem]  min-h-[calc(100vh-70px)] bg-white opacity-95 z-[7000] border-2
             flex justify-center items-center"
         >
           {/* phoneNumber */}
@@ -950,7 +966,16 @@ const MerchantProfile = () => {
             </div>
             <div className="w-full flex flex-wrap gap-[.2rem] md:gap-[1rem] items-center sm:justify-start">
               <button
-                onClick={handleRecommand}
+                // onClick={handleRecommand}
+                onClick={() => {
+                  if (User._id) {
+                    handleRecommand();
+                  }
+                  else {
+                    setLogin(true);
+                    setOpenPhno(true);
+                  }
+                }}
                 id="recommand"
                 className=" px-[.5rem] py-[.2rem] sm:px-[1rem] sm:py-[.85rem] border-[2.5px] border-[#FFD628] rounded-lg font-inter font-[600] sm:text-[1rem] text-[.8rem] "
               >
@@ -1160,8 +1185,7 @@ const MerchantProfile = () => {
 
       {/* menucomment */}
       <div>
-        {User && <Menucomment resId={id}/>
-        }
+        {commentVisible && <Menucomment resId={id} setOpenPhno={setOpenPhno}/>}
       </div>
 
 

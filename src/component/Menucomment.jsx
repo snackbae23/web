@@ -14,11 +14,12 @@ import { IoIosCloseCircleOutline } from "react-icons/io";
 import { FaHeart } from "react-icons/fa6";
 import toast from 'react-hot-toast';
 
-const Menucomment = ({resId}) => {
+const Menucomment = ({ resId, setOpenPhno }) => {
 
     const {
         commentVisible,
         setCommentVisible,
+        setLogin,
         setMenuId,
         menuId,
         menuData,
@@ -31,9 +32,19 @@ const Menucomment = ({resId}) => {
     // console.log("menu id : ", menuId);
     const [data, setData] = useState([]);
 
+    function setTempData(menuId, commentVisible) {
+        const temp = { "menuId": menuId, "commentVisible": commentVisible };
+        temp.menuId = menuId;
+        temp.commentVisible = commentVisible;
+        localStorage.setItem("temp", JSON.stringify(temp));
+    }
     useEffect(() => {
-        handleStateFavorite();
-        const userId = JSON.parse(localStorage.getItem("user"))._id;
+        const userId = JSON.parse(localStorage.getItem("user"))?._id;
+        console.log(userId);
+        if (userId) {
+            handleStateFavorite();
+        }
+        console.log(menuId);
         console.log(userId);
         let config = {
             method: "get",
@@ -45,13 +56,14 @@ const Menucomment = ({resId}) => {
         axios.request(config)
             .then((response) => {
                 console.log(JSON.stringify(response.data));
-                setMenuData(response.data);
-                console.log(menuData);
-                console.log("fd", menuData?.menu?.name);
+                setMenuData(response?.data);
 
-                const a = menuData.menu.mustTry;
-                const b = menuData.menu.liked;
-                const c = menuData.menu.notLiked;
+                // console.log(menuData);
+                // console.log("fd", menuData?.menu?.name);
+
+                const a = menuData?.menu?.mustTry;
+                const b = menuData?.menu?.liked;
+                const c = menuData?.menu?.notLiked;
 
                 if (userId) {
                     if (a) {
@@ -122,7 +134,7 @@ const Menucomment = ({resId}) => {
 
     const submitHandler = () => {
         console.log(comment);
-        let com = { "description": "", rated: "",resId: "" };
+        let com = { "description": "", rated: "", resId: "" };
         com.description = comment;
 
         const a = menuData.menu.mustTry;
@@ -199,17 +211,17 @@ const Menucomment = ({resId}) => {
     };
 
     useEffect(() => {
-        const rating = { "rated": "", "resId" : ""};
+        const rating = { "rated": "", "resId": "" };
         if (value <= 2)
             rating.rated = "notLiked";
         else if (value > 2 && value <= 4)
             rating.rated = "liked";
         else
             rating.rated = "mustTry";
-        
+
         rating.resId = resId;
         let data = JSON.stringify(rating);
-        const userId = JSON.parse(localStorage.getItem("user"))._id;
+        const userId = JSON.parse(localStorage.getItem("user"))?._id;
         let config = {
             method: "put",
             maxBodyLength: Infinity,
@@ -275,11 +287,11 @@ const Menucomment = ({resId}) => {
 
 
     const toggleAddFavorite = () => {
-
+        const user = JSON.parse(localStorage.getItem("user"));
         let config = {
             method: 'put',
             maxBodyLength: Infinity,
-            url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${User._id}/${menuId}`,
+            url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${user._id}/${menuId}`,
             headers: {}
         };
 
@@ -356,8 +368,7 @@ const Menucomment = ({resId}) => {
 
 
     return (
-        <div className=' relative w-full h-0 '>
-
+        <div className=' relative w-full h-0'>
             <div
                 className={` fixed bottom-0 left-[50%] z-[5000] translate-x-[-50%] max-w-[400px] h-[100vh]  overflow-x-hidden hideScroller w-full comment ${commentVisible ? 'translate-y-0 opacity-100' : 'translate-y-full opacity-0'} bg-transparent`}>
                 <div className='w-full h-[26vh] bg-black opacity-45'></div>
@@ -372,7 +383,7 @@ const Menucomment = ({resId}) => {
                             className='text-[2rem] cursor-pointer fixed right-[1rem] top-[27vh] text-[#426CFF] z-[100]' />
                     </div>
                     <div className='relative'>
-                        <img src={menuData?.menu?.image} alt={menuData?.menu?.name}className='h-[180px] aspect-auto object-contain mx-auto mt-[1rem]' />
+                        <img src={menuData?.menu?.image} alt={menuData?.menu?.name} className='h-[180px] aspect-auto object-contain mx-auto mt-[1rem]' />
                         <p className="w-fit px-[.5rem] rounded-xl bg-[#FFD628] font-[500] sm:text-[1.2rem] absolute bottom-[2rem] sm:bottom-[1rem] right-[2rem] sm:right-[1rem] ">
                             ₹ {menuData?.menu?.price}
                         </p>
@@ -395,7 +406,17 @@ const Menucomment = ({resId}) => {
                         </div>
                         <FaHeart id='favorite' className={`text-[1.4rem] cursor-pointer  ${isFavorite ? ('fill-[#ED4F4F] overflow-hidden') : ('fill-gray-300')} `}
                             onClick={() => {
-                                toggleFavorite(menuData?.menu?.name)
+                                const user = JSON.parse(localStorage.getItem("user"));
+                                if (user._id) {
+                                    toggleFavorite(menuData?.menu?.name)
+                                }
+                                else {
+                                    setTempData(menuId, commentVisible);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    setLogin(true);
+                                    setOpenPhno(true);
+                                    // window.location.reload();
+                                }
                             }} />
                     </div>
 
@@ -456,7 +477,21 @@ const Menucomment = ({resId}) => {
                             max="6"
                             step="2"
                             value={value}
-                            onChange={handleInputChange}
+                            onChange={(e) => {
+
+                                const user = JSON.parse(localStorage.getItem("user"));
+                                if (user?._id) {
+                                    handleInputChange(e);
+                                }
+                                else {
+                                    setTempData(menuId, commentVisible);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    setLogin(true);
+                                    setOpenPhno(true);
+                                    // window.location.reload();
+                                }
+
+                            }}
                             className="w-64 h-[10px] mt-[1rem]  bg-[#00000069] appearance-auto accent-[#FFD601] cursor-pointer"
                         />
                     </div>
@@ -467,9 +502,33 @@ const Menucomment = ({resId}) => {
                             className='w-full h-[10rem] focus:outline-none p-[1rem]'
                             placeholder='Write your thoughts....'
                             value={comment}
-                            onChange={commentHandler} />
+                            onChange={(e)=>{
+                                const user = JSON.parse(localStorage.getItem("user"));
+                                if (user?._id) {
+                                    commentHandler(e);
+                                }
+                                else {
+                                    setTempData(menuId, commentVisible);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    setLogin(true);
+                                    setOpenPhno(true);
+                                    // window.location.reload();
+                                }
+                            }} />
                         <button
-                            onClick={submitHandler}
+                            onClick={(e)=>{
+                                const user = JSON.parse(localStorage.getItem("user"));
+                                if (user?._id) {
+                                    submitHandler(e);
+                                }
+                                else {
+                                    setTempData(menuId, commentVisible);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                    setLogin(true);
+                                    setOpenPhno(true);
+                                    // window.location.reload();
+                                }
+                            }}
                             className=' bg-[#FFD628] px-[1.4rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] absolute right-[1rem] bottom-[1rem]'>Submit</button>
                     </div>
 

@@ -22,13 +22,14 @@ const MenuCard = ({ items }) => {
   return (
     <div
       onClick={() => {
-        if (User) {
+        // if (User) {
+          console.log(commentVisible);
           setCommentVisible(!commentVisible);
-        } else {
-          setLogin(true);
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
+          console.log(commentVisible);
+        // } else {
+          // setLogin(true);
+          // window.scrollTo({ top: 0, behavior: 'smooth' });
+        // }
         setMenuId(items._id);
       }}
       className="min-w-[240px] w-[240px] h-fit p-[1rem] shadow-md rounded-md cursor-pointer"
@@ -86,9 +87,9 @@ const MenuCard = ({ items }) => {
         <div className='relative mt-[.5rem]'>
           <p className='flex gap-[.1rem] items-center bg-[#004AAD] w-fit rounded-3xl text-white px-[.7rem] py-[.2rem] relative left-[75%] '>{roundedRating}<CiStar className='text-[1.2rem]' /></p>
 
-          <div className='flex gap-[.5rem] mt-[1rem] items-center'>
+          <div className='flex gap-[.3rem] mt-[1rem] items-center'>
             <img src={recommandicons} alt="recommandicons" className='w-[30%] aspect-auto' />
-            <p className='text-[#004AAD] text-[16px] leading-[16.1px] font-inter font-[400]'>{items.notLikedCount + items.likedCount + items.mustTryCount} recomendation</p>
+            <p className='text-[#004AAD] text-[16px] leading-[16.1px] font-inter font-[400]'>{items.notLikedCount + items.likedCount + items.mustTryCount} recommendations</p>
           </div>
         </div>
       </div>
