@@ -726,7 +726,6 @@ const MerchantProfile = () => {
     }
   }
 
-  console.log(User)
 
   return (
     <div className="w-full h-fit">
