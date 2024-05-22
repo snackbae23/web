@@ -82,7 +82,6 @@ const MerchantProfile = () => {
     setLoader,
     editprofile,
     setEditProfile,
-    favoriteMenu,
     paymentamount,
     setPaymentAmount,
     successPayment,
@@ -92,6 +91,7 @@ const MerchantProfile = () => {
     commentVisible,
     setCommentVisible,
     setMenuId,
+    favoriteMenu,
   } = useSnackBae();
 
   const calculateTimeDifference = (fateDate) => {
@@ -213,7 +213,7 @@ const MerchantProfile = () => {
   const [menus, setMenus] = useState(true);
   const [Recomendations, setRecomendations] = useState(false);
   const [Favourite, setFavourite] = useState(false);
-  const [events, setEvents] = useState(false);
+  // const [events, setEvents] = useState(false);
   const [offers, setoffers] = useState(false);
   const [filter, setFilter] = useState(false);
 
@@ -270,49 +270,52 @@ const MerchantProfile = () => {
   //     toast.error(err);
   //   }
   // };
- const handleSubmit = async () => {
+  const [loading, setLoading] = useState(false)
+  const handleSubmit = async () => {
     console.log("inside onsignup");
-  try {
-    // Initialize invisible reCAPTCHA verifier
-    
-       if (!window.recaptchaVerifier) {
-         window.recaptchaVerifier = new RecaptchaVerifier(
-           auth ,"recaptcha-container",
-           {
-             size: "invisible",
-             callback: (response) => {
-               onSignup();
-             },
-             "expired-callback": () => {},
-           },
-           
-         );
-       }
-    
- const appVerifier = window.recaptchaVerifier;
+    setLoading(true);
+    try {
+      // Initialize invisible reCAPTCHA verifier
 
-    // Verify the phone number format
-    const formatPh = "+91" + phoneNumber;
-    console.log(formatPh);
+      if (!window.recaptchaVerifier) {
+        window.recaptchaVerifier = new RecaptchaVerifier(
+          auth, "recaptcha-container",
+          {
+            size: "invisible",
+            callback: (response) => {
+              onSignup();
+            },
+            "expired-callback": () => { },
+          },
 
-    // Ask user to solve reCAPTCHA before continuing
-    // const appVerifier = window.recaptchaVerifier;
+        );
+      }
 
-    // Sign in with phone number
-    const confirmation = await signInWithPhoneNumber(
-      auth,
-      formatPh,
-      appVerifier
-    );
-    console.log(confirmation);
-    setUser(confirmation);
-    setOpenPhno(false);
-    setOpenOtp(true);
-    toast.success("Successfully sent verification code!");
-  } catch (err) {
-    console.log(err);
-    toast.error(err.message || "An error occurred. Please try again.");
-  }
+      const appVerifier = window.recaptchaVerifier;
+
+      // Verify the phone number format
+      const formatPh = "+91" + phoneNumber;
+      console.log(formatPh);
+
+      // Ask user to solve reCAPTCHA before continuing
+      // const appVerifier = window.recaptchaVerifier;
+
+      // Sign in with phone number
+      const confirmation = await signInWithPhoneNumber(
+        auth,
+        formatPh,
+        appVerifier
+      );
+      console.log(confirmation);
+      setUser(confirmation);
+      setOpenPhno(false);
+      setOpenOtp(true);
+      toast.success("Successfully sent verification code!");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message || "An error occurred. Please try again.");
+    }
+    setLoading(false);
   };
 
   //otp
@@ -325,6 +328,7 @@ const MerchantProfile = () => {
   };
 
   const handleOtpSubmit = async () => {
+    setLoading(true);
     try {
       await user.confirm(otp);
       //   toast({
@@ -363,15 +367,15 @@ const MerchantProfile = () => {
             setLogin(false);
             toast.success('loggedIn successfully!');
             // navigate(`/profile/merchant/${id}`);
-            // window.location.reload();
+
             setUser(JSON.parse(localStorage.getItem("user")));
             const temp = JSON.parse(localStorage.getItem("temp"));
-            if(temp)
-            {
+            if (temp) {
               setCommentVisible(temp?.commentVisible);
               setMenuId(temp?.menuId);
             }
             localStorage.removeItem("temp");
+            window.location.reload();
           } else {
             setOpenPhno(false);
             setOpenOtp(false);
@@ -386,15 +390,10 @@ const MerchantProfile = () => {
     } catch (e) {
       console.log(e);
     }
+    setLoading(false);
   };
 
-  //current date
-  const date = new Date();
 
-  let day = date.getDate();
-  let month = date.getMonth() + 1;
-  let year = date.getFullYear();
-  let currentDate = `${day}-${month}-${year}`;
 
   //profile
   const [profileData, setProfileData] = useState({
@@ -462,6 +461,7 @@ const MerchantProfile = () => {
 
   const handleSubmitProfile = async (e) => {
     e.preventDefault();
+    setLoading(true);
     console.log("Profile data :", profileData);
     profileData.contact = phoneNumber;
     const data = JSON.stringify(profileData);
@@ -488,17 +488,17 @@ const MerchantProfile = () => {
         // window.location.reload();
         setUser(JSON.parse(localStorage.getItem("user")));
         const temp = JSON.parse(localStorage.getItem("temp"));
-            if(temp)
-            {
-              setCommentVisible(temp?.commentVisible);
-              setMenuId(temp?.menuId);
-            }
-            localStorage.removeItem("temp");
+        if (temp) {
+          setCommentVisible(temp?.commentVisible);
+          setMenuId(temp?.menuId);
+        }
+        localStorage.removeItem("temp");
       })
       .catch((error) => {
         console.log(error);
       });
-    // window.location.reload();
+    window.location.reload();
+    setLoading(false);
   };
 
   //payment
@@ -507,18 +507,18 @@ const MerchantProfile = () => {
 
   //search bar
   const [search, setSearch] = useState("");
-  const [searchMenuItems, setSearchMenuItems] = useState();
+  const [searchMenuItems, setSearchMenuItems] = useState(null);
 
   const handleSearch = (e) => {
     const inputValue = e.target.value;
-    setSearch(inputValue);
+    setSearch(inputValue || ""); // Ensure search is never set to null
+
     if (!inputValue) {
       // If input value is empty or length is less than or equal to 1, clear search menu items
-      setSearchMenuItems();
+      setSearchMenuItems(null);
       return;
     }
 
-    setSearch(inputValue);
     searchMenu();
   };
 
@@ -608,6 +608,7 @@ const MerchantProfile = () => {
 
   const handleSubmitEditProfile = () => {
     console.log("editprofileData: ", editprofileData)
+    setLoading(true);
     let config = {
       method: 'put',
       maxBodyLength: Infinity,
@@ -628,7 +629,7 @@ const MerchantProfile = () => {
         console.log(error);
         toast.error(error);
       });
-
+    setLoading(false);
   }
 
   //payment for bill
@@ -725,12 +726,14 @@ const MerchantProfile = () => {
     }
   }
 
+  console.log(User)
+
   return (
     <div className="w-full h-fit">
       <MerchantNavbar />
       {login && (
         <div
-          className=" absolute top-[70px] w-full h-fit py-[1rem]  min-h-[calc(100vh-70px)] bg-white opacity-95 z-[7000] border-2
+          className=" absolute top-[60px] sm:top-[70px] w-full h-fit py-[1rem]  min-h-[calc(100vh-60px)] bg-white opacity-95 z-[7000] border-2
             flex justify-center items-center"
         >
           {/* phoneNumber */}
@@ -765,7 +768,9 @@ const MerchantProfile = () => {
                 onClick={handleSubmit}
                 className="w-[90%] mx-auto h-[3rem] my-[1rem] bg-[#FFD600] text-[#004AAD] rounded-md font-inter font-[700] text-[1.1rem] leading-[32px]"
               >
-                Continue
+                {
+                  loading ? ("Loading...") : ("Continue")
+                }
               </button>
               <div id="recaptcha-container"></div>
             </div>
@@ -799,7 +804,9 @@ const MerchantProfile = () => {
                 onClick={handleOtpSubmit}
                 className="w-[90%] mx-auto h-[3rem] my-[1rem] bg-[#FFD600] text-[#004AAD] rounded-md font-inter font-[700] text-[1.1rem] leading-[32px]"
               >
-                Verify
+                {
+                  loading ? ("Loading...") : ("Verify")
+                }
               </button>
             </div>
           )}
@@ -858,7 +865,7 @@ const MerchantProfile = () => {
                   Date of Birth:
                 </label>
                 <input
-                  className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+                  className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem] w-full"
                   type="date"
                   id="dob"
                   name="dob"
@@ -874,7 +881,7 @@ const MerchantProfile = () => {
                   Anniversary :
                 </label>
                 <input
-                  className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+                  className="border-2 border-[#EAB308] bg-white w-full h-[3rem] rounded-md px-1 mb-[.5rem]"
                   type="date"
                   id="anniversary"
                   name="anniversary"
@@ -936,7 +943,9 @@ const MerchantProfile = () => {
                   type="button"
                   onClick={handleSubmitProfile}
                 >
-                  Continue
+                  {
+                    loading ? ("Loading...") : ("Continue")
+                  }
                 </button>
               </form>
             </div>
@@ -1045,7 +1054,6 @@ const MerchantProfile = () => {
             <button
               onClick={() => {
                 setMenus(!menus);
-                setEvents(false);
                 setoffers(false);
                 setRecomendations(false);
                 setFavourite(false);
@@ -1061,7 +1069,6 @@ const MerchantProfile = () => {
             <button
               onClick={() => {
                 setRecomendations(!Recomendations);
-                setEvents(false);
                 setoffers(false);
                 setMenus(false);
                 setFavourite(false);
@@ -1079,7 +1086,6 @@ const MerchantProfile = () => {
               <button
                 onClick={() => {
                   setRecomendations(false);
-                  setEvents(false);
                   setoffers(false);
                   setMenus(false);
                   setFavourite(!Favourite);
@@ -1112,7 +1118,6 @@ const MerchantProfile = () => {
             <button
               onClick={() => {
                 setMenus(false);
-                setEvents(false);
                 setoffers(!offers);
                 setFavourite(false);
                 setRecomendations(false);
@@ -1134,7 +1139,7 @@ const MerchantProfile = () => {
                   className=" w-[220px] sm:w-[400px] focus:outline-none h-[2.4rem] sm:h-[3rem] px-[1rem]"
                   type="text"
                   placeholder="Search for dish"
-                  value={search}
+                  value={search || ""}
                   onChange={handleSearch}
                 />
                 <CiSearch className=" absolute right-[1rem] top-[50%] translate-y-[-50%] text-[1.3rem]" />
@@ -1185,7 +1190,7 @@ const MerchantProfile = () => {
 
       {/* menucomment */}
       <div>
-        {commentVisible && <Menucomment resId={id} setOpenPhno={setOpenPhno}/>}
+        {commentVisible && <Menucomment resId={id} setOpenPhno={setOpenPhno} />}
       </div>
 
 
@@ -1256,14 +1261,14 @@ const MerchantProfile = () => {
               Date of Birth:
             </label>
             <input
-              className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem] text-[#004AAD]"
+              className="border-2 border-[#EAB308] bg-white h-[3rem] w-full rounded-md px-1 mb-[.5rem] text-[#004AAD]"
               type="date"
               id="dob"
               name="dob"
               required
               value={editprofileData.dob}
               onChange={handleEditProfile}
-              disabled={editprofileData.dob === null}
+              disabled={!!User.dob}
             />
 
             {/* Anniversary */}
@@ -1275,12 +1280,13 @@ const MerchantProfile = () => {
               Anniversary :
             </label>
             <input
-              className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+              className="border-2 border-[#EAB308] bg-white w-full h-[3rem] rounded-md px-1 mb-[.5rem]"
               type="date"
               id="anniversary"
               name="anniversary"
               value={editprofileData.anniversary}
               onChange={handleEditProfile}
+              disabled={editprofileData.anniversary == null}
             />
 
             {/* email */}
@@ -1323,11 +1329,13 @@ const MerchantProfile = () => {
 
 
             <button
-              className="bg-[#EAB308] font-sen font-[500] px-6 py-3 rounded-md uppercase mb-[.5rem]"
+              className="bg-[#EAB308] font-sen font-[500] px-6 py-3 rounded-md uppercase my-[.5rem]"
               type="button"
               onClick={handleSubmitEditProfile}
             >
-              Save
+              {
+                loading ? ("Loading...") : ("Save")
+              }
             </button>
           </form>
         </div>
@@ -1565,7 +1573,7 @@ const MerchantProfile = () => {
                       isOn ? (
                         items.veg === "Yes" &&
                         <MenuCard key={index} items={items} />
-                      ) : (<MenuCard key={index} items={items} />)
+                      ) : (items.active && <MenuCard key={index} items={items} />)
                     )
                   )}
                 </div>
@@ -1593,7 +1601,7 @@ const MerchantProfile = () => {
                       isOn ? (
                         items.veg === "Yes" &&
                         <MenuCard key={index} items={items} />
-                      ) : (<MenuCard key={index} items={items} />)
+                      ) : (items.active && <MenuCard key={index} items={items} />)
                     )
                   )}
                 </div>
@@ -1607,7 +1615,7 @@ const MerchantProfile = () => {
               <div className="w-full h-fit">
                 <div className="w-full flex justify-between items-center my-[1rem] p-[.5rem] px-[1rem] rounded-md">
                   <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">
-                    {category?.name} ({category?.menuItems.length})
+                    {category?.name} ({category?.menuItems.filter(menuItem => menuItem.active).length})
                   </p>
                   {showAllCategories[category?.name] ? (
                     <FaAngleUp
@@ -1628,7 +1636,11 @@ const MerchantProfile = () => {
                       isOn ? (
                         items.veg === "Yes" && <MenuCard key={index} items={items} />
                       ) : (
-                        <MenuCard key={index} items={items} />
+
+
+                        items.active && (
+                          <MenuCard key={index} items={items} />)
+
                       )
                     ))}
                   </div>
@@ -1722,7 +1734,8 @@ const MerchantProfile = () => {
       {
         Favourite &&
         <div>
-          {favoriteMenu?.length === 0 ? (
+          {favoriteMenu
+            ?.length === 0 ? (
             <div className="w-full flex flex-col items-center p-[2rem] pb-[6rem] mt-[1rem]">
               <img
                 src={nofavorite}
@@ -1737,8 +1750,8 @@ const MerchantProfile = () => {
               </p>
             </div>
           ) : (
-            <div className="w-[90%] mx-auto h-fit flex gap-[1rem] overflow-x-scroll hideScroller my-[1rem]">
-              {favoriteMenu.map((items, index) => (
+            <div className="w-[90%] mx-auto h-fit flex gap-[1rem] overflow-x-scroll hideScroller my-[1rem] py-[1rem]">
+              {favoriteMenu?.map((items, index) => (
                 <MenuCard key={index} items={items} />
               ))}
             </div>
@@ -1832,7 +1845,7 @@ const MerchantProfile = () => {
               <div className="w-[100%] h-fit flex flex-wrap gap-[.5rem]">
                 {
                   restaurentdata?.menu.map((menu, index) => (
-                    <div className="flex flex-wrap gap-[.5rem] justify-center sm:justify-start">
+                    <div key={index} className="flex flex-wrap gap-[.5rem] justify-center">
 
                       {filterone === "new" ?
                         menu?.comments
@@ -1840,7 +1853,7 @@ const MerchantProfile = () => {
                           .slice(0, 5) // Adjust the number of recent comments to be displayed
                           .map((comment, index) => (
                             // Render recent comments here
-                            <div key={index} className=' relative min-w-[360px] w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
+                            <div key={index} className=' relative min-w-[360px] w-[90%] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
                               <div className='w-full  flex justify-between items-center'>
                                 <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
                                 <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
@@ -1877,7 +1890,7 @@ const MerchantProfile = () => {
                           .filter(comment => filterone ? comment.rated === filterone : true)
                           .map((comment, index) => (
                             // Render comments based on other filters here
-                            <div key={index} className=' relative min-w-[360px] w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
+                            <div key={index} className=' relative  w-[90%] min-w-[360px] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
                               <div className='w-full  flex justify-between items-center'>
                                 <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
                                 <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
