@@ -31,6 +31,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
         setFavoriteMenu, } = useSnackBae();
     // console.log("menu id : ", menuId);
     const [data, setData] = useState([]);
+    console.log("favoriteMenu", favoriteMenu)
 
     function setTempData(menuId, commentVisible) {
         const temp = { "menuId": menuId, "commentVisible": commentVisible };
@@ -44,8 +45,9 @@ const Menucomment = ({ resId, setOpenPhno }) => {
         if (userId) {
             handleStateFavorite();
         }
+
         console.log(menuId);
-        console.log(userId);
+        // console.log(userId);
         let config = {
             method: "get",
             maxBodyLength: Infinity,
@@ -332,39 +334,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
         }
     };
 
-    // useEffect(() => {
-    // //     handleStateFavorite();
-    // //     console.log(favoriteMenu);
-    // //     if (favoriteMenu) {
-    // //         const isMenuFavorite = favoriteMenu.filter(element => element._id === menuId);
-    // //         console.log(isMenuFavorite)
-    // //         setIsFavorite(isMenuFavorite);
-    // //     }
-
-    // let config = {
-    //     method: 'get',
-    //     maxBodyLength: Infinity,
-    //     url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${User._id}`,
-    //     headers: {}
-    // };
-
-    // axios.request(config)
-    //     .then((response) => {
-    //         console.log((response.data.favoriteMenuItems));
-    //         setFavoriteMenu(response.data.favoriteMenuItems)
-    //         console.log(menuId)
-    //         const isMenuFavorite = favoriteMenu.filter(element => element._id === menuId).length>0;
-    //                 console.log(isMenuFavorite)
-    //                 setIsFavorite(isMenuFavorite);
-
-    //     })
-    //     .catch((error) => {
-    //         console.log(error);
-    //     });
-    // }, [])
-
-    // console.log(User)
-
 
 
     return (
@@ -502,7 +471,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                             className='w-full h-[10rem] focus:outline-none p-[1rem]'
                             placeholder='Write your thoughts....'
                             value={comment}
-                            onChange={(e)=>{
+                            onChange={(e) => {
                                 const user = JSON.parse(localStorage.getItem("user"));
                                 if (user?._id) {
                                     commentHandler(e);
@@ -516,7 +485,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                                 }
                             }} />
                         <button
-                            onClick={(e)=>{
+                            onClick={(e) => {
                                 const user = JSON.parse(localStorage.getItem("user"));
                                 if (user?._id) {
                                     submitHandler(e);
