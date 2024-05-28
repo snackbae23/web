@@ -43,6 +43,7 @@ import good from '../assets/good.png'
 import musttry from '../assets/musttry.png';
 import fssai from '../assets/fssai.png';
 import logo from '../assets/logo.png';
+import recommand from "../assets/recommand.jpg"
 // import userimg from '../assets/userimg.jpg';
 
 // otp
@@ -1052,7 +1053,7 @@ const MerchantProfile = () => {
             {/* menus */}
             <button
               onClick={() => {
-                setMenus(!menus);
+                setMenus(true);
                 setoffers(false);
                 setRecomendations(false);
                 setFavourite(false);
@@ -1067,7 +1068,7 @@ const MerchantProfile = () => {
             {/* Recomendations */}
             <button
               onClick={() => {
-                setRecomendations(!Recomendations);
+                setRecomendations(true);
                 setoffers(false);
                 setMenus(false);
                 setFavourite(false);
@@ -1087,7 +1088,7 @@ const MerchantProfile = () => {
                   setRecomendations(false);
                   setoffers(false);
                   setMenus(false);
-                  setFavourite(!Favourite);
+                  setFavourite(true);
                 }}
                 className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] rounded-md border-2 border-[#00000099] ${Favourite
                   ? "text-[#004AAD] bg-[#F7D128] border-none "
@@ -1117,7 +1118,7 @@ const MerchantProfile = () => {
             <button
               onClick={() => {
                 setMenus(false);
-                setoffers(!offers);
+                setoffers(true);
                 setFavourite(false);
                 setRecomendations(false);
               }}
@@ -1144,7 +1145,10 @@ const MerchantProfile = () => {
                 <CiSearch className=" absolute right-[1rem] top-[50%] translate-y-[-50%] text-[1.3rem]" />
               </div>
               <div className="flex gap-[1rem] items-center w-fit">
-                <div className="p-[.5rem] rounded-md border-2 flex items-center justify-start w-fit h-fit ">
+                <div
+                  onClick={() => {
+                    setIsOn(!isOn)
+                  }} className="p-[.5rem] rounded-md border-2 flex items-center justify-start w-fit h-fit cursor-pointer ">
                   <div
                     className={`${isOn ? "bg-[#67CE67]" : "bg-[#ED4F4F]"
                       } rounded-full w-[10px] aspect-square`}
@@ -1855,7 +1859,7 @@ const MerchantProfile = () => {
                             <div key={index} className=' relative min-w-[360px] w-[90%] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
                               <div className='w-full  flex justify-between items-center'>
                                 <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
-                                <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
+                                <p className='font-intedddr font-[500] text-[#334253]'>{comment?.userId?.name}</p>
                                 <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
                               </div>
                               <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
@@ -1886,41 +1890,51 @@ const MerchantProfile = () => {
                           ))
                         :
                         menu?.comments
-                          .filter(comment => filterone ? comment.rated === filterone : true)
-                          .map((comment, index) => (
-                            // Render comments based on other filters here
-                            <div key={index} className=' relative  w-[90%] min-w-[360px] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
-                              <div className='w-full  flex justify-between items-center'>
-                                <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
-                                <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
-                                <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
-                              </div>
-                              <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
+                          .filter(comment => filterone ? comment.rated === filterone : true).length == 0 ? (
+                          <div className="w-full h-fit flex flex-col items-center pt-[1rem]">
+                             <img src={recommand} alt="recommand-Image" />
+                             <p className="text-[1.4rem] font-inter font-[400]  capitalize">Be first to recommand</p>
+                          </div>
+                        )
+                          :
+                          (
+                            menu?.comments
+                              .filter(comment => filterone ? comment.rated === filterone : true)
+                              .map((comment, index) => (
+                                // Render comments based on other filters here
+                                <div key={index} className=' relative  w-[90%] min-w-[360px] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
+                                  <div className='w-full  flex justify-between items-center'>
+                                    <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
+                                    <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
+                                    <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
+                                  </div>
+                                  <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
 
-                              <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
-                                <p>{menu.name}</p>
-                                {comment?.rated == "mustTry" &&
-                                  <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                    <img src={musttry} alt="musttry" className='w-[20px] aspect-square' />
-                                    <p className='font-inter font-[400] mt-[3px]'>must try</p>
+                                  <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
+                                    <p>{menu.name}</p>
+                                    {comment?.rated == "mustTry" &&
+                                      <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
+                                        <img src={musttry} alt="musttry" className='w-[20px] aspect-square' />
+                                        <p className='font-inter font-[400] mt-[3px]'>must try</p>
+                                      </div>
+                                    }
+                                    {comment?.rated == "liked" &&
+                                      <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
+                                        <img src={good} alt="musttry" className='w-[20px] aspect-square' />
+                                        <p className='font-inter font-[400] mt-[3px]'>Liked</p>
+                                      </div>
+                                    }
+                                    {comment?.rated == "notLiked" &&
+                                      <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
+                                        <img src={notliked} alt="musttry" className='w-[20px] aspect-square' />
+                                        <p className='font-inter font-[400] mt-[3px]'>Not liked</p>
+                                      </div>
+                                    }
                                   </div>
-                                }
-                                {comment?.rated == "liked" &&
-                                  <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                    <img src={good} alt="musttry" className='w-[20px] aspect-square' />
-                                    <p className='font-inter font-[400] mt-[3px]'>Liked</p>
-                                  </div>
-                                }
-                                {comment?.rated == "notLiked" &&
-                                  <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                    <img src={notliked} alt="musttry" className='w-[20px] aspect-square' />
-                                    <p className='font-inter font-[400] mt-[3px]'>Not liked</p>
-                                  </div>
-                                }
-                              </div>
 
-                            </div>
-                          ))
+                                </div>
+                              ))
+                          )
                       }
 
 
