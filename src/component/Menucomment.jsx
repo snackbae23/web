@@ -417,7 +417,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               ₹ {menuData?.menu?.price}
             </p>
           </div>
-
           <div className="relative flex justify-between items-center px-[1rem]">
             <div className="flex gap-[1rem] items-center my-[.5rem] ">
               <div className="p-[.5rem] rounded-md flex items-center justify-start w-fit h-fit border-2  bg-white">
@@ -452,11 +451,53 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               }}
             />
           </div>
-
           <p className="font-inter font-[400] text-[.9rem] text-[#64748B] text-center px-[20px]">
             {menuData?.menu?.description}
           </p>
-
+          {(menuData?.menu?.variants1 ||
+            menuData?.menu?.variants2 ||
+            menuData?.menu?.variants3) && (
+            <div>
+              <p className="font-inter font-[700] px-[20px] my-[.5rem]">
+                Variants
+              </p>
+              <div className="w-[90%] mx-auto mt-[.5rem] border-2 rounded-xl p-[10px]">
+                {/* variants1 */}
+                {menuData?.menu?.variants1 && (
+                  <div className="w-full flex justify-between items-center px-[20px]">
+                    <p className="text-[#004AAD] text-[1.1rem]">
+                      {menuData?.menu?.variants1}
+                    </p>
+                    <p className="text-[#004AAD] text-[1.1rem]">
+                      ₹ {menuData?.menu?.variants1Price}/-
+                    </p>
+                  </div>
+                )}
+                {/* variants2 */}
+                {menuData?.menu?.variants2 && (
+                  <div className="w-full flex justify-between items-center px-[20px]">
+                    <p className="text-[#004AAD] text-[1.1rem]">
+                      {menuData?.menu?.variants2}
+                    </p>
+                    <p className="text-[#004AAD] text-[1.1rem]">
+                      ₹{menuData?.menu?.variants2Price}/-
+                    </p>
+                  </div>
+                )}
+                {/* variants3 */}
+                {menuData?.menu?.variants3 && (
+                  <div className="w-full flex justify-between items-center px-[20px]">
+                    <p className="text-[#004AAD] text-[1.1rem]">
+                      {menuData?.menu?.variants3}
+                    </p>
+                    <p className="text-[#004AAD] text-[1.1rem]">
+                      ₹{menuData?.menu?.variants3Price}/-
+                    </p>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
           <div className="flex justify-center items-center my-[1rem] mt-[2rem]">
             <p className="w-[100px] h-[.5px] bg-[#00000057]"></p>
             <div className="text-center px-[.5rem]">
@@ -466,7 +507,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
             </div>
             <p className="w-[100px] h-[.5px] bg-[#00000057]"></p>
           </div>
-
           {/* notlike,good,musttry */}
           <div className="w-full flex justify-evenly my-[.5rem] ">
             <div className="flex flex-col items-center px-[2rem] py-[1rem] border-r-2">
@@ -497,7 +537,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               </p>
             </div>
           </div>
-
           <div className="flex justify-center items-center mt-[1rem]">
             <p className="w-[100px] h-[.5px] bg-[#00000057]"></p>
             <div className="text-center px-[.5rem]">
@@ -544,7 +583,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               className="w-64 h-[10px] mt-[1rem]  bg-[#00000069] appearance-auto accent-[#FFD601] cursor-pointer"
             />
           </div>
-
           {/* comment */}
           <div className="relative w-[90%] mx-auto h-fit shadow-md rounded-lg mb-[1rem]">
             <textarea
@@ -583,7 +621,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               Submit
             </button>
           </div>
-
           <div className="w-full sticky top-0 bg-white z-[100] pt-[1rem] border-b-2">
             {/* notlike,good,musttry
                     <div className='w-full flex justify-evenly mt-[1rem] '>
@@ -666,7 +703,6 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               </button>
             </div>
           </div>
-
           <div>
             {filteredComments.length === 0 ? (
               <div className="w-full h-fit flex flex-col items-center pt-[1rem]">
@@ -801,6 +837,18 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                           />
                           <p className="font-inter font-[400] mt-[3px]">
                             Not liked
+                          </p>
+                        </div>
+                      )}
+                      {comment?.rated == "" && (
+                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                          <img
+                            src={notliked}
+                            alt="musttry"
+                            className="w-[20px] aspect-square"
+                          />
+                          <p className="font-inter font-[400] mt-[3px]">
+                            No Reaction
                           </p>
                         </div>
                       )}

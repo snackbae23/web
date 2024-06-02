@@ -2022,7 +2022,9 @@ console.log("restaurentdata",restaurentdata)
                               </p>
                               <p className="font-inter font-[400] text-[#67727E] flex gap-[.5rem] items-center">
                                 {calculateTimeDifference(comment?.createdAt)}
-                                {comment.pinned && <TbPinnedFilled className="text-[#426CFF]" />}
+                                {comment.pinned && (
+                                  <TbPinnedFilled className="text-[#426CFF]" />
+                                )}
                               </p>
                             </div>
                             <p className=" font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden">
@@ -2064,6 +2066,18 @@ console.log("restaurentdata",restaurentdata)
                                   />
                                   <p className="font-inter font-[400] mt-[3px]">
                                     Not liked
+                                  </p>
+                                </div>
+                              )}
+                              {comment?.rated == "" && (
+                                <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
+                                  <img
+                                    src={notliked}
+                                    alt="musttry"
+                                    className="w-[20px] aspect-square"
+                                  />
+                                  <p className="font-inter font-[400] mt-[3px]">
+                                    No Reaction
                                   </p>
                                 </div>
                               )}
