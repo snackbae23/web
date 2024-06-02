@@ -26,6 +26,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { FaWhatsapp } from "react-icons/fa";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
+import { TbPinnedFilled } from "react-icons/tb";
 
 //image
 import Instagram from "../assets/Instagram.png";
@@ -59,13 +60,7 @@ const restaurantOffers = [
 
 ];
 
-const restaurantEvents = [
 
-];
-
-const restaurantRecommandation = [
-
-];
 
 const MerchantProfile = () => {
   const {
@@ -98,13 +93,13 @@ const MerchantProfile = () => {
   const calculateTimeDifference = (fateDate) => {
     // Convert fate date to Date object
     const fateDateTime = new Date(fateDate);
-
+// console.log(fateDateTime);
     // Current date
     const currentDate = new Date();
 
     // Calculate time difference in milliseconds
     const timeDifference = currentDate.getTime() - fateDateTime.getTime();
-
+// console.log(timeDifference);
     // Convert milliseconds to days, weeks, or months
     const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
     const weeksDifference = Math.floor(daysDifference / 7);
@@ -181,7 +176,7 @@ const MerchantProfile = () => {
 
   }, [recommend]);
 
-
+console.log("restaurentdata",restaurentdata)
   const handleRecommand = async () => {
     const userId = JSON.parse(localStorage.getItem("user"))._id;
     console.log(userId);
@@ -534,7 +529,7 @@ const MerchantProfile = () => {
     axios.request(config)
       .then((response) => {
         // console.log(JSON.stringify(response.data));
-        console.log((response.data.menuItems));
+        console.log("Search item" ,(response.data.menuItems));
         setSearchMenuItems(response.data.menuItems);
       })
       .catch((error) => {
@@ -554,7 +549,7 @@ const MerchantProfile = () => {
 
     axios.request(config)
       .then((response) => {
-        // console.log((response.data));
+        console.log("top5 items",(response.data));
         setMostRecomended(response.data);
       })
       .catch((error) => {
@@ -726,7 +721,73 @@ const MerchantProfile = () => {
       setfailurepayment(true);
     }
   }
+  
 
+  const [pinCommentIds, setPinCommentIds] = useState([]);
+
+  useEffect(() => {
+    if (restaurentdata) {
+      const ids = [];
+
+      restaurentdata.category.forEach((category) => {
+        if (category.menuItems) {
+          category.menuItems.forEach((item) => {
+            if (item.Pincomments) {
+              const itemIds = item.Pincomments.map((comment) => comment._id);
+              ids.push(...itemIds);
+            }
+          });
+        }
+      });
+
+      setPinCommentIds(ids);
+    }
+  }, [restaurentdata]);
+
+  console.log("pinCommentIds1", pinCommentIds);
+
+
+   const getFilteredCommentsWithMenuName = (filter) => {
+     const filteredCommentsWithMenuName = [];
+
+     if (filter === "new") {
+       restaurentdata?.menu?.forEach((section) => {
+         const comments = section.comments
+           .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+           .slice(0, 6)
+           .map((comment) => ({
+             ...comment,
+             pinned: pinCommentIds.includes(comment._id) ? true : false,
+           }));
+         filteredCommentsWithMenuName.push({
+           menuName: section.name,
+           comments,
+         });
+       });
+     } else {
+       restaurentdata?.menu.forEach((section) => {
+         section?.comments.forEach((item) => {
+           if (item.rated === filter) {
+             const comment = {
+               ...item,
+               pinned: pinCommentIds.includes(item._id) ? true : false,
+             };
+             filteredCommentsWithMenuName.push({
+               menuName: section.name,
+               comments: [comment],
+             });
+           }
+         });
+       });
+     }
+
+     return filteredCommentsWithMenuName;
+   };
+
+
+    const filteredCommentsWithMenuName =
+      getFilteredCommentsWithMenuName(filterone);
+    console.log("Comments with Menu Name", filteredCommentsWithMenuName);
 
   return (
     <div className="w-full h-fit">
@@ -768,9 +829,7 @@ const MerchantProfile = () => {
                 onClick={handleSubmit}
                 className="w-[90%] mx-auto h-[3rem] my-[1rem] bg-[#FFD600] text-[#004AAD] rounded-md font-inter font-[700] text-[1.1rem] leading-[32px]"
               >
-                {
-                  loading ? ("Loading...") : ("Continue")
-                }
+                {loading ? "Loading..." : "Continue"}
               </button>
               <div id="recaptcha-container"></div>
             </div>
@@ -804,9 +863,7 @@ const MerchantProfile = () => {
                 onClick={handleOtpSubmit}
                 className="w-[90%] mx-auto h-[3rem] my-[1rem] bg-[#FFD600] text-[#004AAD] rounded-md font-inter font-[700] text-[1.1rem] leading-[32px]"
               >
-                {
-                  loading ? ("Loading...") : ("Verify")
-                }
+                {loading ? "Loading..." : "Verify"}
               </button>
             </div>
           )}
@@ -943,9 +1000,7 @@ const MerchantProfile = () => {
                   type="button"
                   onClick={handleSubmitProfile}
                 >
-                  {
-                    loading ? ("Loading...") : ("Continue")
-                  }
+                  {loading ? "Loading..." : "Continue"}
                 </button>
               </form>
             </div>
@@ -979,8 +1034,7 @@ const MerchantProfile = () => {
                 onClick={() => {
                   if (User._id) {
                     handleRecommand();
-                  }
-                  else {
+                  } else {
                     setLogin(true);
                     setOpenPhno(true);
                   }
@@ -998,10 +1052,16 @@ const MerchantProfile = () => {
               >
                 <MdOutlineShare className="sm:text-[1.2rem]" />
               </button>
-              <button onClick={() => {
-                console.log("instagrea");
-                window.open("https://www.instagram.com/we.foodoos/?igsh=MTMxeThpMHJvMDg3OQ%3D%3D", "_blank");
-              }} className="p-[.3rem] sm:p-[.6rem] border-[2.5px] border-[#FFD628] rounded-lg font-inter font-[600] ">
+              <button
+                onClick={() => {
+                  console.log("instagrea");
+                  window.open(
+                    "https://www.instagram.com/we.foodoos/?igsh=MTMxeThpMHJvMDg3OQ%3D%3D",
+                    "_blank"
+                  );
+                }}
+                className="p-[.3rem] sm:p-[.6rem] border-[2.5px] border-[#FFD628] rounded-lg font-inter font-[600] "
+              >
                 <img
                   src={Instagram}
                   alt="Instagram"
@@ -1030,8 +1090,7 @@ const MerchantProfile = () => {
               onClick={() => {
                 if (User._id) {
                   setPaymentVisible(!paymentVisible);
-                }
-                else {
+                } else {
                   setLogin(true);
                   setOpenPhno(true);
                 }
@@ -1058,10 +1117,11 @@ const MerchantProfile = () => {
                 setRecomendations(false);
                 setFavourite(false);
               }}
-              className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] border-2 border-[#00000099] rounded-md ${menus
-                ? "text-[#004AAD] bg-[#F7D128] border-none "
-                : "text-black"
-                }`}
+              className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] border-2 border-[#00000099] rounded-md ${
+                menus
+                  ? "text-[#004AAD] bg-[#F7D128] border-none "
+                  : "text-black"
+              }`}
             >
               Menu
             </button>
@@ -1073,16 +1133,16 @@ const MerchantProfile = () => {
                 setMenus(false);
                 setFavourite(false);
               }}
-              className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] rounded-md border-2 border-[#00000099] ${Recomendations
-                ? "text-[#004AAD] bg-[#F7D128] border-none "
-                : "text-black"
-                }`}
+              className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] rounded-md border-2 border-[#00000099] ${
+                Recomendations
+                  ? "text-[#004AAD] bg-[#F7D128] border-none "
+                  : "text-black"
+              }`}
             >
               Recomendations
             </button>
             {/* Favourite */}
-            {
-              User._id &&
+            {User._id && (
               <button
                 onClick={() => {
                   setRecomendations(false);
@@ -1090,14 +1150,15 @@ const MerchantProfile = () => {
                   setMenus(false);
                   setFavourite(true);
                 }}
-                className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] rounded-md border-2 border-[#00000099] ${Favourite
-                  ? "text-[#004AAD] bg-[#F7D128] border-none "
-                  : "text-black"
-                  }`}
+                className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] py-[.5rem] rounded-md border-2 border-[#00000099] ${
+                  Favourite
+                    ? "text-[#004AAD] bg-[#F7D128] border-none "
+                    : "text-black"
+                }`}
               >
                 Favourite
               </button>
-            }
+            )}
             {/* events */}
             {/* <button
               onClick={() => {
@@ -1122,17 +1183,17 @@ const MerchantProfile = () => {
                 setFavourite(false);
                 setRecomendations(false);
               }}
-              className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] border-2 border-[#00000099] py-[.5rem] rounded-md ${offers
-                ? "text-[#004AAD] bg-[#F7D128] border-none"
-                : "text-black"
-                } `}
+              className={` font-inter font-[600] text-[1rem] leading-[1.6rem] px-[1rem] border-2 border-[#00000099] py-[.5rem] rounded-md ${
+                offers
+                  ? "text-[#004AAD] bg-[#F7D128] border-none"
+                  : "text-black"
+              } `}
             >
               Offers
             </button>
           </div>
 
-          {
-            menus &&
+          {menus && (
             <div className=" flex flex-wrap  gap-[.5rem] justify-between items-center py-[1.5rem] sm:py-[2rem] overflow-hidden border-b-2">
               <div className="relative w-fit  shadow-xl rounded-md border-2 ">
                 <input
@@ -1147,25 +1208,30 @@ const MerchantProfile = () => {
               <div className="flex gap-[1rem] items-center w-fit">
                 <div
                   onClick={() => {
-                    setIsOn(!isOn)
-                  }} className="p-[.5rem] rounded-md border-2 flex items-center justify-start w-fit h-fit cursor-pointer ">
+                    setIsOn(!isOn);
+                  }}
+                  className="p-[.5rem] rounded-md border-2 flex items-center justify-start w-fit h-fit cursor-pointer "
+                >
                   <div
-                    className={`${isOn ? "bg-[#67CE67]" : "bg-[#ED4F4F]"
-                      } rounded-full w-[10px] aspect-square`}
+                    className={`${
+                      isOn ? "bg-[#67CE67]" : "bg-[#ED4F4F]"
+                    } rounded-full w-[10px] aspect-square`}
                   ></div>
                 </div>
                 <ToggleSwitch />
               </div>
             </div>
-          }
+          )}
         </div>
       </div>
 
       {/* menufilter */}
       <div
-        className={`${filter ? 'translate-y-0 opacity-100 transition-all duration-300 ease-in-out' : 'translate-y-full opacity-0 transition-all duration-300 ease-in-out'
-          } w-full max-w-[320px] bg-white shadow-lg py-[1rem] px-[1.5rem] rounded-xl border-2  text-center fixed bottom-0 left-[50%] translate-x-[-50%] z-[1000] h-fit`}
-
+        className={`${
+          filter
+            ? "translate-y-0 opacity-100 transition-all duration-300 ease-in-out"
+            : "translate-y-full opacity-0 transition-all duration-300 ease-in-out"
+        } w-full max-w-[320px] bg-white shadow-lg py-[1rem] px-[1.5rem] rounded-xl border-2  text-center fixed bottom-0 left-[50%] translate-x-[-50%] z-[1000] h-fit`}
       >
         <div className="text-[#5E5E5E] font-inter font-[700] text-[1.1rem] sm:text-[1.2rem] flex justify-between items-center border-b-2 py-[.8rem] gap-[1rem] ">
           <p>Browse Menu</p>
@@ -1179,11 +1245,14 @@ const MerchantProfile = () => {
         <div className=" overflow-y-scroll h-[30vh] hideScroller">
           {restaurentdata?.category.map((category, index) => (
             <div key={index} className="">
-              <p onClick={() => {
-                scrollToElement(category?.name);
-                setFilter(!filter);
-                toggleCategory(category?.name);
-              }} className="pt-[1.4rem] font-inter font-[400] text-[1.3rem] cursor-pointer">
+              <p
+                onClick={() => {
+                  scrollToElement(category?.name);
+                  setFilter(!filter);
+                  toggleCategory(category?.name);
+                }}
+                className="pt-[1.4rem] font-inter font-[400] text-[1.3rem] cursor-pointer"
+              >
                 {category?.name}
               </p>
             </div>
@@ -1193,14 +1262,19 @@ const MerchantProfile = () => {
 
       {/* menucomment */}
       <div>
-        {commentVisible && <Menucomment resId={id} setOpenPhno={setOpenPhno} />}
+        {/* {commentVisible && */}
+        <Menucomment resId={id} setOpenPhno={setOpenPhno} />
+        {/* } */}
       </div>
 
-
       {/* update profile */}
-      <div className={`${editprofile ? 'translate-y-0 opacity-100 transition-all duration-300 ease-in-out' : 'translate-y-full opacity-0 transition-all duration-300 ease-in-out'
-        } w-full max-w-[400px] bg-white shadow-lg py-[1rem] px-[1.5rem] rounded-xl border-2  text-center fixed bottom-0 left-[50%] translate-x-[-50%] z-[1000] h-fit`}>
-
+      <div
+        className={`${
+          editprofile
+            ? "translate-y-0 opacity-100 transition-all duration-300 ease-in-out"
+            : "translate-y-full opacity-0 transition-all duration-300 ease-in-out"
+        } w-full max-w-[400px] bg-white shadow-lg py-[1rem] px-[1.5rem] rounded-xl border-2  text-center fixed bottom-0 left-[50%] translate-x-[-50%] z-[1000] h-fit`}
+      >
         <div className="text-[#5E5E5E] font-inter font-[700] text-[1.1rem] sm:text-[1.2rem] flex justify-between items-center border-b-2 py-[.8rem] gap-[1rem] ">
           <p>Update Profile</p>
           <IoIosCloseCircleOutline
@@ -1211,12 +1285,8 @@ const MerchantProfile = () => {
           />
         </div>
         <div className=" w-full h-[70vh] overflow-y-scroll hideScroller rounded-md flex flex-col relative">
-
-
           {/* form */}
           <form className="w-[90%] mx-auto flex flex-col">
-
-
             {/* fullName */}
             <div className="relative w-full flex flex-col">
               <label
@@ -1330,50 +1400,42 @@ const MerchantProfile = () => {
               <option value="Both">Both</option>
             </select>
 
-
             <button
               className="bg-[#EAB308] font-sen font-[500] px-6 py-3 rounded-md uppercase my-[.5rem]"
               type="button"
               onClick={handleSubmitEditProfile}
             >
-              {
-                loading ? ("Loading...") : ("Save")
-              }
+              {loading ? "Loading..." : "Save"}
             </button>
           </form>
         </div>
       </div>
 
-
-
       {/* MerchantShare */}
       <MerchantShare />
 
-
       {/* successpayment popup */}
-      {
-        successPayment &&
-        <SuccessPayment amountToPay={amountToPay} />
-      }
+      {successPayment && <SuccessPayment amountToPay={amountToPay} />}
 
       {/* failurepayment popup */}
-      {
-        failurePayment &&
+      {failurePayment && (
         <FailurePayment
-          paymentVisible={paymentVisible} setPaymentVisible={setPaymentVisible} />
-      }
+          paymentVisible={paymentVisible}
+          setPaymentVisible={setPaymentVisible}
+        />
+      )}
 
       {/* paybill */}
       <div className="w-full h-0 relative">
         <div
-          className={`fixed bottom-0 left-[50%] translate-x-[-50%] max-w-[400px] w-full hideScroller  z-[3000] bg-transparent h-fit border-2 overflow-scroll comment ${paymentVisible
-            ? "translate-y-0 opacity-100"
-            : "translate-y-full opacity-0"
-            }`}
+          className={`fixed bottom-0 left-[50%] translate-x-[-50%] max-w-[400px] w-full hideScroller  z-[3000] bg-transparent h-fit border-2 overflow-scroll comment ${
+            paymentVisible
+              ? "translate-y-0 opacity-100"
+              : "translate-y-full opacity-0"
+          }`}
         >
-          <div className='w-full h-[30vh] bg-black opacity-45'></div>
-          <div className='bg-white border-2 overflow-scroll h-[70vh]'>
-
+          <div className="w-full h-[30vh] bg-black opacity-45"></div>
+          <div className="bg-white border-2 overflow-scroll h-[70vh]">
             <IoClose
               onClick={() => {
                 setPaymentVisible(!paymentVisible);
@@ -1408,7 +1470,7 @@ const MerchantProfile = () => {
                   value={paymentamount}
                   onChange={(e) => {
                     setPaymentAmount(e.target.value);
-                    setamountToPay(e.target.value)
+                    setamountToPay(e.target.value);
                     console.log(paymentamount);
                   }}
                 />
@@ -1439,7 +1501,9 @@ const MerchantProfile = () => {
                   </p>
                 </div>
               ) : (
-                <div className={` flex gap-[1rem] overflow-x-scroll hideScroller`}>
+                <div
+                  className={` flex gap-[1rem] overflow-x-scroll hideScroller`}
+                >
                   {restaurantOffers.map((offer, index) => (
                     <MerchantOffers key={index} offer={offer} />
                   ))}
@@ -1518,10 +1582,11 @@ const MerchantProfile = () => {
                   )}
                 </div>
                 <div
-                  className={`border-dotted border-2 w-[90%] mx-auto   ${ishidden
-                    ? "opacity-0 h-0 duration-200 transition-opacity transition-height"
-                    : "opacity-100 h-auto duration-200 transition-opacity transition-height my-[1rem] p-[1rem]"
-                    }`}
+                  className={`border-dotted border-2 w-[90%] mx-auto   ${
+                    ishidden
+                      ? "opacity-0 h-0 duration-200 transition-opacity transition-height"
+                      : "opacity-100 h-auto duration-200 transition-opacity transition-height my-[1rem] p-[1rem]"
+                  }`}
                 >
                   <p className="my-[.5rem] font-inter font-[400] text-[12px] leading-[19.2px] text-[#262627]">
                     No refund on any purchase are possible{" "}
@@ -1542,7 +1607,10 @@ const MerchantProfile = () => {
             </div>
 
             <div className="sticky bottom-0 w-full bg-white border-2 p-[1rem] rounded-t-3xl">
-              <button onClick={handlePayment} className="  bg-[#004AAD] text-[#ffffff] font-[700] font-Roboto w-[300px]  h-[3.6rem] mx-auto  rounded-md block">
+              <button
+                onClick={handlePayment}
+                className="  bg-[#004AAD] text-[#ffffff] font-[700] font-Roboto w-[300px]  h-[3.6rem] mx-auto  rounded-md block"
+              >
                 Pay Now
               </button>
             </div>
@@ -1558,121 +1626,175 @@ const MerchantProfile = () => {
             onClick={() => {
               setFilter(!filter);
             }}
-            className='px-[1rem] py-[.5rem] bg-[#FFD628] flex justify-around gap-[.5rem] items-center rounded-lg fixed bottom-[2rem] left-[50%] translate-x-[-50%] z-[100]'>
+            className="px-[1rem] py-[.5rem] bg-[#FFD628] flex justify-around gap-[.5rem] items-center rounded-lg fixed bottom-[2rem] left-[50%] translate-x-[-50%] z-[100]"
+          >
             <img src={Restaurantmenu} alt="Restaurantmenu" />
-            <p className='font-inter font-[400] text-[1rem] leading-[1.5rem]'>Browse Menu</p>
+            <p className="font-inter font-[400] text-[1rem] leading-[1.5rem]">
+              Browse Menu
+            </p>
           </button>
 
           {/* searchMenuItems */}
-          {
-            searchMenuItems &&
+          {searchMenuItems && (
             <div className="w-[95%] md:w-[80%] mx-auto">
-              <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">Search Results</p>
+              <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">
+                Search Results
+              </p>
 
               <div className={`w-full scroller-container `}>
-                <div className={`flex gap-[1rem] p-[.5rem] overflow-x-scroll scroller hideScroller w-[${searchMenuItems.length * 240}px]`} style={{ overscrollBehaviorX: 'contain' }}>
-                  {searchMenuItems.map(
-                    (items, index) => (
-                      isOn ? (
-                        items.veg === "Yes" &&
-                        <MenuCard key={index} items={items} />
-                      ) : (items.active && <MenuCard key={index} items={items} />)
-                    )
+                <div
+                  className={`flex gap-[1rem] p-[.5rem] overflow-x-scroll scroller hideScroller w-[${
+                    searchMenuItems.length * 240
+                  }px]`}
+                  style={{ overscrollBehaviorX: "contain" }}
+                >
+                  {searchMenuItems.map((items, index) =>
+                    isOn
+                      ? items.veg === "Yes" && (
+                          <MenuCard key={index} items={items} />
+                        )
+                      : items.active && <MenuCard key={index} items={items} />
                   )}
                 </div>
               </div>
             </div>
-          }
+          )}
           {/* mostRecomended */}
-          {mostRecomended &&
+          {mostRecomended && (
             <div className="w-[95%] md:w-[80%] mx-auto">
-              <div id="mostRecomended" className="w-full flex justify-between items-center  p-[.5rem] px-[1rem] rounded-md">
+              <div
+                onClick={toggleMostRecommended}
+                id="mostRecomended"
+                className="w-full flex justify-between items-center  p-[.5rem] px-[1rem] rounded-md"
+              >
                 <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">
                   Most Recommended ({mostRecomended.length})
                 </p>
                 {showAllMostRecommended ? (
-                  <FaAngleUp className={`text-[1.4rem] cursor-pointer`} onClick={toggleMostRecommended} />
+                  <FaAngleUp className={`text-[1.4rem] cursor-pointer`} />
                 ) : (
-                  <FaAngleDown className={`text-[1.4rem] cursor-pointer`} onClick={toggleMostRecommended} />
+                  <FaAngleDown className={`text-[1.4rem] cursor-pointer`} />
                 )}
               </div>
 
-              <div className={`w-full scroller-container ${showAllMostRecommended ? 'h-auto transition-height duration-300 ease-in-out' : 'h-0'}`}>
-                <div className={`flex gap-[1rem] p-[.5rem] overflow-x-scroll scroller hideScroller w-[${mostRecomended.length * 240}px]`} style={{ overscrollBehaviorX: 'contain' }}>
-                  {mostRecomended?.map(
-                    (items, index) => (
-                      isOn ? (
-                        items.veg === "Yes" &&
-                        <MenuCard key={index} items={items} />
-                      ) : (items.active && <MenuCard key={index} items={items} />)
-                    )
+              <div
+                className={`w-full scroller-container ${
+                  showAllMostRecommended
+                    ? "h-auto transition-height duration-300 ease-in-out"
+                    : "h-0"
+                }`}
+              >
+                <div
+                  className={`flex gap-[1rem] p-[.5rem] overflow-x-scroll scroller hideScroller w-[${
+                    mostRecomended.length * 240
+                  }px]`}
+                  style={{ overscrollBehaviorX: "contain" }}
+                >
+                  {mostRecomended?.map((items, index) =>
+                    isOn
+                      ? items.veg === "Yes" && (
+                          <MenuCard key={index} items={items} />
+                        )
+                      : items.active && <MenuCard key={index} items={items} />
                   )}
                 </div>
               </div>
             </div>
-          }
+          )}
 
           {/*Rest Restaurantmenu */}
-          {restaurentdata?.category.map((category, index) => (
-            <div id={category?.name} key={index} className="w-[95%] md:w-[80%] mx-auto">
-              <div className="w-full h-fit">
-                <div className="w-full flex justify-between items-center my-[1rem] p-[.5rem] px-[1rem] rounded-md">
-                  <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">
-                    {category?.name} ({category?.menuItems.filter(menuItem => menuItem.active).length})
-                  </p>
-                  {showAllCategories[category?.name] ? (
-                    <FaAngleUp
-                      className={`text-[1.4rem] cursor-pointer`}
-                      onClick={() => toggleCategory(category?.name)}
-                    />
-                  ) : (
-                    <FaAngleDown
-                      className={`text-[1.4rem] cursor-pointer`}
-                      onClick={() => toggleCategory(category?.name)}
-                    />
-                  )}
-                </div>
-
-                <div className={`w-full scroller-container ${showAllCategories[category?.name] ? 'h-auto transition-height duration-300 ease-in-out' : 'h-0'}`}>
-                  <div className={`flex gap-[1rem] p-[.5rem] overflow-x-scroll scroller hideScroller w-[${category?.menuItems.length * 240}px]`} style={{ overscrollBehaviorX: 'contain' }}>
-                    {category?.menuItems.map((items, index) => (
-                      isOn ? (
-                        items.veg === "Yes" && <MenuCard key={index} items={items} />
+          {restaurentdata?.category.map(
+            (category, index) =>
+              category.active && (
+                <div
+                  onClick={() => toggleCategory(category?.name)}
+                  id={category?.name}
+                  key={index}
+                  className="w-[95%] md:w-[80%] mx-auto"
+                >
+                  <div className="w-full h-fit">
+                    <div className="w-full flex justify-between items-center my-[1rem] p-[.5rem] px-[1rem] rounded-md">
+                      <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">
+                        {category?.name} (
+                        {
+                          category?.menuItems.filter(
+                            (menuItem) => menuItem.active
+                          ).length
+                        }
+                        )
+                      </p>
+                      {showAllCategories[category?.name] ? (
+                        <FaAngleUp className={`text-[1.4rem] cursor-pointer`} />
                       ) : (
+                        <FaAngleDown
+                          className={`text-[1.4rem] cursor-pointer`}
+                        />
+                      )}
+                    </div>
 
-
-                        items.active && (
-                          <MenuCard key={index} items={items} />)
-
-                      )
-                    ))}
+                    <div
+                      className={`w-full scroller-container ${
+                        showAllCategories[category?.name]
+                          ? "h-auto transition-height duration-300 ease-in-out"
+                          : "h-0"
+                      }`}
+                    >
+                      <div
+                        className={`flex gap-[1rem] p-[.5rem] overflow-x-scroll scroller hideScroller w-[${
+                          category?.menuItems.length * 240
+                        }px]`}
+                        style={{ overscrollBehaviorX: "contain" }}
+                      >
+                        {category?.menuItems.map((items, index) =>
+                          isOn
+                            ? items.veg === "Yes" && (
+                                <MenuCard key={index} items={items} />
+                              )
+                            : items.active && (
+                                <MenuCard key={index} items={items} />
+                              )
+                        )}
+                      </div>
+                    </div>
                   </div>
                 </div>
-
-              </div>
-            </div>
-          ))}
+              )
+          )}
           {/* footer */}
           <div className="w-[90%] h-fit px-[2rem] py-[1rem] border-2 mx-auto border-black rounded-md mb-[6rem] mt-[1rem]">
-            <p className="text-[20px] font-inter font-[700] leading-[40px]">Foodoos</p>
+            <p className="text-[20px] font-inter font-[700] leading-[40px]">
+              Foodoos
+            </p>
             <div className="flex sm:flex-row flex-col justify-between gap-[1rem]">
               <div>
                 <div className="flex gap-[.5rem] items-center my-[.5rem]">
                   <IoLocationOutline className="text-[1.4rem]" />
-                  <p className="text-[16px] font-inter font-[400] leading-[24px]">AG Block, Salt Lake Sector 2</p>
+                  <p className="text-[16px] font-inter font-[400] leading-[24px]">
+                    AG Block, Salt Lake Sector 2
+                  </p>
                 </div>
                 <div className="flex gap-[.5rem] items-center my-[.5rem]">
                   <FaPhoneAlt className="text-[1.2rem]" />
-                  <p className="text-[16px] font-inter font-[400] leading-[24px]">+ 91 {restaurentdata?.contact}</p>
+                  <p className="text-[16px] font-inter font-[400] leading-[24px]">
+                    + 91 {restaurentdata?.contact}
+                  </p>
                 </div>
                 <div className="flex gap-[.5rem] items-center my-[.5rem]">
                   <img src={fssai} alt="fssai" />
-                  <p className="text-[16px] font-inter font-[400] leading-[24px]">1987654321987654321</p>
+                  <p className="text-[16px] font-inter font-[400] leading-[24px]">
+                    1987654321987654321
+                  </p>
                 </div>
               </div>
               <div className="">
-                <p className="inline text-[18px] font-inter font-[600] leading-[24px] text-[#106CF6] border-b-2 border-[#106CF6]">Powered By</p>
-                <img src={logo} alt="logo" className="h-[4rem] aspect-auto mt-[1rem] relative left-[-.5rem]" />
+                <p className="inline text-[18px] font-inter font-[600] leading-[24px] text-[#106CF6] border-b-2 border-[#106CF6]">
+                  Powered By
+                </p>
+                <img
+                  src={logo}
+                  alt="logo"
+                  className="h-[4rem] aspect-auto mt-[1rem] relative left-[-.5rem]"
+                />
               </div>
             </div>
           </div>
@@ -1734,11 +1856,9 @@ const MerchantProfile = () => {
       )} */}
 
       {/* Favourite */}
-      {
-        Favourite &&
+      {Favourite && (
         <div>
-          {favoriteMenu
-            ?.length === 0 ? (
+          {favoriteMenu?.length === 0 ? (
             <div className="w-full flex flex-col items-center p-[2rem] pb-[6rem] mt-[1rem]">
               <img
                 src={nofavorite}
@@ -1746,7 +1866,7 @@ const MerchantProfile = () => {
                 className="max-w-[360px] aspect-auto"
               />
               <p className=" font-Sen font-[700] text-[1.6rem] md:text-[2.4rem] md:leading-[3rem] text-center">
-                Create your custom favourite food iteam list !
+                Create your custom favourite food item list!
               </p>
               <p className=" font-Sen font-[400] md:text-[1.6rem] md:leading-[2rem] text-[#525C67] text-center">
                 Be the first to recommend dishes in this restaurant
@@ -1760,13 +1880,12 @@ const MerchantProfile = () => {
             </div>
           )}
         </div>
-      }
+      )}
 
       {/* Recomendations */}
-      {
-        Recomendations &&
+      {Recomendations && (
         <div>
-          {restaurentdata?.menu.length === 0 ? (
+          {restaurentdata.menu[0].comments.length === 0 ? (
             <div className="w-full flex flex-col items-center p-[2rem] pb-[6rem]">
               <img
                 src={noReccomandation}
@@ -1791,161 +1910,175 @@ const MerchantProfile = () => {
 
               {/* Recommend menu by user */}
               <div className="w-full h-fit  mt-[4rem] scroller-container">
-                <div className={`flex gap-[1rem] px-[.5rem] overflow-x-scroll scroller hideScroller w-[${restaurentdata?.menu.length * 280}px]`}>
-                  {
-                    restaurentdata?.menu.map((items, index) => (
-                      <MenuCard key={index} items={items} />
-                    ))
-                  }
+                <div
+                  className={`flex gap-[1rem] px-[.5rem] overflow-x-scroll scroller hideScroller w-[${
+                    restaurentdata?.menu.length * 280
+                  }px]`}
+                >
+                  {restaurentdata?.menu.map((items, index) => (
+                    <MenuCard key={index} items={items} />
+                  ))}
                 </div>
               </div>
-
             </div>
           ) : (
             <div className="sm:w-[90%] mx-auto h-fit flex flex-wrap justify-center my-[1rem]">
-              <div className='w-full sticky top-0 bg-white z-[100] pt-[1rem] border-b-2'>
-                <p className='font-inter font-[700] leading-[24px] text-[#262627] text-[1.6rem] px-[1rem]'>Recomendations by customers</p>
-                <div className='w-full flex gap-[1rem] items-center my-[1rem] overflow-scroll hideScroller px-[1rem]'>
+              <div className="w-full sticky top-0 bg-white z-[100] pt-[1rem] border-b-2">
+                <p className="font-inter font-[700] leading-[24px] text-[#262627] text-[1.6rem] px-[1rem]">
+                  Recomendations by customers
+                </p>
+                <div className="w-full flex gap-[1rem] items-center my-[1rem] overflow-scroll hideScroller px-[1rem]">
                   <button
                     onClick={() => {
                       // setGood(false);
                       // setNewone(!newone);
                       // setNotliked(false);
                       // setMustTry(false);
-                      setFilterone('new');
+                      setFilterone("new");
                     }}
-                    className={`${filterone === "new" && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>New</button>
+                    className={`${
+                      filterone === "new" && "bg-[#FFD628]"
+                    } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                  >
+                    New
+                  </button>
                   <button
                     onClick={() => {
                       // setGood(false);
                       // setNewone(false);
                       // setNotliked(!notlikedone);
                       // setMustTry(false);
-                      setFilterone('notLiked');
+                      setFilterone("notLiked");
                     }}
-                    className={` ${filterone === "notLiked" && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Not Liked</button>
+                    className={` ${
+                      filterone === "notLiked" && "bg-[#FFD628]"
+                    } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                  >
+                    Not Liked
+                  </button>
                   <button
                     onClick={() => {
                       // setGood(!goodone);
                       // setNewone(false);
                       // setNotliked(false);
                       // setMustTry(false);
-                      setFilterone('liked');
+                      setFilterone("liked");
                     }}
-                    className={` ${filterone === "liked" && ('bg-[#FFD628]')} px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Liked</button>
+                    className={` ${
+                      filterone === "liked" && "bg-[#FFD628]"
+                    } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                  >
+                    Liked
+                  </button>
                   <button
                     onClick={() => {
                       // setGood(false);
                       // setNewone(false);
                       // setNotliked(false);
                       // setMustTry(!musttryone);
-                      setFilterone('mustTry');
+                      setFilterone("mustTry");
                     }}
-                    className={` ${filterone === "mustTry" && ('bg-[#FFD628]')}  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}>Must try</button>
+                    className={` ${
+                      filterone === "mustTry" && "bg-[#FFD628]"
+                    }  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                  >
+                    Must try
+                  </button>
                 </div>
               </div>
 
-              <div className="w-[100%] h-fit flex flex-wrap gap-[.5rem]">
-                {
-                  restaurentdata?.menu.map((menu, index) => (
-                    <div key={index} className="flex flex-wrap gap-[.5rem] justify-center">
-
-                      {filterone === "new" ?
-                        menu?.comments
-                          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-                          .slice(0, 5) // Adjust the number of recent comments to be displayed
-                          .map((comment, index) => (
-                            // Render recent comments here
-                            <div key={index} className=' relative min-w-[360px] w-[90%] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
-                              <div className='w-full  flex justify-between items-center'>
-                                <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
-                                <p className='font-intedddr font-[500] text-[#334253]'>{comment?.userId?.name}</p>
-                                <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
-                              </div>
-                              <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
-
-                              <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
-                                <p>{menu.name}</p>
-                                {comment?.rated == "mustTry" &&
-                                  <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                    <img src={musttry} alt="musttry" className='w-[20px] aspect-square' />
-                                    <p className='font-inter font-[400] mt-[3px]'>must try</p>
-                                  </div>
-                                }
-                                {comment?.rated == "liked" &&
-                                  <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                    <img src={good} alt="musttry" className='w-[20px] aspect-square' />
-                                    <p className='font-inter font-[400] mt-[3px]'>Liked</p>
-                                  </div>
-                                }
-                                {comment?.rated == "notLiked" &&
-                                  <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                    <img src={notliked} alt="musttry" className='w-[20px] aspect-square' />
-                                    <p className='font-inter font-[400] mt-[3px]'>Not liked</p>
-                                  </div>
-                                }
-                              </div>
-
+              <div className="w-[100%] h-fit">
+                {filteredCommentsWithMenuName.length == 0 ? (
+                  <div className="w-full h-fit flex flex-col items-center pt-[1rem]">
+                    <img
+                      src={recommand}
+                      alt="recommand-Image"
+                      className="max-w-[400px]  aspect-auto object-contain"
+                    />
+                    <p className="text-[1.4rem] font-inter font-[400]  capitalize">
+                      Be first to recommand
+                    </p>
+                  </div>
+                ) : (
+                  <div className="w-full h-fit">
+                    {filteredCommentsWithMenuName?.map((menu, index) => (
+                      <div
+                        key={index}
+                        className="w-fit flex flex-wrap sm:gap-[.5rem] justify-start"
+                      >
+                        {menu?.comments.map((comment, index) => (
+                          <div
+                            key={index}
+                            className=" relative  w-[90%] min-w-[360px] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl"
+                          >
+                            <div className="w-full  flex justify-between items-center">
+                              <img
+                                src={defaultuser}
+                                alt="dummyimage"
+                                className="w-[40px] aspect-square rounded-full border-2"
+                              />
+                              <p className="font-inter font-[500] text-[#334253]">
+                                {comment?.userId?.name || "Anonymous"}
+                              </p>
+                              <p className="font-inter font-[400] text-[#67727E] flex gap-[.5rem] items-center">
+                                {calculateTimeDifference(comment?.createdAt)}
+                                {comment.pinned && <TbPinnedFilled className="text-[#426CFF]" />}
+                              </p>
                             </div>
-                          ))
-                        :
-                        menu?.comments
-                          .filter(comment => filterone ? comment.rated === filterone : true).length == 0 ? (
-                          <div className="w-full h-fit flex flex-col items-center pt-[1rem]">
-                             <img src={recommand} alt="recommand-Image" />
-                             <p className="text-[1.4rem] font-inter font-[400]  capitalize">Be first to recommand</p>
-                          </div>
-                        )
-                          :
-                          (
-                            menu?.comments
-                              .filter(comment => filterone ? comment.rated === filterone : true)
-                              .map((comment, index) => (
-                                // Render comments based on other filters here
-                                <div key={index} className=' relative  w-[90%] min-w-[360px] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl'>
-                                  <div className='w-full  flex justify-between items-center'>
-                                    <img src={defaultuser} alt="dummyimage" className='w-[40px] aspect-square rounded-full border-2' />
-                                    <p className='font-inter font-[500] text-[#334253]'>{comment?.userId?.name}</p>
-                                    <p className='font-inter font-[400] text-[#67727E]'>{calculateTimeDifference(comment?.createdAt)}</p>
-                                  </div>
-                                  <p className=' font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden'>{comment?.description}</p>
+                            <p className=" font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden">
+                              {comment?.description}
+                            </p>
 
-                                  <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
-                                    <p>{menu.name}</p>
-                                    {comment?.rated == "mustTry" &&
-                                      <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                        <img src={musttry} alt="musttry" className='w-[20px] aspect-square' />
-                                        <p className='font-inter font-[400] mt-[3px]'>must try</p>
-                                      </div>
-                                    }
-                                    {comment?.rated == "liked" &&
-                                      <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                        <img src={good} alt="musttry" className='w-[20px] aspect-square' />
-                                        <p className='font-inter font-[400] mt-[3px]'>Liked</p>
-                                      </div>
-                                    }
-                                    {comment?.rated == "notLiked" &&
-                                      <div className='w-fit h-fit mt-[.5rem] flex flex-col items-center '>
-                                        <img src={notliked} alt="musttry" className='w-[20px] aspect-square' />
-                                        <p className='font-inter font-[400] mt-[3px]'>Not liked</p>
-                                      </div>
-                                    }
-                                  </div>
-
+                            <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
+                              <p>{menu.menuName}</p>
+                              {comment?.rated == "mustTry" && (
+                                <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
+                                  <img
+                                    src={musttry}
+                                    alt="musttry"
+                                    className="w-[20px] aspect-square"
+                                  />
+                                  <p className="font-inter font-[400] mt-[3px]">
+                                    must try
+                                  </p>
                                 </div>
-                              ))
-                          )
-                      }
-
-
-                    </div>
-                  ))
-                }
+                              )}
+                              {comment?.rated == "liked" && (
+                                <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
+                                  <img
+                                    src={good}
+                                    alt="musttry"
+                                    className="w-[20px] aspect-square"
+                                  />
+                                  <p className="font-inter font-[400] mt-[3px]">
+                                    Liked
+                                  </p>
+                                </div>
+                              )}
+                              {comment?.rated == "notLiked" && (
+                                <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
+                                  <img
+                                    src={notliked}
+                                    alt="musttry"
+                                    className="w-[20px] aspect-square"
+                                  />
+                                  <p className="font-inter font-[400] mt-[3px]">
+                                    Not liked
+                                  </p>
+                                </div>
+                              )}
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
         </div>
-      }
+      )}
     </div>
   );
 };
