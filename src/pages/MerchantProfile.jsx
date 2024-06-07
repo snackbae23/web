@@ -1763,7 +1763,7 @@ console.log("restaurentdata",restaurentdata)
           {/* footer */}
           <div className="w-[90%] h-fit px-[2rem] py-[1rem] border-2 mx-auto border-black rounded-md mb-[6rem] mt-[1rem]">
             <p className="text-[20px] font-inter font-[700] leading-[40px]">
-              Foodoos
+              {restaurentdata?.name}
             </p>
             <div className="flex sm:flex-row flex-col justify-between gap-[1rem]">
               <div>
@@ -1782,7 +1782,7 @@ console.log("restaurentdata",restaurentdata)
                 <div className="flex gap-[.5rem] items-center my-[.5rem]">
                   <img src={fssai} alt="fssai" />
                   <p className="text-[16px] font-inter font-[400] leading-[24px]">
-                    1987654321987654321
+                    {restaurentdata?.fssaiLicenseNo}
                   </p>
                 </div>
               </div>
