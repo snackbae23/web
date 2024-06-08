@@ -1770,7 +1770,7 @@ console.log("restaurentdata",restaurentdata)
                 <div className="flex gap-[.5rem] items-center my-[.5rem]">
                   <IoLocationOutline className="text-[1.4rem]" />
                   <p className="text-[16px] font-inter font-[400] leading-[24px]">
-                    AG Block, Salt Lake Sector 2
+                    {restaurentdata?.outletAddress}
                   </p>
                 </div>
                 <div className="flex gap-[.5rem] items-center my-[.5rem]">
