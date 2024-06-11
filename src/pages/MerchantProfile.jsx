@@ -1056,7 +1056,7 @@ console.log("restaurentdata",restaurentdata)
                 onClick={() => {
                   console.log("instagrea");
                   window.open(
-                    "https://www.instagram.com/we.foodoos/?igsh=MTMxeThpMHJvMDg3OQ%3D%3D",
+                    "https://www.snackbae.in/",
                     "_blank"
                   );
                 }}
