@@ -124,6 +124,18 @@ const JoinAsPartner = () => {
           <div className=" max-w-[400px] w-full h-fit">
             <img src={joinicon4} alt="joinicon4" />
             <p className="font-Roboto font-[600] text-[18px] leading-[40px] md:leading-[56px] md:text-[22px] text-white">
+              Integrate Gamification
+            </p>
+            <p className="font-Sen font-[400] text-[14px] leading-[18px] md:leading-[25px] md:text-[16px] text-white ">
+              Engage your customers and boost sales by integrating gamification
+              into your business. Turn interaction into fun, rewarding
+              experience that keep customers coming back.
+            </p>
+          </div>
+
+          <div className=" max-w-[400px] w-full h-fit">
+            <img src={joinicon5} alt="joinicon5" />
+            <p className="font-Roboto font-[600] text-[18px] leading-[40px] md:leading-[56px] md:text-[22px] text-white">
               Automated Marketing Campaigns 
             </p>
             <p className="font-Sen font-[400] text-[14px] leading-[18px] md:leading-[25px] md:text-[16px] text-white ">
@@ -133,25 +145,13 @@ const JoinAsPartner = () => {
           </div>
 
           <div className=" max-w-[400px] w-full h-fit">
-            <img src={joinicon5} alt="joinicon5" />
+            <img src={joinicon6} alt="joinicon6" />
             <p className="font-Roboto font-[600] text-[18px] leading-[40px] md:leading-[56px] md:text-[22px] text-white">
               Loyalty-Based Offer Tools
             </p>
             <p className="font-Sen font-[400] text-[14px] leading-[18px] md:leading-[25px] md:text-[16px] text-white ">
               Customize offers and rewards to foster customer loyalty and
               satisfaction, driving repeat business and revenue growth.
-            </p>
-          </div>
-
-          <div className=" max-w-[400px] w-full h-fit">
-            <img src={joinicon6} alt="joinicon6" />
-            <p className="font-Roboto font-[600] text-[18px] leading-[40px] md:leading-[56px] md:text-[22px] text-white">
-              Influencer Marketing Services
-            </p>
-            <p className="font-Sen font-[400] text-[14px] leading-[18px] md:leading-[25px] md:text-[16px] text-white ">
-              Leverage our in-house influencer team and collaborate with
-              industry experts to expand your reach on social media and engage
-              with a broader audience.
             </p>
           </div>
         </div>
