@@ -2078,7 +2078,7 @@ const MerchantProfile = () => {
                               >
                                 {menu?.comments.map((comment, index) => (
                                   <div
-                                    className=" relative  w-[90%] sm:w-[360px] min-w-[360px] h-fit  mx-auto border-[1.5px] my-[1rem] rounded-[15px] border-[#00000080]"
+                                    className=" relative  w-[90%] sm:w-[360px] sm:min-w-[360px] h-fit  mx-auto border-[1.5px] my-[1rem] rounded-[15px] border-[#00000080]"
                                     key={index}
                                   >
                                     {/* head */}
@@ -2099,7 +2099,7 @@ const MerchantProfile = () => {
                                       </p>
                                     </div>
                                     {/* body */}
-                                    <p className="w-full px-[1rem]  h-[150px] font-inter font-[400] text-[#0F172A] pt-[1rem] pb-[3rem] text-[1rem]">
+                                    <p className="w-full px-[1rem] h-fit min-h-[150px] font-inter font-[400] text-[#0F172A] pt-[1rem] pb-[3rem] text-[1rem]">
                                       {comment?.description}
                                     </p>
                                     {/* comment footer */}
