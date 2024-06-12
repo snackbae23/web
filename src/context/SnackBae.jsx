@@ -22,6 +22,7 @@ export const SnackBaeProvider = (props) => {
   const [valueChanged,setValueChanged] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteMenu, setFavoriteMenu] = useState();
+  const [recommend, setRecommend] = useState(true);
   
   const [openprofile, setOpenProfile] = useState(false); // open user profile for signup
   const [editprofile, setEditProfile] = useState(false); //edit and open user profile
@@ -103,6 +104,9 @@ export const SnackBaeProvider = (props) => {
         setsuccesspayment,
         failurePayment, 
         setfailurepayment,
+        recommend,
+        setRecommend,
+
       }}
     >
       {props.children}

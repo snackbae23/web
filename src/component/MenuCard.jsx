@@ -38,7 +38,7 @@ const MenuCard = ({ items }) => {
         <img
           src={items?.image}
           alt={items?.name}
-          className=" sm:h-[150px]  h-[100px] aspect-auto object-contain mx-auto"
+          className=" sm:h-[120px]  h-[100px] aspect-auto object-contain mx-auto"
         />
         <div className="p-[.5rem] rounded-md flex items-center justify-start w-fit h-fit absolute top-[.3rem] sm:top-[1rem] left-[.3rem] sm:left-[1rem]  bg-white border-2">
           <div
@@ -89,7 +89,7 @@ const MenuCard = ({ items }) => {
 
           <div className='flex gap-[.3rem] mt-[1rem] items-center'>
             <img src={recommandicons} alt="recommandicons" className='w-[30%] aspect-auto' />
-            <p className='text-[#004AAD] text-[16px] leading-[16.1px] font-inter font-[400]'>{items.notLikedCount + items.likedCount + items.mustTryCount} recommendations</p>
+            <p className='text-[#004AAD] text-[16px] leading-[16.1px] font-inter font-[400] text-nowrap text-ellipsis overflow-hidden'>{items.notLikedCount + items.likedCount + items.mustTryCount} recommendations</p>
           </div>
         </div>
       </div>

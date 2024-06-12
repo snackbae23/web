@@ -40,7 +40,7 @@ import foodos from '../assets/foodos.png';
 import offersImg from '../assets/offers.png';
 import noReccomandation from '../assets/noReccomandation.png';
 import nofavorite from '../assets/nofavorite.png';
-import defaultuser from '../assets/default.jpg';
+import defaultuser from '../assets/review.jpg';
 import notliked from '../assets/notliked.png'
 import good from '../assets/good.png'
 import musttry from '../assets/musttry.png';
@@ -91,7 +91,7 @@ const MerchantProfile = () => {
     commentVisible,
     setCommentVisible,
     setMenuId,
-    favoriteMenu,
+    favoriteMenu, recommend, setRecommend,
   } = useSnackBae();
 
   const calculateTimeDifference = (fateDate) => {
@@ -126,7 +126,7 @@ const MerchantProfile = () => {
   const { id } = useParams();
   console.log(User.anniversary);
   // const [restaurentdata, setrestaurentdata] = useState(null);
-  const [recommend, setRecommend] = useState(true);
+
   const navigate = useNavigate();
 
   // const [newone, setNewone] = useState(false);
@@ -135,56 +135,65 @@ const MerchantProfile = () => {
   // const [musttryone, setMustTry] = useState(false);
   const [filterone, setFilterone] = useState('new');
   const [flashLoader, setFlashLoader] = useState(false);
+
   useEffect(() => {
 
     forRecommendation();
-    setLoader(true); // add loader true
+
     setFlashLoader(true); // add flashloader true
-    let config = {
-      method: "get",
-      maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getRestaurantDetails/${id}`,
-      headers: {},
-    };
 
-    axios
-      .request(config)
-      .then((response) => {
-        console.log(response.data.restaurant);
-        setRestaurentData(response.data.restaurant);
-        console.log(restaurentdata);
-        const userId = JSON.parse(localStorage.getItem("user"))?._id;
-        const a = response.data.restaurant?.recommendedBy;
-        // console.log(a);
-
-        if (userId) {
-          if (a) {
-            const containsString = (a, userId) => a.some((element) => element.includes(userId));
-            // console.log(userId);
-            if (containsString(a, userId)) {
-              // console.log(containsString(a, userId));
-              let recommand = document.getElementById("recommand");
-              recommand.style.backgroundColor = "#FFD628";
-            } else {
-              let recommand = document.getElementById("recommand");
-              recommand.style.backgroundColor = "";
-            }
-          }
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    //remove loader
-    setLoader(false);
     setTimeout(() => {
-      setFlashLoader(false);
+      setFlashLoader(false);  //remove  flashloader true
     }, 6000);
 
-  }, [recommend]);
+  }, [recommend])
+  // useEffect(() => {
 
-  console.log("restaurentdata", restaurentdata)
+
+  //   setLoader(true); // add loader true
+  //   let config = {
+  //     method: "get",
+  //     maxBodyLength: Infinity,
+  //     url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getRestaurantDetails/${id}`,
+  //     headers: {},
+  //   };
+
+  //   axios
+  //     .request(config)
+  //     .then((response) => {
+  //       console.log(response.data.restaurant);
+  //       setRestaurentData(response.data.restaurant);
+  //       console.log(restaurentdata);
+  //       const userId = JSON.parse(localStorage.getItem("user"))?._id;
+  //       const a = response.data.restaurant?.recommendedBy;
+  //       // console.log(a);
+
+  //       if (userId) {
+  //         if (a) {
+  //           const containsString = (a, userId) => a.some((element) => element.includes(userId));
+  //           // console.log(userId);
+  //           if (containsString(a, userId)) {
+  //             // console.log(containsString(a, userId));
+  //             let recommand = document.getElementById("recommand");
+  //             recommand.style.backgroundColor = "#FFD628";
+  //           } else {
+  //             let recommand = document.getElementById("recommand");
+  //             recommand.style.backgroundColor = "";
+  //           }
+  //         }
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+
+  //   //remove loader
+  //   setLoader(false);
+
+  // }, [recommend]);
+
+  console.log("restaurentdata", restaurentdata);
+
   const handleRecommand = async () => {
     const userId = JSON.parse(localStorage.getItem("user"))._id;
     console.log(userId);
@@ -1141,8 +1150,11 @@ const MerchantProfile = () => {
                             setOpenPhno(true);
                           }
                         }}
-                        id="recommand"
-                        className=" px-[.5rem] py-[.2rem] sm:px-[1rem] sm:py-[.85rem] border-[2.5px] border-[#FFD628] rounded-lg font-inter font-[600] sm:text-[1rem] text-[.8rem] "
+                        // id="recommand"
+                        className={` px-[.5rem] py-[.2rem] sm:px-[1rem] 
+                          sm:py-[.85rem] border-[2.5px] border-[#FFD628] rounded-lg 
+                          font-inter font-[600] sm:text-[1rem] text-[.8rem] 
+                          ${recommend ? ('bg-[#FFD628]') : ('bg-white')}`}
                       >
                         Recommend
                       </button>
@@ -1772,13 +1784,13 @@ const MerchantProfile = () => {
                     (category, index) =>
                       category.active && (
                         <div
-                          onClick={() => toggleCategory(category?.name)}
+
                           id={category?.name}
                           key={index}
                           className="w-[95%] md:w-[80%] mx-auto"
                         >
                           <div className="w-full h-fit">
-                            <div className="w-full flex justify-between items-center my-[1rem] p-[.5rem] px-[1rem] rounded-md">
+                            <div onClick={() => toggleCategory(category?.name)} className="w-full flex justify-between items-center my-[1rem] p-[.5rem] px-[1rem] rounded-md">
                               <p className="font-Roboto font-[500] text-[1.4rem] leading-[3rem]">
                                 {category?.name} (
                                 {
@@ -2051,46 +2063,48 @@ const MerchantProfile = () => {
                             <img
                               src={recommand}
                               alt="recommand-Image"
-                              className="max-w-[400px]  aspect-auto object-contain"
+                              className="max-w-[400px] w-[90%] aspect-auto object-contain"
                             />
                             <p className="text-[1.4rem] font-inter font-[400]  capitalize">
                               Be first to recommand
                             </p>
                           </div>
                         ) : (
-                          <div className="w-full h-fit">
+                          <div className="w-full h-fit flex flex-col items-center sm:items-start">
                             {filteredCommentsWithMenuName?.map((menu, index) => (
                               <div
                                 key={index}
-                                className="w-fit flex flex-wrap sm:gap-[.5rem] justify-start"
+                                className="w-full h-fit flex sm:flex-wrap  flex-col sm:gap-[.5rem] items-center sm:justify-start "
                               >
                                 {menu?.comments.map((comment, index) => (
                                   <div
+                                    className=" relative  w-[90%] sm:w-[360px] min-w-[360px] h-fit  mx-auto border-[1.5px] my-[1rem] rounded-[15px] border-[#00000080]"
                                     key={index}
-                                    className=" relative  w-[90%] min-w-[360px] max-w-[360px] h-fit  mx-auto border-2 p-[1.8rem] my-[1rem] rounded-3xl shadow-xl"
                                   >
-                                    <div className="w-full  flex justify-between items-center">
+                                    {/* head */}
+                                    <div className="w-full flex justify-between items-center border-b-[.5px] border-[#00000080] px-[1rem] py-[.5rem]">
                                       <img
                                         src={defaultuser}
                                         alt="dummyimage"
-                                        className="w-[40px] aspect-square rounded-full border-2"
+                                        className="w-[50px] aspect-square rounded-full"
                                       />
                                       <p className="font-inter font-[500] text-[#334253]">
                                         {comment?.userId?.name || "Anonymous"}
                                       </p>
-                                      <p className="font-inter font-[400] text-[#67727E] flex gap-[.5rem] items-center">
+                                      <p className="font-inter font-[400] text-[#0F172A] flex gap-[.5rem] items-center">
                                         {calculateTimeDifference(comment?.createdAt)}
                                         {comment.pinned && (
                                           <TbPinnedFilled className="text-[#426CFF]" />
                                         )}
                                       </p>
                                     </div>
-                                    <p className=" font-inter font-[400] text-[#67727E] py-[1rem] pb-[3rem] text-ellipsis overflow-hidden">
+                                    {/* body */}
+                                    <p className="w-full px-[1rem]  h-[150px] font-inter font-[400] text-[#0F172A] pt-[1rem] pb-[3rem] text-[1rem]">
                                       {comment?.description}
                                     </p>
-
-                                    <div className="flex justify-around items-center absolute w-full left-0 bottom-2">
-                                      <p>{menu.menuName}</p>
+                                    {/* comment footer */}
+                                    <div className="flex  justify-between px-[1rem] items-center absolute w-full left-0 bottom-2">
+                                      <p className="font-Roboto font-[500] text-[#000000]">{menu.menuName}</p>
                                       {comment?.rated == "mustTry" && (
                                         <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                                           <img
