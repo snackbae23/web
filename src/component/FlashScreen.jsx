@@ -71,7 +71,7 @@ const FlashScreen = () => {
                 }
                 <p
                     className=' font-Roboto font-[500] text-[1.5rem] leading-[1.2rem] mt-[.5rem]'>
-                    {restaurentdata?.name}-{restaurentdata?.outletAddress.split(",")[1]}
+                    {restaurentdata?.name}-{restaurentdata?.outletAddress?.split(",")[1]}
                 </p>
             </div>
             <div className='absolute bottom-[5rem] left-[50%] translate-x-[-50%] w-fit h-fit '>
