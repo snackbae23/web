@@ -32,7 +32,7 @@ function Footer() {
           <div className="w-[95%] sm:w-[80%] mx-auto">
             <div className="">
               <div className="w-[90%] mx-auto text-[.9rem] flex justify-between items-center ">
-                <img src={Logo1} alt="logo" width={100} className="py-[2rem]" />
+                <img src={Logo1} alt="logo" width={120} className="py-[2rem]" />
                 <p>made with 💛 in the city of joy</p>
               </div>
 
