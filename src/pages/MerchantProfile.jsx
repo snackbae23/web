@@ -1047,7 +1047,7 @@ const MerchantProfile = () => {
                       />
                       <div>
                         <p className="font-Roboto font-[600] text-[1.2rem] leading-[1.2rem] md:text-[2.4rem] md:leading-[2.4rem]">
-                          {restaurentdata?.name}-{restaurentdata?.outletAddress.split(",")[1]}
+                          {restaurentdata?.name}-{restaurentdata?.outletAddress?.split(",")[1]}
                         </p>
                         {/* <p className=" text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
                           Chinese,Italian and Indian
