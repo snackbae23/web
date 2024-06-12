@@ -8,13 +8,18 @@ import logo from '../assets/logo.png';
 import logo1 from '../assets/logo1.png';
 
 const FlashScreen = () => {
-    const { } = useSnackBae();
+    const {
+        User,
+        restaurentdata,
+        setRestaurentData,
+        setRecommend } = useSnackBae();
     const { id } = useParams();
-    const [restaurentdata, setrestaurentdata] = useState();
     // console.log('id', id);
 
     useEffect(() => {
         fetchRestaurentData();
+        console.log("restaurentdata", restaurentdata);
+
     }, []);
 
     const fetchRestaurentData = async () => {
@@ -28,7 +33,27 @@ const FlashScreen = () => {
         axios.request(config)
             .then((response) => {
                 // console.log(JSON.stringify(response.data));
-                setrestaurentdata(response.data.restaurant);
+                setRestaurentData(response.data.restaurant);
+                const a = response.data.restaurant?.recommendedBy;
+                // console.log(a);
+                const userId = User._id;
+
+                if (userId) {
+                    if (a) {
+                        const containsString = (a, userId) => a.some((element) => element.includes(userId));
+                        // console.log(userId);
+                        if (containsString(a, userId)) {
+                            // console.log(containsString(a, userId));
+                            // let recommand = document.getElementById("recommand");
+                            // recommand.style.backgroundColor = "#FFD628";
+                            setRecommend(true);
+                        } else {
+                            // let recommand = document.getElementById("recommand");
+                            // recommand.style.backgroundColor = "";
+                            setRecommend(false);
+                        }
+                    }
+                }
             })
             .catch((error) => {
                 console.log(error);
@@ -49,7 +74,7 @@ const FlashScreen = () => {
                     {restaurentdata?.name}-{restaurentdata?.outletAddress.split(",")[1]}
                 </p>
             </div>
-            <div className='absolute bottom-[3rem] left-[50%] translate-x-[-50%] w-fit h-fit '>
+            <div className='absolute bottom-[5rem] left-[50%] translate-x-[-50%] w-fit h-fit '>
                 <p className=' font-Roboto font-[500] text-[.9rem] leading-[1rem] ml-[2rem] z-[1]'>Powered by</p>
                 <img src={logo} alt="logo" className='w-[120px] aspect-auto rounded-xl object-cover relative top-[-1rem] z-[-1]' />
             </div>
