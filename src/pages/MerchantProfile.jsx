@@ -137,7 +137,6 @@ const MerchantProfile = () => {
   const [flashLoader, setFlashLoader] = useState(false);
 
   useEffect(() => {
-
     forRecommendation();
 
     setFlashLoader(true); // add flashloader true
@@ -147,6 +146,14 @@ const MerchantProfile = () => {
     }, 6000);
 
   }, [recommend])
+
+  useEffect(() => {
+    if (login || commentVisible || shareVisible) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [login, commentVisible,shareVisible]);
   // useEffect(() => {
 
 
@@ -341,7 +348,7 @@ const MerchantProfile = () => {
   };
 
   const handleOtpSubmit = async () => {
-    setLoading(true);
+    setLoading(true);  // loading for popup
     try {
       await user.confirm(otp);
       //   toast({
@@ -817,8 +824,8 @@ const MerchantProfile = () => {
               <MerchantNavbar />
               {login && (
                 <div
-                  className=" absolute top-[60px] sm:top-[70px] w-full h-fit py-[1rem]  min-h-[calc(100vh-60px)] bg-white opacity-95 z-[7000] border-2
-            flex justify-center items-center"
+                  className=" absolute top-[60px] sm:top-[70px] w-full  py-[1rem]  min-h-[calc(100vh-60px)] bg-white opacity-95 z-[7000] border-2
+            flex justify-center items-center overflow-hidden"
                 >
                   {/* phoneNumber */}
                   {openphno && (
@@ -846,6 +853,12 @@ const MerchantProfile = () => {
                           value={phoneNumber}
                           onChange={handlePhoneChange}
                           required
+                          onKeyDown={(event) => {
+                            console.log('key')
+                            if (event.key === 'Enter') {
+                              handleSubmit();
+                            }
+                          }}
                         />
                       </div>
                       <button
@@ -880,6 +893,11 @@ const MerchantProfile = () => {
                         value={otp}
                         onChange={handleOtpChange}
                         required
+                        onKeyDown={(event) => {
+                          if (event.key === 'Enter') {
+                            handleOtpSubmit();
+                          }
+                        }}
                       />
 
                       <button
@@ -1507,7 +1525,7 @@ const MerchantProfile = () => {
                 />
               )}
 
-              {/* paybill */}
+              {/* paybill start */}
               <div className="w-full h-0 relative">
                 <div
                   className={`fixed bottom-0 left-[50%] translate-x-[-50%] max-w-[400px] w-full hideScroller  z-[3000] bg-transparent h-fit border-2 overflow-scroll comment ${paymentVisible
@@ -2009,6 +2027,9 @@ const MerchantProfile = () => {
                               // setNotliked(false);
                               // setMustTry(false);
                               setFilterone("new");
+                              toast('recent messages!', {
+                                icon: '🆕',
+                              });
                             }}
                             className={`${filterone === "new" && "bg-[#FFD628]"
                               } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
@@ -2022,6 +2043,9 @@ const MerchantProfile = () => {
                               // setNotliked(!notlikedone);
                               // setMustTry(false);
                               setFilterone("notLiked");
+                              toast('not liked messages!', {
+                                icon: '😞',
+                              });
                             }}
                             className={` ${filterone === "notLiked" && "bg-[#FFD628]"
                               } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
@@ -2035,6 +2059,9 @@ const MerchantProfile = () => {
                               // setNotliked(false);
                               // setMustTry(false);
                               setFilterone("liked");
+                              toast('liked messages!', {
+                                icon: '👍',
+                              });
                             }}
                             className={` ${filterone === "liked" && "bg-[#FFD628]"
                               } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
@@ -2048,6 +2075,9 @@ const MerchantProfile = () => {
                               // setNotliked(false);
                               // setMustTry(!musttryone);
                               setFilterone("mustTry");
+                              toast('mustTry!', {
+                                icon: '🤩',
+                              });
                             }}
                             className={` ${filterone === "mustTry" && "bg-[#FFD628]"
                               }  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
