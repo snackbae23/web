@@ -153,7 +153,7 @@ const MerchantProfile = () => {
     } else {
       document.body.style.overflow = 'unset';
     }
-  }, [login, commentVisible,shareVisible]);
+  }, [login, commentVisible, shareVisible]);
   // useEffect(() => {
 
 
@@ -813,6 +813,12 @@ const MerchantProfile = () => {
     getFilteredCommentsWithMenuName(filterone);
   console.log("Comments with Menu Name", filteredCommentsWithMenuName);
 
+
+  //links for url 
+  const youtubeLink =  restaurentdata?.youtubeLink;
+  const facebookLink =  restaurentdata?.facebookLink;
+  const instaLink =  restaurentdata?.instaLink;
+
   return (
     <>
       {
@@ -968,6 +974,7 @@ const MerchantProfile = () => {
                           id="dob"
                           name="dob"
                           onChange={handleChangeProfile}
+                          placeholder="only once, never to change"
                         />
 
                         {/* Anniversary */}
@@ -1099,9 +1106,9 @@ const MerchantProfile = () => {
                         restaurentdata?.youtubeLink &&
                         <button
                           onClick={() => {
-                            console.log("Youtube");
+                            console.log("Youtube",`${restaurentdata?.youtubeLink}`);
                             window.open(
-                              `${restaurentdata?.youtubeLink}`,
+                             youtubeLink,
                               "_blank"
                             );
                           }}
@@ -1119,9 +1126,9 @@ const MerchantProfile = () => {
                         restaurentdata?.instaLink &&
                         <button
                           onClick={() => {
-                            console.log("instagram");
+                            console.log("instagram",`${restaurentdata?.instaLink}`);
                             window.open(
-                              `${restaurentdata?.instaLink}`,
+                              instaLink,
                               "_blank"
                             );
                           }}
@@ -1139,9 +1146,9 @@ const MerchantProfile = () => {
                         restaurentdata?.facebookLink &&
                         <button
                           onClick={() => {
-                            console.log("Facebook");
+                            console.log("Facebook",`${restaurentdata.facebookLink}`);
                             window.open(
-                              `${restaurentdata?.facebookLink}`,
+                              facebookLink,
                               "_blank"
                             );
                           }}
@@ -1438,10 +1445,11 @@ const MerchantProfile = () => {
                       type="date"
                       id="dob"
                       name="dob"
+                      placeholder="only once, never to change"
                       required
                       value={editprofileData.dob}
                       onChange={handleEditProfile}
-                      disabled={!!User.dob}
+                      disabled={User.dob}
                     />
 
                     {/* Anniversary */}
