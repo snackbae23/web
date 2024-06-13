@@ -1083,9 +1083,16 @@ const MerchantProfile = () => {
                               {restaurentdata?.name}
                               {restaurentdata?.outletAddress ? (`-${restaurentdata?.outletAddress?.split(",")[1]}`) : ('')}
                             </p>
-                            {/* <p className=" text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
-                          Chinese,Italian and Indian
-                        </p> */}
+                            {restaurentdata?.cuisineServed && (
+  <p className="text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
+    {restaurentdata.cuisineServed.map((cuisine, index) => (
+      <div key={index}>
+        {index > 0 && ", "}
+        {cuisine}
+      </div>
+    ))}
+  </p>
+)}
                           </div>
                         </div>
 
