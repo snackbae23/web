@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import notliked from "../assets/notliked.png";
 import good from "../assets/good.png";
 import musttry from "../assets/musttry.png";
-import defaultuser from "../assets/default.jpg";
+import defaultuser from '../assets/review.jpg';
 import recommand from "../assets/recommand.jpg";
 
 //icons
@@ -389,11 +389,10 @@ const Menucomment = ({ resId, setOpenPhno }) => {
   return (
     <div className=" relative w-full h-0">
       <div
-        className={` fixed bottom-0 left-[50%] z-[5000] translate-x-[-50%] max-w-[400px] h-[100vh]  overflow-x-hidden hideScroller w-full comment ${
-          commentVisible
-            ? "translate-y-0 opacity-100"
-            : "translate-y-full opacity-0"
-        } bg-transparent`}
+        className={` fixed bottom-0 left-[50%] z-[5000] translate-x-[-50%] max-w-[400px] h-[100vh]  overflow-x-hidden hideScroller w-full comment ${commentVisible
+          ? "translate-y-0 opacity-100"
+          : "translate-y-full opacity-0"
+          } bg-transparent`}
       >
         <div className="w-full h-[26vh] bg-black opacity-45"></div>
         <div className="h-[75vh]  w-full overflow-y-scroll relative bg-white hideScroller border-2">
@@ -434,9 +433,8 @@ const Menucomment = ({ resId, setOpenPhno }) => {
             </div>
             <FaHeart
               id="favorite"
-              className={`text-[1.4rem] cursor-pointer  ${
-                isFavorite ? "fill-[#ED4F4F] overflow-hidden" : "fill-gray-300"
-              } `}
+              className={`text-[1.4rem] cursor-pointer  ${isFavorite ? "fill-[#ED4F4F] overflow-hidden" : "fill-gray-300"
+                } `}
               onClick={() => {
                 const user = JSON.parse(localStorage.getItem("user"));
                 if (user._id) {
@@ -457,47 +455,47 @@ const Menucomment = ({ resId, setOpenPhno }) => {
           {(menuData?.menu?.variants1 ||
             menuData?.menu?.variants2 ||
             menuData?.menu?.variants3) && (
-            <div>
-              <p className="font-inter font-[700] px-[20px] my-[.5rem]">
-                Variants
-              </p>
-              <div className="w-[90%] mx-auto mt-[.5rem] border-2 rounded-xl p-[10px]">
-                {/* variants1 */}
-                {menuData?.menu?.variants1 && (
-                  <div className="w-full flex justify-between items-center px-[20px]">
-                    <p className="text-[#004AAD] text-[1.1rem]">
-                      {menuData?.menu?.variants1}
-                    </p>
-                    <p className="text-[#004AAD] text-[1.1rem]">
-                      ₹ {menuData?.menu?.variants1Price}/-
-                    </p>
-                  </div>
-                )}
-                {/* variants2 */}
-                {menuData?.menu?.variants2 && (
-                  <div className="w-full flex justify-between items-center px-[20px]">
-                    <p className="text-[#004AAD] text-[1.1rem]">
-                      {menuData?.menu?.variants2}
-                    </p>
-                    <p className="text-[#004AAD] text-[1.1rem]">
-                      ₹{menuData?.menu?.variants2Price}/-
-                    </p>
-                  </div>
-                )}
-                {/* variants3 */}
-                {menuData?.menu?.variants3 && (
-                  <div className="w-full flex justify-between items-center px-[20px]">
-                    <p className="text-[#004AAD] text-[1.1rem]">
-                      {menuData?.menu?.variants3}
-                    </p>
-                    <p className="text-[#004AAD] text-[1.1rem]">
-                      ₹{menuData?.menu?.variants3Price}/-
-                    </p>
-                  </div>
-                )}
+              <div>
+                <p className="font-inter font-[700] px-[20px] my-[.5rem]">
+                  Variants
+                </p>
+                <div className="w-[90%] mx-auto mt-[.5rem] border-2 rounded-xl p-[10px]">
+                  {/* variants1 */}
+                  {menuData?.menu?.variants1 && (
+                    <div className="w-full flex justify-between items-center px-[20px]">
+                      <p className="text-[#004AAD] text-[1.1rem]">
+                        {menuData?.menu?.variants1}
+                      </p>
+                      <p className="text-[#004AAD] text-[1.1rem]">
+                        ₹ {menuData?.menu?.variants1Price}/-
+                      </p>
+                    </div>
+                  )}
+                  {/* variants2 */}
+                  {menuData?.menu?.variants2 && (
+                    <div className="w-full flex justify-between items-center px-[20px]">
+                      <p className="text-[#004AAD] text-[1.1rem]">
+                        {menuData?.menu?.variants2}
+                      </p>
+                      <p className="text-[#004AAD] text-[1.1rem]">
+                        ₹{menuData?.menu?.variants2Price}/-
+                      </p>
+                    </div>
+                  )}
+                  {/* variants3 */}
+                  {menuData?.menu?.variants3 && (
+                    <div className="w-full flex justify-between items-center px-[20px]">
+                      <p className="text-[#004AAD] text-[1.1rem]">
+                        {menuData?.menu?.variants3}
+                      </p>
+                      <p className="text-[#004AAD] text-[1.1rem]">
+                        ₹{menuData?.menu?.variants3Price}/-
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          )}
+            )}
           <div className="flex justify-center items-center my-[1rem] mt-[2rem]">
             <p className="w-[100px] h-[.5px] bg-[#00000057]"></p>
             <div className="text-center px-[.5rem]">
@@ -653,9 +651,8 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                   // setMustTry(false);
                   setFilter("new");
                 }}
-                className={`${
-                  filter === "new" && "bg-[#FFD628]"
-                } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                className={`${filter === "new" && "bg-[#FFD628]"
+                  } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
               >
                 New
               </button>
@@ -667,9 +664,8 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                   // setMustTry(false);
                   setFilter("notLiked");
                 }}
-                className={` ${
-                  filter === "notLiked" && "bg-[#FFD628]"
-                } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                className={` ${filter === "notLiked" && "bg-[#FFD628]"
+                  } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
               >
                 Not Liked
               </button>
@@ -681,9 +677,8 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                   // setMustTry(false);
                   setFilter("liked");
                 }}
-                className={` ${
-                  filter === "liked" && "bg-[#FFD628]"
-                } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                className={` ${filter === "liked" && "bg-[#FFD628]"
+                  } px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
               >
                 Liked
               </button>
@@ -695,9 +690,8 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                   // setMustTry(!musttryone);
                   setFilter("mustTry");
                 }}
-                className={` ${
-                  filter === "mustTry" && "bg-[#FFD628]"
-                }  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
+                className={` ${filter === "mustTry" && "bg-[#FFD628]"
+                  }  px-[1.2rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem] border-2 text-nowrap`}
               >
                 Must try
               </button>
@@ -721,14 +715,15 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                 {filter == "new" &&
                   menuData.menu.Pincomments.map((comment, index) => (
                     <div
+                      className=" relative  w-[80%]  h-fit  mx-auto border-[1.5px] my-[1rem] rounded-[15px] border-[#00000080]"
                       key={index}
-                      className=" relative w-[80%] mx-auto h-fit border-2 p-[1rem] my-[1rem] rounded-3xl shadow-xl"
                     >
-                      <div className="w-full flex justify-evenly items-center">
+                      {/* head */}
+                      <div className="w-full flex justify-between items-center border-b-[.5px] border-[#00000080] px-[1rem] py-[.5rem]">
                         <img
                           src={defaultuser}
                           alt="dummyimage"
-                          className="w-[40px] aspect-square rounded-full border-2"
+                          className="w-[50px] aspect-square rounded-full"
                         />
                         <p className="font-inter font-[500] text-[#334253]">
                           {comment?.userId?.name || "Anonymous"}
@@ -738,43 +733,58 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                           <TbPinnedFilled className="text-[#426CFF]" />
                         </p>
                       </div>
-                      <p className="font-inter font-[400] text-[#67727E] p-[1rem] pb-[3rem]">
+                      {/* body */}
+                      <p className="w-full px-[1rem] h-fit min-h-[150px] font-inter font-[400] text-[#0F172A] pt-[1rem] pb-[3rem] text-[1rem]">
                         {comment?.description}
                       </p>
-                      <div>
+                      {/* comment footer */}
+                      <div className="flex  justify-between px-[1rem] items-center absolute w-fit right-0 bottom-2">
+                        {/* <p className="font-Roboto font-[500] text-[#000000]">{menu.menuName}</p> */}
                         {comment?.rated == "mustTry" && (
-                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                             <img
                               src={musttry}
                               alt="musttry"
                               className="w-[20px] aspect-square"
                             />
-                            <p className="font-inter font-[400] mt-[3px]">
+                            <p className="font-inter font-[400] mt-[3px] text-nowrap">
                               must try
                             </p>
                           </div>
                         )}
                         {comment?.rated == "liked" && (
-                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                             <img
                               src={good}
                               alt="musttry"
                               className="w-[20px] aspect-square"
                             />
-                            <p className="font-inter font-[400] mt-[3px]">
+                            <p className="font-inter font-[400] mt-[3px] text-nowrap">
                               Liked
                             </p>
                           </div>
                         )}
                         {comment?.rated == "notLiked" && (
-                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                             <img
                               src={notliked}
                               alt="musttry"
                               className="w-[20px] aspect-square"
                             />
-                            <p className="font-inter font-[400] mt-[3px]">
+                            <p className="font-inter font-[400] mt-[3px] text-nowrap">
                               Not liked
+                            </p>
+                          </div>
+                        )}
+                        {comment?.rated == "" && (
+                          <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
+                            <img
+                              src={notliked}
+                              alt="musttry"
+                              className="w-[20px] aspect-square"
+                            />
+                            <p className="font-inter font-[400] mt-[3px] text-nowrap">
+                              No Reaction
                             </p>
                           </div>
                         )}
@@ -784,70 +794,74 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                 {/* all comments */}
                 {filteredComments?.map((comment, index) => (
                   <div
+                    className=" relative  w-[80%]  h-fit  mx-auto border-[1.5px] my-[1rem] rounded-[15px] border-[#00000080]"
                     key={index}
-                    className=" relative w-[80%] mx-auto h-fit border-2 p-[1rem] my-[1rem] rounded-3xl shadow-xl"
                   >
-                    <div className="w-full flex justify-evenly items-center">
+                    {/* head */}
+                    <div className="w-full flex justify-between items-center border-b-[.5px] border-[#00000080] px-[1rem] py-[.5rem]">
                       <img
                         src={defaultuser}
                         alt="dummyimage"
-                        className="w-[40px] aspect-square rounded-full border-2"
+                        className="w-[50px] aspect-square rounded-full"
                       />
                       <p className="font-inter font-[500] text-[#334253]">
                         {comment?.userId?.name || "Anonymous"}
                       </p>
-                      <p className="font-inter font-[400] text-[#67727E]">
+                      <p className="font-inter font-[400] text-[#67727E] flex gap-[.5rem] items-center">
                         {calculateTimeDifference(comment?.createdAt)}
                       </p>
                     </div>
-                    <p className="font-inter font-[400] text-[#67727E] p-[1rem] pb-[3rem]">
+                    {/* body */}
+                    <p className="w-full px-[1rem] h-fit min-h-[150px] font-inter font-[400] text-[#0F172A] pt-[1rem] pb-[3rem] text-[1rem]">
                       {comment?.description}
                     </p>
-                    <div>
+                    {/* comment footer */}
+                    <div className="flex  justify-between px-[1rem] items-center absolute w-fit right-0 bottom-2">
+                      {/* <p className="font-Roboto font-[500] text-[#000000]">{menu.menuName}</p> */}
                       {comment?.rated == "mustTry" && (
-                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                           <img
                             src={musttry}
                             alt="musttry"
                             className="w-[20px] aspect-square"
                           />
-                          <p className="font-inter font-[400] mt-[3px]">
+                          <p className="font-inter font-[400] mt-[3px] text-nowrap">
                             must try
                           </p>
                         </div>
                       )}
                       {comment?.rated == "liked" && (
-                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                           <img
                             src={good}
                             alt="musttry"
                             className="w-[20px] aspect-square"
                           />
-                          <p className="font-inter font-[400] mt-[3px]">
+                          <p className="font-inter font-[400] mt-[3px] text-nowrap">
                             Liked
                           </p>
                         </div>
                       )}
                       {comment?.rated == "notLiked" && (
-                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                           <img
                             src={notliked}
                             alt="musttry"
                             className="w-[20px] aspect-square"
                           />
-                          <p className="font-inter font-[400] mt-[3px]">
+                          <p className="font-inter font-[400] mt-[3px] text-nowrap">
                             Not liked
                           </p>
                         </div>
                       )}
                       {comment?.rated == "" && (
-                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center absolute right-[1rem] bottom-[1rem]">
+                        <div className="w-fit h-fit mt-[.5rem] flex flex-col items-center ">
                           <img
                             src={notliked}
                             alt="musttry"
                             className="w-[20px] aspect-square"
                           />
-                          <p className="font-inter font-[400] mt-[3px]">
+                          <p className="font-inter font-[400] mt-[3px] text-nowrap">
                             No Reaction
                           </p>
                         </div>

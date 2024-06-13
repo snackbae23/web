@@ -23,12 +23,12 @@ const MenuCard = ({ items }) => {
     <div
       onClick={() => {
         // if (User) {
-          console.log(commentVisible);
-          setCommentVisible(!commentVisible);
-          console.log(commentVisible);
+        console.log(commentVisible);
+        setCommentVisible(!commentVisible);
+        console.log(commentVisible);
         // } else {
-          // setLogin(true);
-          // window.scrollTo({ top: 0, behavior: 'smooth' });
+        // setLogin(true);
+        // window.scrollTo({ top: 0, behavior: 'smooth' });
         // }
         setMenuId(items._id);
       }}
