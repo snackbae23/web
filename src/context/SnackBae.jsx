@@ -9,7 +9,7 @@ export const useSnackBae = () => {
 };
 
 export const SnackBaeProvider = (props) => {
-  const [User, setUser] = useState(false); // it help in store data of user after fetch
+  const [User, setUser] = useState(""); // it help in store data of user after fetch
   const [login, setLogin] = useState(false); //open login for user when it not logged in
   const [allBlogs, setAllBlogs] = useState("");
   const [loader, setLoader] = useState(false);
@@ -22,7 +22,7 @@ export const SnackBaeProvider = (props) => {
   const [valueChanged,setValueChanged] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
   const [favoriteMenu, setFavoriteMenu] = useState();
-  const [recommend, setRecommend] = useState(true);
+  const [recommend, setRecommend] = useState(false);
   
   const [openprofile, setOpenProfile] = useState(false); // open user profile for signup
   const [editprofile, setEditProfile] = useState(false); //edit and open user profile
