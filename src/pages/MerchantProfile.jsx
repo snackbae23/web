@@ -211,6 +211,7 @@ const MerchantProfile = () => {
         method: "put",
         maxBodyLength: Infinity,
         url: `https://seashell-app-lgwmg.ondigitalocean.app/api/toggleRecommendation/${userId}/${id}`,
+        // url : `http://localhost:4000/api/toggleRecommendation/${userId}/${id}`,
         headers: {},
         data: data,
       };
