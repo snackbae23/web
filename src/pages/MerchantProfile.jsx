@@ -1079,20 +1079,21 @@ const MerchantProfile = () => {
                             className="w-[50px] md:w-[120px] aspect-square object-cover mix-blend-multiply rounded-full mr-[.3rem] "
                           />
                           <div>
-                            <p className="font-Roboto font-[600] text-[1.2rem] leading-[1.2rem] md:text-[2.4rem] md:leading-[2.4rem]">
-                              {restaurentdata?.name}
-                              {restaurentdata?.outletAddress ? (`-${restaurentdata?.outletAddress?.split(",")[1]}`) : ('')}
-                            </p>
-                            {restaurentdata?.cuisineServed && (
-  <p className="text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
-    {restaurentdata.cuisineServed.map((cuisine, index) => (
-      <div key={index}>
-        {index > 0 && ", "}
-        {cuisine}
-      </div>
-    ))}
-  </p>
-)}
+  <p className="font-Roboto font-[600] text-[1.2rem] leading-[1.2rem] md:text-[2.4rem] md:leading-[2.4rem]">
+  {restaurentdata?.name}
+  {restaurentdata?.outletAddress ? ` - ${restaurentdata?.outletAddress?.split(",")[1]}` : ''}
+  {restaurentdata?.cuisineServed && (
+    <span className="text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
+      {" "}
+      {restaurentdata.cuisineServed.map((cuisine, index) => (
+        <React.Fragment key={index}>
+          {index > 0 && ", "}
+          {cuisine}
+        </React.Fragment>
+      ))}
+    </span>
+  )}
+</p>
                           </div>
                         </div>
 
