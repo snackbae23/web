@@ -18,7 +18,22 @@ const MenuCard = ({ items }) => {
   const weightedSum = items.notLikedCount * 0 + items.likedCount * 2 + items.mustTryCount * 4;
   const averageRating = totalVotes > 0 ? (weightedSum / totalVotes) : 0;
   const roundedRating = parseFloat(averageRating.toFixed(1));
-
+  const updateCount = async(req,res) => {
+    let config = {
+      method: 'put',
+      maxBodyLength: Infinity,
+      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/updateCount/${items._id}`,
+      headers: { }
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+  }
   return (
     <div
       onClick={() => {
@@ -31,6 +46,7 @@ const MenuCard = ({ items }) => {
           // window.scrollTo({ top: 0, behavior: 'smooth' });
         // }
         setMenuId(items._id);
+        updateCount();
       }}
       className="min-w-[240px] w-[240px] h-fit p-[1rem] shadow-md rounded-md cursor-pointer"
     >
