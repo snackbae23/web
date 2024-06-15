@@ -67,6 +67,7 @@ const restaurantOffers = [
 
 
 const MerchantProfile = () => {
+
   const {
     login,
     setLogin,
@@ -124,17 +125,66 @@ const MerchantProfile = () => {
 
 
   const { id } = useParams();
-  console.log(User?.anniversary);
-  // const [restaurentdata, setrestaurentdata] = useState(null);
-
   const navigate = useNavigate();
-
-  // const [newone, setNewone] = useState(false);
-  // const [notlikedone, setNotliked] = useState(false);
-  // const [goodone, setGood] = useState(false);
-  // const [musttryone, setMustTry] = useState(false);
   const [filterone, setFilterone] = useState('new');
   const [flashLoader, setFlashLoader] = useState(false);
+  const [menus, setMenus] = useState(true);
+  const [Recomendations, setRecomendations] = useState(false);
+  const [Favourite, setFavourite] = useState(false);
+  // const [events, setEvents] = useState(false);
+  const [offers, setoffers] = useState(false);
+  const [filter, setFilter] = useState(false);
+  //login and signup
+  const [openphno, setOpenPhno] = useState(true);
+  const [openotp, setOpenOtp] = useState(false);
+  const [user, setUser] = useState();
+  // phoneNumber
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [loading, setLoading] = useState(false);
+  //otp
+  const [otp, setOtp] = useState("");
+  //profile
+  const [profileData, setProfileData] = useState({
+    // profileImage: userimg,
+    name: "",
+    gender: "",
+    dob: "male",
+    contact: "",
+    email: "",
+    foodPreference: "",
+    anniversary: "",
+    terms: false,
+  });
+  //payment
+  const [paymentVisible, setPaymentVisible] = useState(false);
+  const [ishidden, setIsHidden] = useState(false);
+  //search bar
+  const [search, setSearch] = useState("");
+  const [searchMenuItems, setSearchMenuItems] = useState(null);
+  //get all menu items for recommendation
+  const [mostRecomended, setMostRecomended] = useState();
+  // toggle data for more than 4
+  const [showAllCategories, setShowAllCategories] = useState({});
+  const [showAllMostRecommended, setShowAllMostRecommended] = useState(true);
+  //editprofile
+  const [editprofileData, setEditProfileData] = useState({
+    // profileImage: userimg,
+    name: "",
+    gender: "",
+    dob: "",
+    contact: '',
+    email: "",
+    foodPreference: "",
+    anniversary: "",
+  });
+
+  //payment for bill
+  const [amountToPay, setamountToPay] = useState('');
+  const [pinCommentIds, setPinCommentIds] = useState([]);
+  //links for url 
+  const youtubeLink = restaurentdata?.youtubeLink;
+  const facebookLink = restaurentdata?.facebookLink;
+  const instaLink = restaurentdata?.instaLink;
 
   useEffect(() => {
     forRecommendation();
@@ -150,7 +200,7 @@ const MerchantProfile = () => {
     return () => clearTimeout(flashLoaderTimeout);
 
 
-  }, [])
+  }, []);
 
   useEffect(() => {
     if (login || commentVisible || shareVisible || editprofile) {
@@ -159,6 +209,11 @@ const MerchantProfile = () => {
       document.body.style.overflow = 'unset';
     }
   }, [login, commentVisible, shareVisible, editprofile]);
+
+  useEffect(() => {
+    setEditProfileData(User);
+  }, [editprofile]);
+
   // useEffect(() => {
 
 
@@ -236,13 +291,6 @@ const MerchantProfile = () => {
     }
   };
 
-  const [menus, setMenus] = useState(true);
-  const [Recomendations, setRecomendations] = useState(false);
-  const [Favourite, setFavourite] = useState(false);
-  // const [events, setEvents] = useState(false);
-  const [offers, setoffers] = useState(false);
-  const [filter, setFilter] = useState(false);
-
   const scrollToElement = (id) => {
     const element = document.getElementById(id);
     const headerOffset = 180; // Adjust this value to match the height of your fixed header
@@ -260,13 +308,6 @@ const MerchantProfile = () => {
     }
   };
 
-
-  //login and signup
-  const [openphno, setOpenPhno] = useState(true);
-  const [openotp, setOpenOtp] = useState(false);
-  const [user, setUser] = useState();
-  // phoneNumber
-  const [phoneNumber, setPhoneNumber] = useState("");
   const handlePhoneChange = (e) => {
     const inputPhoneNumber = e.target.value.replace(/\D/g, "");
     if (inputPhoneNumber.length <= 10) {
@@ -274,29 +315,6 @@ const MerchantProfile = () => {
     }
   };
 
-  // const handleSubmit = async () => {
-  //   console.log("inside onsignup");
-  //   try {
-  //     const recaptcha = new RecaptchaVerifier(auth, "recaptcha-container", {});
-  //     const formatPh = "+91" + phoneNumber;
-  //     console.log(formatPh);
-  //     // const confirmation = await signInWithPhoneNumber(auth, formatPh);
-  //     const confirmation = await signInWithPhoneNumber(
-  //       auth,
-  //       formatPh,
-  //       recaptcha
-  //     );
-  //     console.log(confirmation);
-  //     setUser(confirmation);
-  //     setOpenPhno(false);
-  //     setOpenOtp(true);
-  //     toast.success('Successfully Read!');
-  //   } catch (err) {
-  //     console.log(err);
-  //     toast.error(err);
-  //   }
-  // };
-  const [loading, setLoading] = useState(false)
   const handleSubmit = async () => {
     console.log("inside onsignup");
     setLoading(true);
@@ -344,8 +362,6 @@ const MerchantProfile = () => {
     setLoading(false);
   };
 
-  //otp
-  const [otp, setOtp] = useState("");
   const handleOtpChange = (e) => {
     const otpNumber = e.target.value.replace(/\D/g, "");
     if (otpNumber.length <= 6) {
@@ -419,21 +435,6 @@ const MerchantProfile = () => {
     setLoading(false);
   };
 
-
-
-  //profile
-  const [profileData, setProfileData] = useState({
-    // profileImage: userimg,
-    name: "",
-    gender: "",
-    dob: "male",
-    contact: "",
-    email: "",
-    foodPreference: "",
-    anniversary: "",
-    terms: false,
-  });
-
   const handleChangeProfile = (e) => {
     const { name, value, type, checked, files } = e.target;
 
@@ -443,47 +444,6 @@ const MerchantProfile = () => {
         type === "checkbox" ? checked : type === "file" ? files[0] : value,
     }));
   };
-  // const handleImageChange = async (pics) => {
-  //   console.log(pics);
-  //   const formData = new FormData();
-  //   formData.append("file", pics);
-
-  //   let config = {
-  //     method: "post",
-  //     maxBodyLength: Infinity,
-  //     url: "https://seashell-app-lgwmg.ondigitalocean.app/api/fileUpload",
-  //     // headers: {
-  //     //   ...data.getHeaders(),
-  //     // },
-  //     data: formData,
-  //   };
-
-  //   axios
-  //     .request(config)
-  //     .then((response) => {
-  //       console.log(JSON.stringify(response.data));
-  //       console.log(response.data.data.url);
-  //       profileData.profileImage = response.data.data.url;
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
-
-  // const handleImagePreview = (e) => {
-  //   const file = e.target.files[0];
-
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onloadend = () => {
-  //       setProfileData((prevProfileData) => ({
-  //         ...prevProfileData,
-  //         profileImage: reader.result,
-  //       }));
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
 
   const handleSubmitProfile = async (e) => {
     e.preventDefault();
@@ -527,14 +487,6 @@ const MerchantProfile = () => {
     setLoading(false);
   };
 
-  //payment
-  const [paymentVisible, setPaymentVisible] = useState(false);
-  const [ishidden, setIsHidden] = useState(false);
-
-  //search bar
-  const [search, setSearch] = useState("");
-  const [searchMenuItems, setSearchMenuItems] = useState(null);
-
   const handleSearch = (e) => {
     const inputValue = e.target.value;
     setSearch(inputValue || ""); // Ensure search is never set to null
@@ -567,8 +519,6 @@ const MerchantProfile = () => {
       });
   }
 
-  //get all menu items for recommendation
-  const [mostRecomended, setMostRecomended] = useState();
   const forRecommendation = async (req, res) => {
     let config = {
       method: "get",
@@ -587,9 +537,6 @@ const MerchantProfile = () => {
       });
   }
 
-
-  // toggle data for more than 4
-  const [showAllCategories, setShowAllCategories] = useState({});
   const toggleCategory = (categoryId) => {
     setShowAllCategories(prevState => ({
       ...prevState,
@@ -598,29 +545,11 @@ const MerchantProfile = () => {
 
   };
 
-
-  const [showAllMostRecommended, setShowAllMostRecommended] = useState(true);
-
   const toggleMostRecommended = () => {
     setShowAllMostRecommended(prevState => !prevState);
   };
 
 
-  //editprofile
-  const [editprofileData, setEditProfileData] = useState({
-    // profileImage: userimg,
-    name: "",
-    gender: "",
-    dob: "",
-    contact: '',
-    email: "",
-    foodPreference: "",
-    anniversary: "",
-  });
-
-  useEffect(() => {
-    setEditProfileData(User);
-  }, [editprofile]);
 
   const handleEditProfile = (e) => {
     const { name, value, type, checked, files } = e.target;
@@ -657,9 +586,6 @@ const MerchantProfile = () => {
       });
     setLoading(false);
   }
-
-  //payment for bill
-  const [amountToPay, setamountToPay] = useState('');
 
   function loadScript(src) {
     return new Promise((resolve) => {
@@ -752,9 +678,6 @@ const MerchantProfile = () => {
     }
   }
 
-
-  const [pinCommentIds, setPinCommentIds] = useState([]);
-
   useEffect(() => {
     if (restaurentdata) {
       const ids = [];
@@ -818,12 +741,6 @@ const MerchantProfile = () => {
   const filteredCommentsWithMenuName =
     getFilteredCommentsWithMenuName(filterone);
   console.log("Comments with Menu Name", filteredCommentsWithMenuName);
-
-
-  //links for url 
-  const youtubeLink = restaurentdata?.youtubeLink;
-  const facebookLink = restaurentdata?.facebookLink;
-  const instaLink = restaurentdata?.instaLink;
 
   return (
     <>
@@ -1079,19 +996,19 @@ const MerchantProfile = () => {
                             className="w-[50px] md:w-[120px] aspect-square object-cover mix-blend-multiply rounded-full mr-[.3rem] "
                           />
                           <div>
-  <p className="font-Roboto font-[600] text-[1.2rem] leading-[1.2rem] md:text-[2.4rem] md:leading-[2.4rem]">
-  {restaurentdata?.name}
-  {restaurentdata?.outletAddress ? ` - ${restaurentdata?.outletAddress?.split(",")[1]}` : ''}
-  </p>
-  {restaurentdata?.cuisineServed && (
-    <span className="text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
-      {restaurentdata.cuisineServed.map((cuisine, index) => (
-        <React.Fragment key={index}>
-          {cuisine}
-        </React.Fragment>
-      ))}
-    </span>
-  )}
+                            <p className="font-Roboto font-[600] text-[1.2rem] leading-[1.2rem] md:text-[2.4rem] md:leading-[2.4rem]">
+                              {restaurentdata?.name}
+                              {restaurentdata?.outletAddress ? ` - ${restaurentdata?.outletAddress?.split(",")[1]}` : ''}
+                            </p>
+                            {restaurentdata?.cuisineServed && (
+                              <span className="text-[#0f172aca] font-Roboto font-[500] text-[.9rem] md:text-[1.2rem] md:leading-[1.8rem]">
+                                {restaurentdata.cuisineServed.map((cuisine, index) => (
+                                  <React.Fragment key={index}>
+                                    {cuisine}
+                                  </React.Fragment>
+                                ))}
+                              </span>
+                            )}
 
                           </div>
                         </div>
