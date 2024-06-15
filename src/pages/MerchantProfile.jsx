@@ -1916,7 +1916,7 @@ const MerchantProfile = () => {
                   {/* Favourite */}
                   {Favourite && (
                     <div>
-                      {favoriteMenu?.length === 0 ? (
+                      {favoriteMenu === null ? (
                         <div className="w-full flex flex-col items-center p-[2rem] pb-[6rem] mt-[1rem]">
                           <img
                             src={nofavorite}
