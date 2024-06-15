@@ -21,7 +21,7 @@ export const SnackBaeProvider = (props) => {
   const [menuData,setMenuData] = useState({});
   const [valueChanged,setValueChanged] = useState(true);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favoriteMenu, setFavoriteMenu] = useState();
+  const [favoriteMenu, setFavoriteMenu] = useState(null);
   const [recommend, setRecommend] = useState(false);
   
   const [openprofile, setOpenProfile] = useState(false); // open user profile for signup
