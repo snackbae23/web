@@ -189,7 +189,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
       .request(config)
       .then((response) => {
         console.log(JSON.stringify(response.data));
-
+        toast.success("Thanks for your comment");
         let config = {
           method: "get",
           maxBodyLength: Infinity,
@@ -218,6 +218,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
 
   const handleInputChange = (event) => {
     setValue(parseInt(event.target.value));
+    toast.success("Rating updated successfully");
   };
 
   useEffect(() => {
@@ -589,6 +590,11 @@ const Menucomment = ({ resId, setOpenPhno }) => {
               placeholder="Write your thoughts...."
               value={comment}
               maxLength={75}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  submitHandler(e);
+                }
+              }}
               onChange={(e) => {
                 const user = JSON.parse(localStorage.getItem("user"));
                 if (user?._id) {
