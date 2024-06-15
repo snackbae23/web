@@ -276,7 +276,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${User._id}`,
+      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${User._id}/${resId}`,
       headers: {},
     };
 
