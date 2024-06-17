@@ -26,7 +26,7 @@ const FlashScreen = () => {
         let config = {
             method: 'get',
             maxBodyLength: Infinity,
-            url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getRestaurantDetails/${id}`,
+            url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/getRestaurantDetails/${id}`,
             headers: {}
         };
 

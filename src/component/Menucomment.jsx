@@ -52,7 +52,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getMenuById/${menuId}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/getMenuById/${menuId}`,
       headers: {},
     };
 
@@ -178,7 +178,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/addComment/${userId}/${menuId}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/addComment/${userId}/${menuId}`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -193,7 +193,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
         let config = {
           method: "get",
           maxBodyLength: Infinity,
-          url: `https://seashell-app-lgwmg.ondigitalocean.app/getMenuById/${menuId}`,
+          url: `https://goldfish-app-yhaxv.ondigitalocean.app/getMenuById/${menuId}`,
           headers: {},
         };
 
@@ -233,7 +233,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
     let config = {
       method: "put",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/updateRating/${User._id}/${menuId}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/updateRating/${User._id}/${menuId}`,
       headers: {
         "Content-Type": "application/json",
       },
@@ -249,7 +249,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
         let config1 = {
           method: "get",
           maxBodyLength: Infinity,
-          url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getMenuById/${menuId}`,
+          url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/getMenuById/${menuId}`,
           headers: {},
         };
 
@@ -276,7 +276,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${User._id}/${resId}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/favourites/${User._id}/${resId}`,
       headers: {},
     };
 
@@ -300,7 +300,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
     let config = {
       method: "put",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/favourites/${user._id}/${menuId}/${resId}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/favourites/${user._id}/${menuId}/${resId}`,
       // url : `http://localhost:4000/api/favourites/${user._id}/${menuId}/${resId}`,
       headers: {},
     };
