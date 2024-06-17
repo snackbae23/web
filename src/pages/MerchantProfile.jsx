@@ -270,7 +270,7 @@ const MerchantProfile = () => {
       let config = {
         method: "put",
         maxBodyLength: Infinity,
-        url: `https://seashell-app-lgwmg.ondigitalocean.app/api/toggleRecommendation/${userId}/${id}`,
+        url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/toggleRecommendation/${userId}/${id}`,
         // url : `http://localhost:4000/api/toggleRecommendation/${userId}/${id}`,
         headers: {},
         data: data,
@@ -390,7 +390,7 @@ const MerchantProfile = () => {
       let config = {
         method: "get",
         maxBodyLength: Infinity,
-        url: `https://seashell-app-lgwmg.ondigitalocean.app/api/checkContactExists/${phoneNumber}`,
+        url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/checkContactExists/${phoneNumber}`,
         headers: {},
       };
 
@@ -454,7 +454,7 @@ const MerchantProfile = () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://seashell-app-lgwmg.ondigitalocean.app/api/addUser",
+      url: "https://goldfish-app-yhaxv.ondigitalocean.app/api/addUser",
       headers: {
         "Content-Type": "application/json",
       },
@@ -504,7 +504,7 @@ const MerchantProfile = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/searchMenu/${id}/${search}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/searchMenu/${id}/${search}`,
       headers: {},
     };
 
@@ -523,7 +523,7 @@ const MerchantProfile = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getTop5/${id}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/getTop5/${id}`,
       headers: {},
     };
 
@@ -567,7 +567,7 @@ const MerchantProfile = () => {
     let config = {
       method: 'put',
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/user/${User._id}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/user/${User._id}`,
       headers: {
         'Content-Type': 'application/json'
       },
@@ -616,7 +616,7 @@ const MerchantProfile = () => {
       //Math.round(paymentamount);
       console.log("jjjjjjjjjj");
       const orderResponse = await axios.post(
-        "https://seashell-app-lgwmg.ondigitalocean.app/api/payment/capturepayment",
+        "https://goldfish-app-yhaxv.ondigitalocean.app/api/payment/capturepayment",
         { amount: paymentamount }
       );
       console.log(orderResponse);
@@ -661,7 +661,7 @@ const MerchantProfile = () => {
     console.log("hellohjjjjjjj");
     try {
       const verifyUrl =
-        "https://seashell-app-lgwmg.ondigitalocean.app/api/payment/verifypayment";
+        "https://goldfish-app-yhaxv.ondigitalocean.app/api/payment/verifypayment";
       const { data } = await axios.post(verifyUrl, {
         bodydata,
       });
