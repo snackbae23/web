@@ -26,7 +26,7 @@ const BlogSingle = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getBlogById/${pathId}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/getBlogById/${pathId}`,
       headers: {},
     };
 
