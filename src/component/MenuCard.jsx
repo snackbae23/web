@@ -22,7 +22,7 @@ const MenuCard = ({ items }) => {
     let config = {
       method: 'put',
       maxBodyLength: Infinity,
-      url: `https://seashell-app-lgwmg.ondigitalocean.app/api/updateCount/${items._id}`,
+      url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/updateCount/${items._id}`,
       headers: { }
     };
     
