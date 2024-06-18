@@ -188,19 +188,86 @@ const MerchantProfile = () => {
 
   useEffect(() => {
     forRecommendation();
+    helper();
+    const user = JSON.parse(localStorage.getItem("user"));
+    if (!user) {
+      setLogin(true);
+      setOpenPhno(true);
+    }
 
+    updateVisitorsRecord();
+  }, []);
+
+  function helper() {
     setFlashLoader(true); // add flashloader true
 
     const flashLoaderTimeout = setTimeout(() => {
       setFlashLoader(false);
     }, 4000);
 
-
     // Clean up the timeout on component unmount
     return () => clearTimeout(flashLoaderTimeout);
+  }
+
+  const updateVisitorsRecord = async (req, res) => {
+
+    let isValueStored = JSON.parse(localStorage.getItem("snackBae_code"));
+    if (isValueStored) {
+      const now = new Date().getTime();
+      const twelveHours = 12 * 60 * 60 * 1000; // 12 hours in milliseconds
+
+      // we check if the item has expired
+      if (now - isValueStored.timestamp > twelveHours) {
+        localStorage.removeItem("snackBae_code");
+        isValueStored = null;
+      }
+    }
+    if (!isValueStored) {
+      //updating the count
+      let config = {
+        method: 'put',
+        maxBodyLength: Infinity,
+        url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/updateVisitorsCount/${id}`,
+        headers: {}
+      };
+
+      axios.request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+      //set the item
+      const item = {
+        value: "for visitors count",
+        timestamp: new Date().getTime() // current time in milliseconds
+      };
+      localStorage.setItem("snackBae_code", JSON.stringify(item));
+    }
 
 
-  }, []);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      const userId = user._id;
+      let config = {
+        method: 'put',
+        maxBodyLength: Infinity,
+        url: `https://goldfish-app-yhaxv.ondigitalocean.app/api/updateVisitorsData/${userId}/${id}`,
+        headers: {}
+      };
+
+      axios.request(config)
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
 
   useEffect(() => {
     if (login || commentVisible || shareVisible || editprofile) {
@@ -213,51 +280,6 @@ const MerchantProfile = () => {
   useEffect(() => {
     setEditProfileData(User);
   }, [editprofile]);
-
-  // useEffect(() => {
-
-
-  //   setLoader(true); // add loader true
-  //   let config = {
-  //     method: "get",
-  //     maxBodyLength: Infinity,
-  //     url: `https://seashell-app-lgwmg.ondigitalocean.app/api/getRestaurantDetails/${id}`,
-  //     headers: {},
-  //   };
-
-  //   axios
-  //     .request(config)
-  //     .then((response) => {
-  //       console.log(response.data.restaurant);
-  //       setRestaurentData(response.data.restaurant);
-  //       console.log(restaurentdata);
-  //       const userId = JSON.parse(localStorage.getItem("user"))?._id;
-  //       const a = response.data.restaurant?.recommendedBy;
-  //       // console.log(a);
-
-  //       if (userId) {
-  //         if (a) {
-  //           const containsString = (a, userId) => a.some((element) => element.includes(userId));
-  //           // console.log(userId);
-  //           if (containsString(a, userId)) {
-  //             // console.log(containsString(a, userId));
-  //             let recommand = document.getElementById("recommand");
-  //             recommand.style.backgroundColor = "#FFD628";
-  //           } else {
-  //             let recommand = document.getElementById("recommand");
-  //             recommand.style.backgroundColor = "";
-  //           }
-  //         }
-  //       }
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-
-  //   //remove loader
-  //   setLoader(false);
-
-  // }, [recommend]);
 
   console.log("restaurentdata", restaurentdata);
 
@@ -613,8 +635,7 @@ const MerchantProfile = () => {
       const res = await loadScript(
         "https://checkout.razorpay.com/v1/checkout.js"
       );
-      //Math.round(paymentamount);
-      console.log("jjjjjjjjjj");
+
       const orderResponse = await axios.post(
         "https://goldfish-app-yhaxv.ondigitalocean.app/api/payment/capturepayment",
         { amount: paymentamount }
