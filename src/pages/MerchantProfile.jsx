@@ -470,8 +470,8 @@ const MerchantProfile = () => {
   const handleSubmitProfile = async (e) => {
     e.preventDefault();
     setLoading(true);
-    console.log("Profile data :", profileData);
     profileData.contact = phoneNumber;
+    console.log("Profile data :", profileData);
     const data = JSON.stringify(profileData);
     let config = {
       method: "post",
@@ -486,20 +486,20 @@ const MerchantProfile = () => {
     axios
       .request(config)
       .then((response) => {
-        console.log(JSON.stringify(response.data));
+        console.log("profile section ", JSON.stringify(response));
         console.log(JSON.stringify(response.data.data));
         localStorage.setItem("user", JSON.stringify(response.data.user));
         setLogin(false);
         setOpenProfile(false);
         toast.success('SignUp Successfully!');
         // navigate(`/profile/merchant/${id}`);
-        // window.location.reload();
         setUser(JSON.parse(localStorage.getItem("user")));
         const temp = JSON.parse(localStorage.getItem("temp"));
         if (temp) {
           setCommentVisible(temp?.commentVisible);
           setMenuId(temp?.menuId);
         }
+        // window.location.reload();
         localStorage.removeItem("temp");
       })
       .catch((error) => {
@@ -508,7 +508,7 @@ const MerchantProfile = () => {
     window.location.reload();
     setLoading(false);
   };
-
+  console.log('user ', User.name);
   const handleSearch = (e) => {
     const inputValue = e.target.value;
     setSearch(inputValue || ""); // Ensure search is never set to null
@@ -869,7 +869,7 @@ const MerchantProfile = () => {
                           </p>
 
                           {/* form */}
-                          <form className="w-[90%] mx-auto flex flex-col">
+                          <form onSubmit={handleSubmitProfile} className="w-[90%] mx-auto flex flex-col">
                             {/* fullName */}
                             <div className="relative w-full flex flex-col">
                               <label
@@ -883,8 +883,9 @@ const MerchantProfile = () => {
                                 type="text"
                                 id="name"
                                 name="name"
-                                required
+                                value={profileData.name}
                                 onChange={handleChangeProfile}
+                                required
                               />
                             </div>
                             {/* gender */}
@@ -919,6 +920,7 @@ const MerchantProfile = () => {
                               type="date"
                               id="dob"
                               name="dob"
+                              value={profileData.dob}
                               onChange={handleChangeProfile}
                               placeholder="only once, never to change"
                             />
@@ -936,6 +938,7 @@ const MerchantProfile = () => {
                               type="date"
                               id="anniversary"
                               name="anniversary"
+                              value={profileData.anniversary}
                               onChange={handleChangeProfile}
                             />
 
@@ -952,8 +955,9 @@ const MerchantProfile = () => {
                               type="email"
                               id="email"
                               name="email"
-                              required
+                              value={profileData.email}
                               onChange={handleChangeProfile}
+                              required
                             />
 
                             {/* foodPreference */}
@@ -991,8 +995,8 @@ const MerchantProfile = () => {
 
                             <button
                               className="bg-[#EAB308] font-sen font-[500] px-6 py-3 rounded-md uppercase mb-[.5rem]"
-                              type="button"
-                              onClick={handleSubmitProfile}
+                              type="submit"
+                            // onClick={handleSubmitProfile}
                             >
                               {loading ? "Loading..." : "Continue"}
                             </button>
@@ -1324,9 +1328,9 @@ const MerchantProfile = () => {
 
                   {/* menucomment */}
                   <div>
-                    {/* {commentVisible && */}
-                    <Menucomment resId={id} setOpenPhno={setOpenPhno} />
-                    {/* } */}
+                    {commentVisible &&
+                      <Menucomment resId={id} setOpenPhno={setOpenPhno} />
+                    }
                   </div>
 
                   {/* update profile */}
