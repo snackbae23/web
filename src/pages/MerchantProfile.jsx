@@ -499,13 +499,13 @@ const MerchantProfile = () => {
           setCommentVisible(temp?.commentVisible);
           setMenuId(temp?.menuId);
         }
-        // window.location.reload();
+       window.location.reload();
         localStorage.removeItem("temp");
       })
       .catch((error) => {
         console.log(error);
       });
-    window.location.reload();
+    // window.location.reload();
     setLoading(false);
   };
   console.log('user ', User.name);
