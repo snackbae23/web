@@ -439,7 +439,7 @@ const Menucomment = ({ resId, setOpenPhno }) => {
                 } `}
               onClick={() => {
                 const user = JSON.parse(localStorage.getItem("user"));
-                if (user._id) {
+                if (user?._id) {
                   toggleFavorite(menuData?.menu?.name);
                 } else {
                   setTempData(menuId, commentVisible);
