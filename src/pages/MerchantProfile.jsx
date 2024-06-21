@@ -148,7 +148,7 @@ const MerchantProfile = () => {
     // profileImage: userimg,
     name: "",
     gender: "",
-    dob: "male",
+    dob: "",
     contact: "",
     email: "",
     foodPreference: "",
@@ -922,7 +922,6 @@ const MerchantProfile = () => {
                               name="dob"
                               value={profileData.dob}
                               onChange={handleChangeProfile}
-                              placeholder="only once, never to change"
                             />
 
                             {/* Anniversary */}
