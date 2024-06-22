@@ -786,12 +786,12 @@ const MerchantProfile = () => {
                             <p className="font-inter font-[600] text-[1.1rem] leading-[32px]">
                               Login or Signup
                             </p>
-                            <IoClose
+                            {/* <IoClose
                               onClick={() => {
                                 setLogin(!login);
                               }}
                               className="text-[1.4rem] cursor-pointer"
-                            />
+                            /> */}
                           </div>
                           {/* Mobile Number */}
                           <div className="w-[90%] mx-auto">
@@ -827,12 +827,12 @@ const MerchantProfile = () => {
                       {openotp && (
                         <div className="max-w-[320px] w-full h-fit rounded-md border-2 flex flex-col justify-center relative">
                           <div className=" relative w-full h-fit my-[1rem]">
-                            <IoClose
+                            {/* <IoClose
                               onClick={() => {
                                 setLogin(!login);
                               }}
                               className="text-[1.4rem] absolute right-[1rem] cursor-pointer"
-                            />
+                            /> */}
                           </div>
                           <p className="w-[90%] mx-auto font-inter font-[500] leading-[32px] text-[#0000009E] py-[.5rem] ">
                             Enter OTP sent on +91 <span>{phoneNumber}</span>
@@ -863,8 +863,8 @@ const MerchantProfile = () => {
 
                       {/* profile */}
                       {openprofile && (
-                        <div className="max-w-[320px] w-full h-fit rounded-md border-2 flex flex-col justify-center relative">
-                          <p className="font-[600] font-sans text-[1.8rem]">
+                        <div className="max-w-[320px] w-full h-fit rounded-md border-2 flex flex-col relative">
+                          <p className="font-[600] font-sans text-[1.8rem] ml-[1rem]">
                             Create Profile
                           </p>
 
@@ -879,7 +879,7 @@ const MerchantProfile = () => {
                                 Full Name:
                               </label>
                               <input
-                                className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+                                className="border-2 border-[#EAB308] bg-white h-[2.5rem] rounded-md px-1 mb-[.5rem]"
                                 type="text"
                                 id="name"
                                 name="name"
@@ -896,7 +896,7 @@ const MerchantProfile = () => {
                               Gender:
                             </label>
                             <select
-                              className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+                              className="border-2 border-[#EAB308] bg-white h-[2.5rem] rounded-md px-1 mb-[.5rem]"
                               id="gender"
                               name="gender"
                               value={profileData.gender}
@@ -916,7 +916,7 @@ const MerchantProfile = () => {
                               Date of Birth:
                             </label>
                             <input
-                              className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem] w-full"
+                              className="border-2 border-[#EAB308] bg-white h-[2.5rem] rounded-md px-1 mb-[.5rem] w-full"
                               type="date"
                               id="dob"
                               name="dob"
@@ -933,7 +933,7 @@ const MerchantProfile = () => {
                               Anniversary :
                             </label>
                             <input
-                              className="border-2 border-[#EAB308] bg-white w-full h-[3rem] rounded-md px-1 mb-[.5rem]"
+                              className="border-2 border-[#EAB308] bg-white w-full h-[2.5rem] rounded-md px-1 mb-[.5rem]"
                               type="date"
                               id="anniversary"
                               name="anniversary"
@@ -950,7 +950,7 @@ const MerchantProfile = () => {
                               Email ID:
                             </label>
                             <input
-                              className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+                              className="border-2 border-[#EAB308] bg-white h-[2.5rem] rounded-md px-1 mb-[.5rem]"
                               type="email"
                               id="email"
                               name="email"
@@ -967,7 +967,7 @@ const MerchantProfile = () => {
                               Food Preference:
                             </label>
                             <select
-                              className="border-2 border-[#EAB308] bg-white h-[3rem] rounded-md px-1 mb-[.5rem]"
+                              className="border-2 border-[#EAB308] bg-white h-[2.5rem] rounded-md px-1 mb-[.5rem]"
                               id="foodPreference"
                               name="foodPreference"
                               value={profileData.foodPreference}

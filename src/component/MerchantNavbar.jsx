@@ -68,16 +68,16 @@ const MerchantNavbar = () => {
 
 
 
-                        <div className='absolute right-0 bg-white px-[1rem]'>
+                        <div className={`absolute right-0 top-[60px] bg-[#fde230]  rounded-sm shadow-md ${visible ? ('block') : ('hidden')}`}>
                             <button onClick={() => {
                                 setEditProfile(!editprofile);
                             }}
-                                className={`py-[.5rem] rounded-md text-nowrap ${visible ? ('block') : ('hidden')}`}>Update profile</button>
+                                className={`w-full  text-left  pt-[1rem] pb-[.5rem] pr-[2rem] pl-[1rem] font-Roboto text-[1.2rem] text-nowrap `}>Update profile</button>
                             <button onClick={() => {
                                 localStorage.removeItem('user');
                                 window.location.reload();
                             }}
-                                className={`py-[.5rem] rounded-md text-nowrap ${visible ? ('block') : ('hidden')}`}>Log out</button>
+                                className={`w-full text-left py-[1rem] pr-[2rem] pl-[1rem] font-Roboto text-[1.2rem] text-nowrap `}>Log out</button>
                         </div>
 
                     </div>

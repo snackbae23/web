@@ -105,7 +105,7 @@ export const SnackBaeProvider = (props) => {
         failurePayment, 
         setfailurepayment,
         recommend,
-        setRecommend,
+        setRecommend
 
       }}
     >
