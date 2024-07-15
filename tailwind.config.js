@@ -7,6 +7,7 @@ export default {
         'inter' : ['Inter'],
         'Roboto': ['Roboto'],
         'Sen': ['Sen'],
+        'plus': ['Plus+Jakarta+Sans'],
       },
     },
     
