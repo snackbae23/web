@@ -324,7 +324,7 @@ const LandingPage = () => {
 
         {/* let snackbae */}
 
-        <div className='w-full sm:w-[95%] h-fit bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-2 mx-2'>
+        <div className='w-[96%] sm:w-[100%] h-fit bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-2 mx-2'>
           <div className='flex flex-col sm:w-full w-[95%] items-center justify-center'>
           <p className='font-semibold sm:text-[2.1rem] text-[1.5rem] text-[#121D2F] mt-[2rem] mb-4'>Let SnackBAE  boost your business!</p>
           <p>Join 250+ restaurants and cafes that are already using</p>
