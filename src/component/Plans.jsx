@@ -134,13 +134,13 @@ const Plans = () => {
     };
   return (
     
-    <div>
+    
         <div className="w-full flex flex-col items-center">
             <div className="px-[1rem] md:px-[5rem] w-full mt-5 flex flex-row flex-wrap ">
               <div className="w-full flex flex-row justify-center items-center ">
                 <div className="w-fit h-fit flex flex-row rounded-[40px] border border-1 my-[2rem] bg-white border-[#000000CC]">
                   <button
-                    className={`w-fit px-[2rem]  py-2 font-[500] rounded-[40px] transition-colors duration-500 ${
+                    className={`w-fit px-[2rem] sm:text-[] text-[.9rem] py-2 font-[500] rounded-[40px] transition-colors duration-500 ${
                       switchTab === "quarterly"
                         ? "bg-[#004AAD] text-white"
                         : "bg-white text-black"
@@ -150,7 +150,7 @@ const Plans = () => {
                     Quarterly
                   </button>
                   <button
-                    className={`w-fit px-[1rem] font-[500] rounded-[40px] text-nowrap transition-colors duration-500 ${
+                    className={`w-fit px-[1rem] sm:text-[] text-[.9rem] font-[500] rounded-[40px] text-nowrap transition-colors duration-500 ${
                       switchTab === "annual"
                         ? "bg-[#004AAD] text-white"
                         : "bg-white text-black"
@@ -248,7 +248,7 @@ const Plans = () => {
             
             
           </div>
-    </div>
+    
   )
 }
 

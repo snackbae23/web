@@ -22,6 +22,7 @@ import image4 from '../assets/image 167.png'
 import image5 from '../assets/image 170.png'
 import image6 from '../assets/image 172.png'
 import image7 from '../assets/image 171.png'
+import arrow from '../assets/arrow-section-two.png.png'
 
 
 import { PopupButton } from "react-calendly";
@@ -100,13 +101,13 @@ const LandingPage = () => {
         </div>
 
         {/* content1 */}
-        <div className='w-[95%]  sm:w-[90%] mx-auto h-fit mt-[4rem]  relative flex sm:flex-row flex-col justify-evenly sm:justify-between items-center'>
-          <div className='flex relative w-full h-fit  '>
+        <div className='w-[100%]  sm:w-[90%] h-fit mt-[4rem] px-4  '>
+          <div className='flex relative w-full h-fit sm:px-1 px-1.5  '>
             <div className='font-inter text-[2.2rem] text-white sm:w-[65%] w-[90%]'>
               <p className='text-[1.1rem] italic font-normal'>(India's Food-service Sector )</p>
               <p className='font-medium'>India's Food service market set to nearly double to <span className='text-yellow-400 font-semibold'> ₹ 9 trillion by 2030</span> </p>
             </div>
-            <div className='w-[40%]  sm:flex absolute sm:right-0 -right-16 -top-11 items-center justify-center'>
+            <div className='  sm:flex absolute sm:right-0 left-[70%]  items-center justify-center'>
             <div className="sm:block hidden">
             <dotlottie-player
               src="https://lottie.host/b05944d8-6e3d-40f8-9ca2-4e25cd7605ec/uK2OSefSKy.json"
@@ -168,6 +169,18 @@ const LandingPage = () => {
             
         </div>
 
+        <div className='flex flex-col w-[90%] h-fit font-Roboto text-white'>
+            <p className='font-[400] text-[1.7rem] font-inter text-white'>And our vision is to</p>
+            <div className='flex my-[2rem]'>
+              <img src={arrow} alt="" className='sm:h-[200px] h-[70px] aspect-auto' />
+              <div className='flex flex-col gap-2 items-center justify-center sm:leading-[9rem] leading-[7rem]'>
+                <p className='font-semibold   sm:text-[4.5rem] text-[3rem] leading-[3rem]'>Accelerate industry</p>
+                <p className='font-semibold  text-nowrap  text-[4.5rem]'>by <span className='text-[#FDE030] font-semibold sm:text-[8rem] text-[6rem]'>10x</span></p>
+
+              </div>
+            </div>
+        </div>
+
         {/* Our products */}
         <div id='product' className='w-full h-fit text-[#121D2F] bg-[#DFEDFF] flex flex-col justify-center items-center rounded-t-3xl'>
           <div className='my-[2rem] flex flex-col justify-center items-center '>
@@ -207,7 +220,7 @@ const LandingPage = () => {
           </div>
           <div className='w-full h-[4px] mt-[4rem] bg-[#D9D9D9]'></div>
           
-        {/* utilise whatsapp */}
+         {/* utilise whatsapp */}
           <div className=' bg-gradient-to-b from-[#DFEDFF] to-white sm:w-full  flex flex-col justify-center items-center sm:leading-[2.8rem] '>
             <div className=' sm:w-full mt-[4rem] w-[90%] flex flex-col justify-center items-center sm:leading-[2.8rem] '>
             <p className=' sm:text-[3rem] text-[1.5rem] font-inter font-[600]  text-[#004AAD] flex  '>Utilise WhatsApp Business Api</p>
@@ -284,10 +297,10 @@ const LandingPage = () => {
 
            {/* plans */}
 
-        <div className='w-full h-fit bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-3 px-4 '>
-            <p className='font-inter font-[500] sm:text-[2.2rem] text-[1.5rem]'>Plans that are <span className='text-[#004AAD]'>carefully crafted</span>  to suit your business.</p>
-            <Plans/>
-        </div>  
+          <div className='sm:w-full w-[95%] h-fit bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-3 px-2 '>
+              <p className='font-inter font-[500] sm:text-[2.2rem] text-[1.5rem]'>Plans that are <span className='text-[#004AAD]'>carefully crafted</span>  to suit your business.</p>
+              <Plans/>
+          </div>  
  
         </div>
 
@@ -315,12 +328,12 @@ const LandingPage = () => {
           <p>Plateform and growing their reach, revenue and sales</p>
 
           <div className='flex mt-[2rem] gap-5'>
-            <button className='px-5 py-2 bg-[#F1F6FF] text-[#2878FF] rounded-md'>Request Demo</button>
-            <button className='px-5 py-2 bg-[#2878FF] text-white rounded-md'> <PopupButton
+            <button className='px-5 py-2 bg-[#F1F6FF] text-[#2878FF] rounded-md'><PopupButton
                   url="https://calendly.com/connect-snackbae/free_demo"
                   rootElement={document.getElementById("root")}
-                  text="Start for free"
+                  text="Contect us"
                 /></button>
+            <button className='px-5 py-2 bg-[#2878FF] text-white rounded-md'> Start for free</button>
           </div>
           
         </div>
