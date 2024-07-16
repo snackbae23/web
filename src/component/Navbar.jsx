@@ -79,13 +79,13 @@ const Navbar = () => {
             >
              Our Blogs
             </NavLink>
-            <NavLink
+            {/* <NavLink
               onClick={handleLinkClick}
               className=" font-[600] text-[.9rem] leading-[1.6rem]"
               to="/joinAsPartner"
             >
               Join as Partner
-            </NavLink>
+            </NavLink> */}
           </div>
           <NavLink
             onClick={handleLinkClick}
