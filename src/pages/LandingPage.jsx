@@ -1,9 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import '@dotlottie/player-component';
 import './LandingPage.css';
 import Plans from '../component/Plans';
 import Footer from '../component/Footer';
+// import { NavLink } from 'react-router-dom';
 
 //icons
 import { IoIosArrowRoundForward } from "react-icons/io";
@@ -175,14 +176,14 @@ const LandingPage = () => {
               <img src={arrow} alt="" className='sm:h-[200px] h-[70px] aspect-auto' />
               <div className='flex flex-col gap-2 items-center justify-center sm:leading-[9rem] leading-[7rem]'>
                 <p className='font-semibold   sm:text-[4.5rem] text-[3rem] leading-[3rem]'>Accelerate industry</p>
-                <p className='font-semibold  text-nowrap  text-[4.5rem]'>by <span className='text-[#FDE030] font-semibold sm:text-[8rem] text-[6rem]'>10x</span></p>
+                <p className='font-semibold  text-nowrap sm:left-0 left-4   text-[4.5rem]'>by <span className='text-[#FDE030] font-semibold sm:text-[8rem] text-[6rem]'>10x</span></p>
 
               </div>
             </div>
         </div>
 
         {/* Our products */}
-        <div id='product' className='w-full h-fit text-[#121D2F] bg-[#DFEDFF] flex flex-col justify-center items-center rounded-t-3xl'>
+        <div id='product' className='w-full h-fit text-[#121D2F] bg-[#DFEDFF] flex flex-col justify-center items-center rounded-t-3xl sm:px-0 px-2'>
           <div className='my-[2rem] flex flex-col justify-center items-center '>
           <p className=' text-[3rem] font-semibold '>Our Products</p>
           <p className='text-[1.1rem]'>Choose our  all in one Restaurant CRM solution</p>
@@ -226,7 +227,7 @@ const LandingPage = () => {
             <p className=' sm:text-[3rem] text-[1.5rem] font-inter font-[600]  text-[#004AAD] flex  '>Utilise WhatsApp Business Api</p>
             <p className='sm:text-[2.1rem] text-[1.4rem] font-inter font-[600]'>& connect with your customers like never before</p>
             <p className='font-Roboto font-[400] text-[1rem] text-[#697777]'>Select a template, Edit Details, Customise your way, and Never miss a chance to Engage your customers!</p>
-            <button className='sm:px-10 px-5 sm:py-0  py-1 mt-4 bg-[#004AAD] text-white rounded-md'>Start for free</button>
+            <NavLink to="https://snackbaeuser-snackbaes-projects.vercel.app/" className='sm:px-10 px-5 sm:py-0  py-1 mt-4 bg-[#004AAD] text-white rounded-md'>Start for free</NavLink>
             </div>
 
           
@@ -333,7 +334,7 @@ const LandingPage = () => {
                   rootElement={document.getElementById("root")}
                   text="Contect us"
                 /></button>
-            <button className='px-5 py-2 bg-[#2878FF] text-white rounded-md'> Start for free</button>
+            <NavLink to="https://snackbaeuser-snackbaes-projects.vercel.app/" className='px-5 py-2 bg-[#2878FF] text-white rounded-md'> Start for free</NavLink>
           </div>
           
         </div>
