@@ -5,6 +5,7 @@ import insta from '../assets/instagramIcon.png';
 import twitter from '../assets/twitterIcon.png';
 import fb from '../assets/facebookIcon.png';
 import { Link } from "react-router-dom";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 function Footer() {
     const [email, setEmail] = useState("");
 
@@ -33,7 +34,7 @@ function Footer() {
             <div className="">
               <div className="w-[90%] mx-auto text-[.9rem] flex justify-between items-center ">
                 <img src={Logo1} alt="logo" width={120} className="py-[2rem]" />
-                <p>made with 💛 in the city of joy</p>
+                <p className='sm:block hidden'>made with 💛 in the city of joy</p>
               </div>
 
               <p className="bg-gray-400 w-[100%] mx-auto h-[.08px] mb-[1rem] "></p>
@@ -58,46 +59,46 @@ function Footer() {
                     onClick={submitEmailHandler}
                     className="bg-[#EAB308] h-[3rem] px-2 rounded-t-md text-black font-semibold"
                   >
-                    Send
+                    <MdOutlineKeyboardArrowRight className='size-8' />
                   </button>
                 </div>
               </div>
-              <div className="flex sm:justify-around justify-between w-full lg:w-[70%] gap-[.5rem]">
+              <div className="flex sm:justify-around justify-between w-[98%] lg:w-[70%] gap-[.5rem]">
                 <div className="flex flex-col gap-[.5rem]">
                   <p className="text-[#8b7430]">Services</p>
                   <Link onClick={scrollSmooth} to="/joinAsPartner">
                     <div className="text-[.7rem] sm:text-[.9rem]">
-                      Interactive Digital Menu
+                    Interactive Digital Menu
                     </div>
                   </Link>
                   <Link onClick={scrollSmooth} to="/joinAsPartner">
                     <div className="text-[.7rem] sm:text-[.9rem]">
-                      Comisionless Payments
+                    Smart CRM
                     </div>
                   </Link>
                   <Link onClick={scrollSmooth} to="/joinAsPartner">
                     <div className="text-[.7rem] sm:text-[.9rem]">
-                      Recommend System
+                    WhatsApp Business API
                     </div>
                   </Link>
                 </div>
                 <div className="flex flex-col gap-[.5rem]">
                   <p className="text-[#8b7430]">About</p>
-                  <Link onClick={scrollSmooth} to="/">
-                    <div className="text-[.7rem] sm:text-[.9rem]">Home</div>
-                  </Link>
                   <Link onClick={scrollSmooth} to="/blogs">
-                    <div className="text-[.7rem] sm:text-[.9rem]">Blogs</div>
+                    <div className="text-[.7rem] sm:text-[.9rem]">Our Blogs</div>
                   </Link>
-                  <Link onClick={scrollSmooth} to="/aboutus">
-                    <div className="text-[.7rem] sm:text-[.9rem]">About Us</div>
+                  <Link onClick={scrollSmooth} to="/privacyPolicy">
+                    <div className="text-[.7rem] sm:text-[.9rem]">Privacy Policy</div>
+                  </Link>
+                  <Link onClick={scrollSmooth} to="/termsCondition">
+                    <div className="text-[.7rem] sm:text-[.9rem]">Terms & condition</div>
                   </Link>
                 </div>
                 <div className="flex flex-col gap-[.5rem]">
                   <p className="text-[#8b7430] text-nowrap">For Restaurants</p>
                   <Link onClick={scrollSmooth} to="/joinAsPartner">
                     <div className="text-[.7rem] sm:text-[.9rem]">
-                      Join as Partner
+                    Start for Free
                     </div>
                   </Link>
                   <Link
@@ -105,9 +106,18 @@ function Footer() {
                     to="https://snackbaeuser-snackbaes-projects.vercel.app/"
                   >
                     <div className="text-[.7rem] sm:text-[.9rem]">
-                      Partner Login
+                    Partner Login
                     </div>
                   </Link>
+                  <Link
+                    onClick={scrollSmooth}
+                    to="https://snackbaeuser-snackbaes-projects.vercel.app/"
+                  >
+                    <div className="text-[.7rem] sm:text-[.9rem]">
+                    Contact Us
+                    </div>
+                  </Link>
+
                 </div>
               </div>
             </div>
