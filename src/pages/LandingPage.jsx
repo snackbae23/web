@@ -37,7 +37,7 @@ const LandingPage = () => {
        {/* hero-section */}
        <div className="bg-[#14213E] w-full h-fit flex flex-col  items-center justify-center z-[100]">
         {/* content */}
-        <div className="w-full sm:w-[90%] mx-auto h-fit min-h-[calc(100vh-70px)] relative flex sm:flex-row flex-col justify-evenly sm:justify-between items-center sm:mt-[2rem] mt-[5rem]">
+        <div className="w-full sm:w-[90%] mx-auto h-fit min-h-[calc(100vh-70px)] relative flex sm:flex-row flex-col justify-evenly sm:justify-between items-center sm:mt-[.2rem] mt-[5rem]">
           <div className="flex flex-col w-[90%] mx-auto md:w-[70%] h-full gap-[1rem] sm:gap-[2rem] justify-center">
             <p className="text-[#E5E7EB] font-[700] text-[3.2rem] md:text-[3rem] lg:text-[3.8rem] leading-[3.6rem] md:leading-[4rem] lg:leading-[4.5rem]">
               It’s not just food,
@@ -88,7 +88,7 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <div className='w-[100%] font-inter text-[.9rem] flex  text-nowrap gap-6 px-8 items-center justify-evenly text-[#004AAD] overflow-hidden sm:h-[60px] h-[40px] bg-gradient-to-l from-[#8EBEFF] to-[#FDE030] -rotate-3 m-6 mb-10'>
+        <div className='w-[100%] font-inter text-[.9rem] flex  text-nowrap gap-6 px-8 items-center justify-evenly text-[#004AAD] overflow-hidden sm:h-[60px] h-[40px] bg-gradient-to-l from-[#8EBEFF] to-[#FDE030] -rotate-3 -mt-2  mb-10'>
             <p>Start your free trial</p>
             <IoIosArrowRoundForward className='text-[1.3rem]' />
             <p>Start your free trial</p>
