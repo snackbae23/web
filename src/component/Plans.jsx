@@ -36,7 +36,7 @@ const Plans = () => {
             price: 765,
             validity: "/month billed annually",
             features: [
-              "Digital QR menu with 5 tables",
+              "Digital QR menu with 10 tables",
               "Social media integration",
               "Automated customer data collection",
               "Automated feedback collection",
@@ -91,7 +91,7 @@ const Plans = () => {
             price: 465,
             validity: "/month billed annually",
             features: [
-              "Digital QR menu with 5 tables",
+              "Digital QR menu with 10 tables",
               "Social media integration",
               "Automated customer data collection",
               "Automated feedback collection",
