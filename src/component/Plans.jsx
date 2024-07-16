@@ -165,7 +165,7 @@ const Plans = () => {
             <div className="flex flex-row w-full items-center justify-center flex-wrap px-[1rem] gap-x-[1.2rem] gap-y-[1.2rem] sm:mt-14">
           {switchTab === "quarterly" &&
             PlansData.quarterly.map((plan) => (
-              <div className="group  sm:w-[30%] flex flex-col gap-3 shadow-2xl border rounded-3xl p-[1.5rem] bg-[#FFFFFF] hover:bg-[#004AAD] hover:text-white transition-all">
+              <div className="group  sm:w-[30%] flex flex-col  gap-3 shadow-2xl border rounded-3xl p-[1.5rem] bg-[#FFFFFF] hover:bg-[#004AAD] hover:text-white transition-all">
                 <h1 className="text-[1.7rem] text-[#1B223C] font-semibold flex flex-row items-center gap-2 text-nowrap group-hover:text-white">
                   {plan.name}
                   {plan.name === "Starter Plan" && (
@@ -185,7 +185,7 @@ const Plans = () => {
                 </p>
                 <div className="w-full sm:h-[250px] flex flex-col gap-2 mt-2">
                   {plan.features.map((feature) => (
-                    <p className="flex flex-row items-center gap-1 text-[18px]">
+                    <p className="flex flex-row items-center text-nowrap gap-1 text-[18px]">
                       <GrFormCheckmark className="text-2xl" />
                       <span className='text-[0.95rem]'> {feature}</span>
                       
@@ -225,7 +225,7 @@ const Plans = () => {
                 </p>
                 <div className="w-full sm:h-[250px] flex flex-col gap-2 mt-2">
                   {plan.features.map((feature) => (
-                    <p className="flex flex-row items-center gap-1 text-[18px]">
+                    <p className="flex flex-row items-center gap-1 text-nowrap text-[18px]">
                       <GrFormCheckmark className="text-2xl" />
                       <span className='text-[0.95rem]'> {feature}</span>
                       
