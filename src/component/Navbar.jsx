@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 //image
-import logo from '../assets/logo.png';
-
+import logo from '../assets/IMG-20231226-WA00032.png';
+import logo1 from '../assets/IMG-20231226-WA00032 (1).png'
 //icons
 import { IoMdMenu, IoMdClose } from "react-icons/io";
 
@@ -37,7 +37,7 @@ const Navbar = () => {
 
 
     return (
-      <div className="relative bg-white   z-[1000] w-full h-[70px] flex justify-between items-center px-[1rem]">
+      <div className=" absolute bg-transparent   z-[1000] w-[100%] h-[70px] flex justify-between items-center px-[1rem]">
         {/* logo */}
         <img
           onClick={() => {
@@ -45,14 +45,24 @@ const Navbar = () => {
           }}
           src={logo}
           alt="logo"
-          className="h-full aspect-auto p-[.5rem] cursor-pointer"
+          className="h-full aspect-auto p-[.5rem] cursor-pointer mix-blend-multiply sm:block hidden"
+        />
+
+        {/* logo */}
+        <img
+          onClick={() => {
+            navigate("/");
+          }}
+          src={logo1}
+          alt="logo"
+          className="h-full aspect-auto p-[.5rem] cursor-pointer mix-blend-multiply sm:hidden block"
         />
 
         {/* links */}
         <div
           className={`sm:relative sm:top-0 sm:right-0 absolute top-[75px] right-[1rem] ${
             isToggled ? "flex" : "hidden sm:flex"
-          } sm:flex-row flex-col-reverse justify-between items-center shadow-lg sm:shadow-none p-[2rem] sm:p-0 gap-[1rem] sm:gap-0 z-[999] bg-white`}
+          } sm:flex-row flex-col-reverse justify-between items-center shadow-lg sm:rounded-none rounded-lg sm:shadow-none p-[2rem] sm:p-0 gap-[1rem] sm:bg-transparent bg-white sm:gap-0 z-[999] `}
         >
           <div className="flex sm:flex-row flex-col justify-between items-center sm:gap-[2rem] gap-[.5rem]">
             <button
@@ -61,7 +71,7 @@ const Navbar = () => {
                 handleLinkClick();
                 scrollToElement();
               }}
-              className=" font-[600] text-[.9rem] leading-[1.6rem]"
+              className=" font-[600] text-[.9rem] leading-[1.6rem] sm:text-white"
             >
               Our Products
             </button>
@@ -74,7 +84,7 @@ const Navbar = () => {
             </NavLink> */}
             <NavLink
               onClick={handleLinkClick}
-              className=" font-[600] text-[.9rem] leading-[1.6rem]"
+              className=" font-[600] text-[.9rem] leading-[1.6rem] sm:text-white"
               to="/blogs"
             >
              Our Blogs
@@ -99,16 +109,17 @@ const Navbar = () => {
         {/* menu-icons */}
         {isToggled ? (
           <IoMdClose
-            className="sm:hidden block text-[1.6rem]"
+            className="sm:hidden block text-[1.6rem] text-white"
             onClick={handleToggle}
           />
         ) : (
           <IoMdMenu
-            className="sm:hidden block text-[1.6rem]"
+            className="sm:hidden block text-[1.6rem] text-white"
             onClick={handleToggle}
           />
         )}
       </div>
+      
     );
 }
 

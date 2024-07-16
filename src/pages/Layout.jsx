@@ -22,7 +22,7 @@ const Layout = () => {
     <>
       {
         loader ? (<Loader/>) :
-          (<div className="w-full h-fit">
+          (<div className="w-full h-fit bg-transparent">
             {
               isVisible ? (
                 <div>

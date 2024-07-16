@@ -33,11 +33,11 @@ import bgHero from '../assets/Backgroundhero.png';
 
 const LandingPage = () => {
   return (
-    <div className='w-full h-git'>
+    <div className='w-full h-git '>
        {/* hero-section */}
-       <div className="bg-[#14213E] w-full h-fit flex flex-col items-center justify-center z-[100]">
+       <div className="bg-[#14213E] w-full h-fit flex flex-col  items-center justify-center z-[100]">
         {/* content */}
-        <div className="w-full sm:w-[90%] mx-auto h-fit min-h-[calc(100vh-70px)] relative flex sm:flex-row flex-col justify-evenly sm:justify-between items-center">
+        <div className="w-full sm:w-[90%] mx-auto h-fit min-h-[calc(100vh-70px)] relative flex sm:flex-row flex-col justify-evenly sm:justify-between items-center mt-[2rem]">
           <div className="flex flex-col w-[90%] mx-auto md:w-[70%] h-full gap-[1rem] sm:gap-[2rem] justify-center">
             <p className="text-[#E5E7EB] font-[700] text-[3.2rem] md:text-[3rem] lg:text-[3.8rem] leading-[3.6rem] md:leading-[4rem] lg:leading-[4.5rem]">
               It’s not just food,
@@ -108,13 +108,14 @@ const LandingPage = () => {
               <p className='text-[1.1rem] italic font-normal'>(India's Food-service Sector )</p>
               <p className='font-medium'>India's Food service market set to nearly double to <span className='text-yellow-400 font-semibold'> ₹ 9 trillion by 2030</span> </p>
             </div>
-            <div className='  sm:flex absolute sm:right-0 left-[70%]  items-center justify-center'>
+            <div className='  sm:flex absolute sm:right-0 left-[75%]  items-center justify-center'>
             <div className="sm:block hidden">
             <dotlottie-player
               src="https://lottie.host/b05944d8-6e3d-40f8-9ca2-4e25cd7605ec/uK2OSefSKy.json"
               autoplay
               loop
-              style={{ width: "150px", height: "150px" }}
+              style={{ width: "250px", height: "150px" }}
+             className
             />
             </div>
             {/* small-screen */}
@@ -186,7 +187,7 @@ const LandingPage = () => {
         <div id='product' className='w-full h-fit text-[#121D2F] bg-[#DFEDFF] flex flex-col justify-center items-center rounded-t-3xl sm:px-0 px-2'>
           <div className='my-[2rem] flex flex-col justify-center items-center '>
           <p className=' text-[3rem] font-semibold '>Our Products</p>
-          <p className='text-[1.1rem]'>Choose our  all in one Restaurant CRM solution</p>
+          <p className='text-[1.1rem] sm:w-full w-[97%]'>Choose our  all in one Restaurant CRM solution</p>
           </div>
 
           <div className='w-[98%] sm:w-[90%] mx-auto h-fit my-[1rem] sm:gap-0 gap-10   flex sm:flex-row flex-col justify-between   '>
@@ -324,15 +325,18 @@ const LandingPage = () => {
         {/* let snackbae */}
 
         <div className='w-full sm:w-[95%] h-fit bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-2 mx-2'>
+          <div className='flex flex-col sm:w-full w-[95%] items-center justify-center'>
           <p className='font-semibold sm:text-[2.1rem] text-[1.5rem] text-[#121D2F] mt-[2rem] mb-4'>Let SnackBAE  boost your business!</p>
           <p>Join 250+ restaurants and cafes that are already using</p>
           <p>Plateform and growing their reach, revenue and sales</p>
+          </div>
+          
 
           <div className='flex mt-[2rem] gap-5'>
             <button className='px-5 py-2 bg-[#F1F6FF] text-[#2878FF] rounded-md'><PopupButton
                   url="https://calendly.com/connect-snackbae/free_demo"
                   rootElement={document.getElementById("root")}
-                  text="Contect us"
+                  text="Contact us"
                 /></button>
             <NavLink to="https://snackbaeuser-snackbaes-projects.vercel.app/" className='px-5 py-2 bg-[#2878FF] text-white rounded-md'> Start for free</NavLink>
           </div>
