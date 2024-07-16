@@ -27,7 +27,7 @@ const Navbar = () => {
 
     // Function to handle scrolling to the referenced element
     const scrollToElement = () => {
-        const element = document.getElementById('elementId');
+        const element = document.getElementById('product');
 
         // Scroll to the element if found
         if (element) {
@@ -37,7 +37,7 @@ const Navbar = () => {
 
 
     return (
-      <div className="relative bg-white  z-[1000] w-full h-[70px] flex justify-between items-center px-[1rem]">
+      <div className="relative bg-white   z-[1000] w-full h-[70px] flex justify-between items-center px-[1rem]">
         {/* logo */}
         <img
           onClick={() => {
@@ -63,21 +63,21 @@ const Navbar = () => {
               }}
               className=" font-[600] text-[.9rem] leading-[1.6rem]"
             >
-              Feature
+              Our Products
             </button>
-            <NavLink
+            {/* <NavLink
               onClick={handleLinkClick}
               className=" font-[600] text-[.9rem] leading-[1.6rem]"
               to="/aboutus"
             >
               About us
-            </NavLink>
+            </NavLink> */}
             <NavLink
               onClick={handleLinkClick}
               className=" font-[600] text-[.9rem] leading-[1.6rem]"
               to="/blogs"
             >
-              Blogs
+             Our Blogs
             </NavLink>
             <NavLink
               onClick={handleLinkClick}
@@ -92,7 +92,7 @@ const Navbar = () => {
             className="sm:ml-[2rem] bg-[#FFD628] px-[1.4rem] py-[.5rem] rounded-md font-[500] text-[1rem] leading-[1.15rem]"
             to="https://snackbaeuser-snackbaes-projects.vercel.app/"
           >
-            Dashboard
+            Get Started
           </NavLink>
         </div>
 
