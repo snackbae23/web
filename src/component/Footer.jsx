@@ -6,6 +6,7 @@ import twitter from '../assets/twitterIcon.png';
 import fb from '../assets/facebookIcon.png';
 import { Link } from "react-router-dom";
 import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { FaLinkedin } from "react-icons/fa6";
 function Footer() {
     const [email, setEmail] = useState("");
 
@@ -63,7 +64,7 @@ function Footer() {
                   </button>
                 </div>
               </div>
-              <div className="flex sm:justify-around justify-between w-[98%] lg:w-[70%] gap-[.5rem]">
+              <div className="flex sm:justify-around justify-between w-[98%] lg:w-[70%] sm:gap-[.5rem] gap-[.3rem]">
                 <div className="flex flex-col gap-[.5rem]">
                   <p className="text-[#8b7430]">Services</p>
                   <Link onClick={scrollSmooth} to="/joinAsPartner">
@@ -123,39 +124,12 @@ function Footer() {
             </div>
 
             <div className="w-full flex md:flex-row flex-col justify-between items-center ">
-              <div className="flex gap-[1rem] my-[1rem] text-[.9rem]">
-                <Link
-                  onClick={scrollSmooth}
-                  to="/termsCondition"
-                  className="text-[.7rem] sm:text-[.9rem]"
-                >
-                  Terms & Conditions
-                </Link>
-                <Link
-                  onClick={scrollSmooth}
-                  to="/privacyPolicy"
-                  className="text-[.7rem] sm:text-[.9rem]"
-                >
-                  Privacy Policy
-                </Link>
-                <Link
-                  onClick={scrollSmooth}
-                  to="/contact"
-                  className="text-[.7rem] sm:text-[.9rem]"
-                >
-                  Contact Us
-                </Link>
-              </div>
+              
               <div className="flex gap-[1rem] my-[1rem]">
-                <Link to="/">
-                  <img src={fb}></img>
+                <Link to="https://www.linkedin.com/company/snackbae/">
+                <FaLinkedin className='size-8' />
                 </Link>
-                <Link to="/">
-                  <img src={twitter}></img>
-                </Link>
-                <Link to="/">
-                  <img src={insta}></img>
-                </Link>
+               
               </div>
             </div>
           </div>
