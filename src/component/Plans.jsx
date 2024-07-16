@@ -144,7 +144,7 @@ const Plans = () => {
                       switchTab === "quarterly"
                         ? "bg-[#004AAD] text-white"
                         : "bg-white text-black"
-                    } text-[22px]`}
+                    } sm:text-[22px] text-[.9rem]`}
                     onClick={() => setSwitchTab("quarterly")}
                   >
                     Quarterly
@@ -154,7 +154,7 @@ const Plans = () => {
                       switchTab === "annual"
                         ? "bg-[#004AAD] text-white"
                         : "bg-white text-black"
-                    } text-[22px]`}
+                    } sm:text-[22px] text-[.9rem]`}
                     onClick={() => setSwitchTab("annual")}
                   >
                     Annually (save 44%)
