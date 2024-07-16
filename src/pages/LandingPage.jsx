@@ -64,7 +64,9 @@ const LandingPage = () => {
                 />
                 {/* Request Demo */}
               </div>
+              
             </div>
+            <p className="md:w-[70%] font-[400] text-[.8rem] sm:text-[1.1rem] text-[#D1D5DB]">*No Credit Card required</p>
           </div>
           {/* gif */}
           {/* <img src={gifhero} alt='gif-hero' className='w-[80%] md:w-[40%] aspect-auto' /> */}
@@ -144,9 +146,9 @@ const LandingPage = () => {
                 </div>
                 <div className=' sm:w-[57%] p-[1.5rem] flex flex-col gap-4  text-[1.2rem] font-light bg-[#C084FC1A] rounded-2xl text-[#FDE030]'>
                 <div className='flex gap-2 items-center'>
-                <p className='text-[#FDE030] font-semibold text-[2.2rem]'>$2 billion+ <span className='text-[1.15rem] font-light'>in 2023</span></p>
+                <p className='text-[#FDE030] font-semibold text-[2.2rem]'>$2 billion+ <span className='text-[1.15rem] font-light'>in 2024</span></p>
                 </div>
-                <p>Food service Market Size in india </p>
+                <p>Restaurant CRM Market size in India</p>
                   
                   
                 </div>
@@ -158,13 +160,13 @@ const LandingPage = () => {
                   
                 </div>
                 <div className=' sm:w-[30%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-[#FDE030]'>
-                  <p className='text-[#FDE030] font-semibold text-[2.2rem]'>30% </p>
+                  <p className='text-[#FDE030] font-semibold text-[2.2rem]'>32% </p>
                   <p>Market Share of whatsApp Business in communication market</p>
                   
                 </div>
                 <div className=' sm:w-[30%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-[#FDE030]'>
                   <p className='text-[#FDE030] font-semibold text-[2.2rem]'>$2.5 billion</p>
-                  <p>Market Share of whatsApp Business in communication market</p>
+                  <p>Marketing spend per year by eateries</p>
                   
                 </div>
             </div>

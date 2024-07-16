@@ -38,7 +38,7 @@ export const SnackBaeProvider = (props) => {
     
     // Update state if user data is found
     if (storedUser) {
-       setUser(JSON.parse(storedUser));
+       //setUser(JSON.parse(storedUser));
     }
     getAllData();
     setTimeout(() => {
