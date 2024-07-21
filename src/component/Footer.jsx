@@ -33,9 +33,9 @@ function Footer() {
         <div className="w-full h-fit bg-[#0F172A] text-gray-200 pb-[1rem]">
           <div className="w-[95%] sm:w-[80%] mx-auto">
             <div className="">
-              <div className="w-[90%] mx-auto text-[.9rem] flex justify-between items-center ">
+              <div className="w-[90%] mx-auto text-[.9rem] flex-row  flex justify-between items-center ">
                 <img src={Logo1} alt="logo" width={120} className="py-[2rem]" />
-                <p className='sm:block hidden'>made with 💛 in the city of joy</p>
+                <p className='mt-[1.8rem]'>Made with 💛 in the city of Joy</p>
               </div>
 
               <p className="bg-gray-400 w-[100%] mx-auto h-[.08px] mb-[1rem] "></p>
@@ -127,7 +127,7 @@ function Footer() {
               
               <div className="flex gap-[1rem] my-[1rem]">
                 <Link to="https://www.linkedin.com/company/snackbae/">
-                <FaLinkedin className='size-8' />
+                <FaLinkedin className='size-8 rounded-lg  text-sky-800 bg-white' />
                 </Link>
                
               </div>
@@ -136,7 +136,7 @@ function Footer() {
           <p className="bg-gray-400 w-[90%] mx-auto h-[.08px] mb-[1rem] "></p>
 
           <div className="w-[90%] mx-auto text-[.9rem] flex justify-center items-center text-center">
-            <p>All Rights Reserved © SNACKBAE PRIVATE LIMITED,2023</p>
+            <p>All Rights Reserved © SNACKBAE PRIVATE LIMITED,2024</p>
             
           </div>
         </div>

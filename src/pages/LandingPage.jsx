@@ -22,7 +22,7 @@ import image3 from '../assets/Group 1171278505 (2).png'
 import image4 from '../assets/image 167.png'
 import image5 from '../assets/image 170.png'
 import image6 from '../assets/image 172.png'
-import image7 from '../assets/image 171.png'
+import image7 from '../assets/image 171 (1).png'
 import arrow from '../assets/arrow-section-two.png.png'
 
 
@@ -49,7 +49,7 @@ const LandingPage = () => {
               ensuring your patrons spend less time waiting and more time in
               indulging in delicious dishes.
             </p>
-            <div className="flex  gap-[2rem] sm:justify-start justify-center items-center">
+            <div className="flex  gap-[1rem] justify-start my-[.5rem] items-center">
               <Link
                 to="https://snackbaeuser-snackbaes-projects.vercel.app/register"
                 className="bg-[#FFD628] px-[1.5rem] py-[.5rem] rounded-3xl font-[500]"
@@ -136,7 +136,7 @@ const LandingPage = () => {
         {/* total report */}
         <div className='w-[95%]  sm:w-[90%] mx-auto h-fit my-[2rem]  relative flex gap-5 flex-col justify-evenly sm:justify-between items-center'>
             <div className='w-full h-fit flex sm:flex-row gap-4 flex-col'>
-                <div className=' sm:w-[42%] p-[1.5rem] text-[1.2rem] font-light bg-[#C084FC1A] rounded-2xl text-[#FDE030]'>
+                <div className=' sm:w-[42%] p-[1.5rem] text-[1.2rem] font-light bg-[#C084FC1A] rounded-2xl text-white'>
                   <p>Food service Market Size in </p>
                   <p>india</p>
                   <div className='flex gap-2 items-center '>
@@ -148,7 +148,7 @@ const LandingPage = () => {
                 <div className='flex gap-2 items-center'>
                 <p className='text-[#FDE030] font-semibold text-[2.2rem]'>$2 billion+ <span className='text-[1.15rem] font-light'>in 2024</span></p>
                 </div>
-                <p>Restaurant CRM Market size in India</p>
+                <p className='text-white'>Restaurant CRM Market size in India</p>
                   
                   
                 </div>
@@ -156,15 +156,15 @@ const LandingPage = () => {
             <div className='w-full h-fit flex sm:flex-row gap-4 flex-col'>
                 <div className=' sm:w-[40%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-white'>
                   <p className='text-[#FDE030] font-semibold text-[2.2rem]'>30% </p>
-                  <p>The addressable customer base for the Indian food services market is expected to  grow from  <span className='text-[#DDE030]'>340 million to 450 million by 2030</span></p>
+                  <p>The addressable customer base for the Indian food services market is expected to  grow from  <span className='text-[#FDE030]'>340 million to 450 million by 2030</span></p>
                   
                 </div>
-                <div className=' sm:w-[30%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-[#FDE030]'>
+                <div className=' sm:w-[30%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-white'>
                   <p className='text-[#FDE030] font-semibold text-[2.2rem]'>32% </p>
                   <p>Market Share of whatsApp Business in communication market</p>
                   
                 </div>
-                <div className=' sm:w-[30%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-[#FDE030]'>
+                <div className=' sm:w-[30%] p-[1.5rem] text-[1.2rem] font-normal bg-[#C084FC1A] rounded-2xl text-white'>
                   <p className='text-[#FDE030] font-semibold text-[2.2rem]'>$2.5 billion</p>
                   <p>Marketing spend per year by eateries</p>
                   
@@ -234,9 +234,9 @@ const LandingPage = () => {
             </div>
 
           
-            <div className='w-full  sm:px-4 px-2 flex items-center mt-[4rem]  gap-2 '>
+            <div className='w-full  sm:px-4 px-2 flex items-center sm:mt-[4rem] mt-[2rem]  gap-2 '>
 
-              <div className='w-[20%] h-[330px] relative sm:block hidden'>
+              <div className='w-[20%] h-[300px] relative sm:block hidden'>
                 {/* bgimage */}
                 <img
                   src={birthday}
@@ -249,7 +249,7 @@ const LandingPage = () => {
                 <button className='absolute size-8 bg-white left-16 bottom-9  rounded-full  text-slate-700'><HiOutlineSpeakerphone className='size-6 ml-1 z-50' /></button>
               </div>
               
-              <div className='sm:w-[20%] w-[30%] sm:h-[330px] h-[150px] relative '>
+              <div className='sm:w-[20%] w-[30%] sm:h-[300px] h-[150px] relative '>
                 {/* bgimage */}
                 <img
                   src={image2}
@@ -261,7 +261,7 @@ const LandingPage = () => {
                 <button className='absolute sm:size-8 size-6 bg-white sm:left-5 left-2 sm:bottom-9 bottom-5  rounded-full  text-green-500'><RiWhatsappFill className='sm:size-6 ml-1 z-50' /></button>
                 <button className='absolute sm:size-8 size-6 bg-white sm:left-16 left-9 sm:bottom-9 bottom-5  rounded-full  text-slate-700'><HiOutlineSpeakerphone className='sm:size-6 ml-1 z-50' /></button>
               </div>
-              <div className='sm:w-[25%] w-[40%] sm:h-[530px] h-[250px] relative '>
+              <div className='sm:w-[25%] w-[40%] sm:h-[450px] h-[220px] relative '>
                 {/* bgimage */}
                 <img
                   src={mobile}
@@ -269,7 +269,7 @@ const LandingPage = () => {
                   className="absolute  top-0 w-full h-full "
                 />
               </div>
-              <div className='sm:w-[20%] w-[30%]  sm:h-[330px] h-[150px] relative '>
+              <div className='sm:w-[20%] w-[30%]  sm:h-[300px] h-[150px] relative '>
                 {/* bgimage */}
                 <img
                   src={image3}
@@ -281,7 +281,7 @@ const LandingPage = () => {
                 <button className='absolute sm:size-8 size-6 bg-white sm:left-5 left-2 sm:bottom-9 bottom-5  rounded-full  text-green-500'><RiWhatsappFill className='sm:size-6 ml-1 z-50' /></button>
                 <button className='absolute sm:size-8 size-6 bg-white sm:left-16 left-9 sm:bottom-9 bottom-5  rounded-full  text-slate-700'><IoIosNotificationsOutline  className='sm:size-6 ml-1 z-50' /></button>
               </div>
-              <div className='w-[20%] h-[330px] relative sm:block hidden'>
+              <div className='w-[20%] h-[300px] relative sm:block hidden'>
                 {/* bgimage */}
                 <img
                   src={image4}
@@ -326,11 +326,11 @@ const LandingPage = () => {
 
         {/* let snackbae */}
 
-        <div className='w-[96%] sm:w-[100%] h-fit bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-2 mx-2'>
+        <div className='w-[96%] sm:w-[100%] h-fit text-center bg-[#DFEDFF] flex items-center justify-center flex-col py-[3rem] sm:px-2 mx-2'>
           <div className='flex flex-col sm:w-full w-[95%] items-center justify-center'>
           <p className='font-semibold sm:text-[2.1rem] text-[1.5rem] text-[#121D2F] mt-[2rem] mb-4'>Let SnackBAE  boost your business!</p>
-          <p>Join 250+ restaurants and cafes that are already using</p>
-          <p>Plateform and growing their reach, revenue and sales</p>
+          <p>Join 250+ restaurants and cafes that are already using Platform and growing their reach, revenue and sales</p>
+          <p className='hidden'>Platform and growing their reach, revenue and sales</p>
           </div>
           
 
