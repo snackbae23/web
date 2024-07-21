@@ -35,7 +35,7 @@ function Footer() {
             <div className="">
               <div className="w-[90%] mx-auto text-[.9rem] flex-row  flex justify-between items-center ">
                 <img src={Logo1} alt="logo" width={120} className="py-[2rem]" />
-                <p className='mt-[1.8rem]'>made with 💛 in the city of joy</p>
+                <p className='mt-[1.8rem]'>Made with 💛 in the city of Joy</p>
               </div>
 
               <p className="bg-gray-400 w-[100%] mx-auto h-[.08px] mb-[1rem] "></p>
@@ -136,7 +136,7 @@ function Footer() {
           <p className="bg-gray-400 w-[90%] mx-auto h-[.08px] mb-[1rem] "></p>
 
           <div className="w-[90%] mx-auto text-[.9rem] flex justify-center items-center text-center">
-            <p>All Rights Reserved © SNACKBAE PRIVATE LIMITED,2023</p>
+            <p>All Rights Reserved © SNACKBAE PRIVATE LIMITED,2024</p>
             
           </div>
         </div>
