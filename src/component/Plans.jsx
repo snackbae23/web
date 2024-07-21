@@ -34,7 +34,7 @@ const Plans = () => {
             name: "Starter Plan",
             desc: "Unleash the Power of Your Business with Starter Plan.",
             price: 765,
-            validity: "/month billed annually",
+            validity: "/month/outlet",
             features: [
               "Digital QR menu with 10 tables",
               "Social media integration",
@@ -89,7 +89,7 @@ const Plans = () => {
             name: "Starter Plan",
             desc: "Unleash the Power of Your Business with Starter Plan.",
             price: 465,
-            validity: "/month billed annually",
+            validity: "/month/outlet",
             features: [
               "Digital QR menu with 10 tables",
               "Social media integration",
