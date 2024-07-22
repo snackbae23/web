@@ -15,6 +15,7 @@ import TermsCondtion from './pages/Terms&Condtion';
 import PrivacyPolicy from './pages/PrivacyPolicy'
 import ContactUs from './pages/ContactUs';
 import MerchantProfile from './pages/MerchantProfile';
+import Test from "./pages/test"
 
 function App() {
 
@@ -36,12 +37,11 @@ function App() {
           <Route path="/termsCondition" element={<TermsCondtion />} />
           <Route path="/privacyPolicy" element={<PrivacyPolicy />} />
           <Route path="/contact" element={<ContactUs />} />
-
-
+          <Route path="/test" element={<Test />} />
         </Route>
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App
