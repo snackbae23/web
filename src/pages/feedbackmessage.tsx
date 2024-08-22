@@ -13,7 +13,7 @@ const feedbackmessage = () => {
     const location = useLocation();
     const { rating } = location.state || {};
     const user = localStorage.getItem("user");
-    const userId = user ? JSON.parse(user).userId : null;
+    const userId = user ? JSON.parse(user)._id : null;
 
     console.log(rating);
 

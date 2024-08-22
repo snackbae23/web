@@ -22,7 +22,8 @@ const Feedback = () => {
   const user = localStorage.getItem("user");
 
   const { id } = useParams<{ id: string }>();
-  const userId = user ? JSON.parse(user).userId : null;
+  const userId = user ? JSON.parse(user)._id : null;
+  console.log(userId);
   const navigate = useNavigate();
   const [rating, setRating] = useState<string>("");
 
