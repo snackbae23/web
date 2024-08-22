@@ -1,9 +1,15 @@
+
+
+import { MuiOtpInput } from 'mui-one-time-password-input'
 import React, { useState, useRef, useCallback } from 'react';
 import { useNavigate, useParams, useLocation, } from 'react-router-dom';
 import axios from 'axios';
-import Palmrecognition from '../assets/Palm recognition.png';
 import toast from 'react-hot-toast';
 import { baseUrl } from '../main';
+
+//image
+import Palmrecognition from '../assets/Palm recognition.png';
+
 
 interface FormData {
     name: string;
@@ -16,18 +22,19 @@ interface LocationState {
     formData: FormData;
 }
 
-const Otp: React.FC = () => {
+export default function App() {
     const location = useLocation();
     const { formData } = location.state as LocationState || {};
-    const { id: newId ,tableNo } = useParams<{ id: string , tableNo: string }>();
+    const { id: newId, tableNo } = useParams<{ id: string, tableNo: string }>();
     const navigate = useNavigate();
+    const [otp, setOtp] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(false);
 
-    const [otp, setOtp] = useState<string[]>(Array(6).fill(''));
-    const inputsRef = useRef<(HTMLInputElement | null)[]>([]);
     const [seconds, setSeconds] = useState<number>(60);
     const [isResendDisabled, setIsResendDisabled] = useState<boolean>(true);
     const timerRef = useRef<NodeJS.Timeout | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+    // console.log(otp);
+
 
     const startTimer = useCallback(() => {
         timerRef.current = setInterval(() => {
@@ -42,39 +49,6 @@ const Otp: React.FC = () => {
             });
         }, 1000);
     }, []);
-
-    // const clearTimer = useCallback(() => {
-    //     if (timerRef.current) {
-    //         clearInterval(timerRef.current);
-    //     }
-    // }, []);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-        const { value } = e.target;
-        if (/^\d$/.test(value) || value === '') {
-            const newOtp = [...otp];
-            newOtp[index] = value;
-            setOtp(newOtp);
-            if (value !== '' && index < 5) {
-                inputsRef.current[index + 1]?.focus();
-            }
-        }
-    };
-
-    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>, index: number) => {
-        if (e.key === 'Backspace' && otp[index] === '' && index > 0) {
-            inputsRef.current[index - 1]?.focus();
-        }
-    };
-
-    const handlePaste = (e: React.ClipboardEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        const pastedData = e.clipboardData.getData('text').slice(0, 6);
-        if (/^\d{6}$/.test(pastedData)) {
-            setOtp(pastedData.split(''));
-            inputsRef.current[5]?.focus();
-        }
-    };
 
     const addUser = () => {
         let config = {
@@ -97,15 +71,13 @@ const Otp: React.FC = () => {
                 console.log(error);
             });
     }
-
-
-
     const otpVerify = async () => {
         try {
             let data = JSON.stringify({
                 "phoneNumber": `91${formData.phone}`,
                 "orderId": formData.orderId,
-                "otp": otp.join(''),
+                // "otp": otp.join(''),
+                "otp": otp,
                 "clientId": "8TPPGON8VH9R9HTCCQNN5LLGZTZAHZ2N",
                 "clientSecret": "13l19zkrepn7ru1lg9sbqxjnzzumu9vj"
             });
@@ -162,6 +134,7 @@ const Otp: React.FC = () => {
                 .catch((error) => {
                     console.log(error);
                     toast.error(error.message);
+                    setLoading(false);
                 });
 
 
@@ -225,6 +198,7 @@ const Otp: React.FC = () => {
         startTimer();
     }
 
+
     return (
         <>
             <div className='w-full h-[160px] bg-[#FFD600] flex items-end justify-between px-[1rem] py-[1rem]'>
@@ -236,8 +210,12 @@ const Otp: React.FC = () => {
             </div>
             <div className='w-full h-fit px-[.5rem]'>
                 <p className=' font-[600] font-inter text-[18px] leading-[23.4px] mt-[1rem] uppercase'>Enter OTP</p>
+
+
+
+
                 <form onSubmit={handleSubmit} className="w-full flex flex-col items-center gap-[1rem]">
-                    <div className='w-full flex flex-row justify-evenly gap-[.5rem] mt-[1rem]'>
+                    {/* <div className='w-full flex flex-row justify-evenly gap-[.5rem] mt-[1rem]'>
                         {otp.map((digit, index) => (
                             <input
                                 key={index}
@@ -251,6 +229,28 @@ const Otp: React.FC = () => {
                                 className="w-12 h-12 text-center border-b-2 border-blue-500 text-xl focus:border-blue-700 focus:outline-none"
                             />
                         ))}
+                    </div> */}
+                    <div className='w-full h-fit flex flex-wrap justify-center items-center'>
+                        {/* <OtpInput
+                            value={otp}
+                            onChange={setOtp}
+                            numInputs={6}
+                            renderSeparator={<span> </span>}
+                            renderInput={(props) => <input {...props} />}
+                            shouldAutoFocus={true}
+                            inputStyle={{
+                                width: '2.4rem',
+                                height: '2.4rem',
+                                margin: '0 10px',
+                                fontSize: '20px',
+                                borderRadius: '4px',
+                                border: '1px solid rgba(0, 0, 0, 0.3)',
+                            }}
+                        /> */}
+                        <MuiOtpInput
+                            value={otp}
+                            onChange={() => { setOtp(otp) }} />
+
                     </div>
 
                     <div className='w-full flex flex-row flex-wrap gap-[.7rem] mt-[1rem]'>
@@ -270,6 +270,4 @@ const Otp: React.FC = () => {
             </div>
         </>
     );
-};
-
-export default Otp;
+}

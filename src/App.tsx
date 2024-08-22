@@ -12,6 +12,8 @@ import BlogSingle from './pages/BlogSingle';
 import TermsCondition from './pages/TermsandCondition';
 import ContactUs from './pages/ContactUs';
 import Privacypolicy from './pages/Privacypolicy';
+import Feedback from './pages/Feedback';
+import feedbackmessage from './pages/feedbackmessage';
 
 // Components
 import ProtectedRoute from './components/ProtectedRoute';
@@ -46,6 +48,14 @@ const App: React.FC = () => {
         <Route
           path="/restaurant/:id/:tableNo/search"
           element={<ProtectedRoute element={Searchpage} />}
+        />
+        <Route
+          path="/restaurant/:id/:tableNo/feedback"
+          element={<ProtectedRoute element={Feedback} />}
+        />
+        <Route
+          path="/restaurant/:id/:tableNo/feedback/message"
+          element={<ProtectedRoute element={feedbackmessage} />}
         />
 
         {/* 404 Redirect */}

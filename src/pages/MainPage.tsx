@@ -116,7 +116,7 @@ const MainPage = () => {
     const hasCheckedVisitorData = useRef(false);
 
     //redux
-    const dispatch = useAppDispatch()
+    const dispatch = useAppDispatch();
     const { data, loading, error } = useAppSelector((state) => state.restaurant);
     const mostRecommand = useAppSelector((state) => state.mostRecommand);
     const favoriteMenu = useAppSelector((state) => state.favoriteMenu);
@@ -126,6 +126,7 @@ const MainPage = () => {
     const user = userData ? JSON.parse(userData) : null;
     // console.log(user)
     // console.log(tableNo);
+    // console.log(data?.restaurantfeedback);
 
     const navigate = useNavigate();
     const [isFeedbackOpen, setFeedbackOpen] = useState<boolean>(false);
@@ -751,15 +752,14 @@ const MainPage = () => {
                 </div>
 
                 {/* section 7  feedback */}
-                {
-                    (data?.additionalDetails?.zomato || data?.additionalDetails?.google) &&
-                    <div onClick={() => {
-                        setFeedbackOpen(true);
-                    }}
-                        className='w-fit h-fit flex items-center px-[1rem] py-[1rem] fixed top-[85vh] right-0 bg-black text-white rounded-l-[10px]' >
-                        <FaPlus className='text-[1.1rem] mr-[.5rem]' /> FeedBack
-                    </div >
-                }
+                <div onClick={() => {
+                    !data?.restaurantfeedback?.active ?
+                        (setFeedbackOpen(true))
+                        : (navigate('feedback'))
+                }}
+                    className='w-fit h-fit flex items-center px-[1rem] py-[1rem] fixed top-[85vh] right-0 bg-black text-white rounded-l-[10px]' >
+                    <FaPlus className='text-[1.1rem] mr-[.5rem]' /> FeedBack
+                </div >
 
                 {/* section 8  popup for menuprofile */}
 
