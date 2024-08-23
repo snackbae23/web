@@ -21,6 +21,14 @@ interface FormData {
 interface LocationState {
     formData: FormData;
 }
+// interface OTPOptions {
+//     transport: string[]
+// }
+
+// interface CredentialRequestOptions {
+//     otp: OTPOptions
+//     signal: AbortSignal
+// }
 
 export default function App() {
     const location = useLocation();
@@ -145,6 +153,10 @@ export default function App() {
         }
     };
 
+    const handleChange = (otp: string) => {
+        setOtp(otp)
+    }
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
@@ -198,6 +210,43 @@ export default function App() {
         startTimer();
     }
 
+    // useEffect(() => {
+    //     if ("OTPCredential" in window) {
+    //         const ac = new AbortController();
+    
+    //         navigator.credentials
+    //             .get({
+    //                 otp: { transport: ["sms"] },
+    //                 signal: ac.signal,
+    //             } as CredentialRequestOptions)
+    //             .then((otp: any) => {
+    //                 // Use the OTP code
+    //                 // const otpCode = otp.code;
+    //                 const otpMessage = otp.code;
+    //                 const otpCode = otpMessage.match(/\b\d{6}\b/)[0]; 
+    //                 console.log("OTP received:", otpCode);
+    //                 handleChange(otpCode); // Handle the OTP code
+    
+    //                 // Optional: Submit the form or verify the OTP
+    //                 // if (document.forms[0]) document.forms[0].submit();
+    //                 // otpVerify();
+    //             })
+    //             .catch((err) => {
+    //                 console.error("Error:", err);
+    //             });
+    
+    //         // Abort the request after 3 seconds
+    //         setTimeout(() => {
+    //             ac.abort();
+    //         }, 3000);
+    //     }
+    // }, []);
+    
+
+
+
+
+
 
     return (
         <>
@@ -231,30 +280,16 @@ export default function App() {
                         ))}
                     </div> */}
                     <div className='w-full h-fit flex flex-wrap justify-center items-center'>
-                        {/* <OtpInput
-                            value={otp}
-                            onChange={setOtp}
-                            numInputs={6}
-                            renderSeparator={<span> </span>}
-                            renderInput={(props) => <input {...props} />}
-                            shouldAutoFocus={true}
-                            inputStyle={{
-                                width: '2.4rem',
-                                height: '2.4rem',
-                                margin: '0 10px',
-                                fontSize: '20px',
-                                borderRadius: '4px',
-                                border: '1px solid rgba(0, 0, 0, 0.3)',
-                            }}
-                        /> */}
                         <MuiOtpInput
                             value={otp}
-                            onChange={() => { setOtp(otp) }} />
-
+                            onChange={handleChange}
+                            length={6}
+                            autoFocus
+                        />
                     </div>
 
                     <div className='w-full flex flex-row flex-wrap gap-[.7rem] mt-[1rem]'>
-                        <p>Didn’t receive OTP? <span>{isResendDisabled ? `Resend in 00:${seconds < 10 ? `0${seconds}` : seconds}` : <button type="button" onClick={() => {
+                        <p>Didn't receive OTP? <span>{isResendDisabled ? `Resend in 00:${seconds < 10 ? `0${seconds}` : seconds}` : <button type="button" onClick={() => {
                             handleResend();
                         }} disabled={isResendDisabled} className="text-blue-500">Resend OTP</button>}</span></p>
                     </div>
